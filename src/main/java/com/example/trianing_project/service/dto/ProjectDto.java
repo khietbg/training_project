@@ -1,46 +1,42 @@
-package com.example.trianing_project.domain;
+package com.example.trianing_project.service.dto;
 
+import com.example.trianing_project.domain.Employee;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-@Entity
-@Table(name = "project")
-public class Project {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+public class ProjectDto implements Serializable {
     private Long id;
-    @Column(name = "name")
+    @NotEmpty(message = "Name is required")
+    @Size(min = 5, message = "Project name must have at least 1 character")
     private String name;
-    @Column(name = "os")
+    @NotEmpty(message = "Operating system is required")
+    @Size(min = 1, message = "Operating system must have at least 1 character")
     private String os;
-    @Column(name = "framework")
+    @NotEmpty(message = "Framework is required")
+    @Size(min = 1, message = "Framework must have at least 1 character")
     private String framework;
-    @Column(name = "language")
+    @Size(min = 2, max = 8, message = "Language must have 2 to 8 characters")
     private String language;
-    @Column(name = "start_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Start date is required")
     private LocalDate startDate;
-    @Column(name = "end_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull(message = "End date is required")
+    @NotNull(message = "Start date is required")
     private LocalDate endDate;
-    @Column(name = "employee_id")
     private Long pmId;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private Employee pm;
+    private String pmName;
 
 
-    public Project() {
+    public ProjectDto() {
     }
 
-    public Project(Long id, String name, String os, String framework, String language, LocalDate startDate, LocalDate endDate, Long pmId, Employee pm) {
+    public ProjectDto(Long id, String name, String os, String framework, String language, LocalDate startDate, LocalDate endDate, Long pmId, String pmName) {
         this.id = id;
         this.name = name;
         this.os = os;
@@ -49,8 +45,9 @@ public class Project {
         this.startDate = startDate;
         this.endDate = endDate;
         this.pmId = pmId;
-        this.pm = pm;
+        this.pmName = pmName;
     }
+
 
     public Long getId() {
         return id;
@@ -116,11 +113,11 @@ public class Project {
         this.pmId = pmId;
     }
 
-    public Employee getPm() {
-        return pm;
+    public String getPmName() {
+        return pmName;
     }
 
-    public void setPm(Employee pm) {
-        this.pm = pm;
+    public void setPmName(String pmName) {
+        this.pmName = pmName;
     }
 }

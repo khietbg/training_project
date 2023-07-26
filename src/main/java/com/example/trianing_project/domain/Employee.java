@@ -12,14 +12,12 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
     @Column(name = "avatar_url")
     private String avatar_url;
     @Column(name = "first_name")
     private String first_name;
     @Column(name = "last_name")
     private String last_name;
-
     @Column(name = "email")
     private String email;
     @Column(name = "address")
@@ -53,14 +51,11 @@ public class Employee {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Employee manager;
-
     @Column(name = "department_id")
     private Long departmentId;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Department department;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "employee_role",
@@ -75,7 +70,6 @@ public class Employee {
     private Set<Project> projects = new HashSet<>();
     @Column(name = "status")
     private boolean status;
-
     public Long getId() {
         return id;
     }

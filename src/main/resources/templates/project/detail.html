@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <h2>Project Detail</h2>
+    <div th:if="${project}">
+        <p>ID: <span th:text="${project.id}"></span></p>
+        <p>Name Project: <span th:text="${project.name}"></span></p>
+        <p>Operating system: <span th:text="${project.os}"></span></p>
+        <p>Frame work: <span th:text="${project.framework}"></span></p>
+        <p>Language: <span th:text="${project.language}"></span></p>
+        <p>Start date: <span th:text="${project.startDate}"></span></p>
+        <p>End date: <span th:text="${project.endDate}"></span></p>
+        <p>PM name: <span th:text="${project.pmName}"></span></p>
+    </div>
+    <div th:if="${message}">
+        <p th:text="${message}"></p>
+    </div>
+</div>
+</body>
+</html>

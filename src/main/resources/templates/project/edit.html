@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <h3>Edit Project</h3>
+    <form th:action="@{/project/edit}" method="post" th:object="${project}">
+        <input th:value="*{id}" th:field="*{id}" type="hidden"><br>
+        <label>Name Project:</label>
+        <input type="text" th:field="*{name}" th:value="${project.name}" placeholder="name"><br>
+
+        <label>Operating system:</label>
+        <input type="text" th:field="*{os}" th:value="${project.os}" placeholder="Operating system"><br>
+
+        <label>Frame work:</label>
+        <input type="text" th:field="*{framework}" th:value="${project.framework}" placeholder="Frame work"><br>
+
+        <label>Language:</label>
+        <input type="text" th:field="*{language}" th:value="${project.language}" placeholder="Language"><br>
+
+        <label>Start date:</label>
+        <input type="text" th:field="*{startDate}" th:value="${project.startDate}" placeholder="Start date"><br>
+
+        <label>End date:</label>
+        <input type="text" th:field="*{endDate}" th:value="${project.endDate}" placeholder="End date"><br>
+
+        <label>PM name:</label>
+        <input type="text" th:field="*{pmName}" th:value="${project.pmName}" placeholder="PM name"><br>
+
+        <button type="submit">Upload</button>
+    </form>
+</div>
+
+</body>
+</html>
