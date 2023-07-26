@@ -1,6 +1,8 @@
 package com.example.trianing_project.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,16 +18,20 @@ public class Employee {
     @Column(name = "avatar_url")
     private String avatarUrl;
     @Column(name = "first_name")
+    @Size(min = 4)
     private String firstName;
+    @Size(min = 4)
     @Column(name = "last_name")
     private String lastName;
 
     @Column(name = "email")
+    @Email(message = "email in valid!")
     private String email;
     @Column(name = "address")
     private String address;
     @Column(name = "phone")
     private String phone;
+    @Size(min = 6)
     @Column(name = "password")
     private String password;
     @Column(name = "sex")

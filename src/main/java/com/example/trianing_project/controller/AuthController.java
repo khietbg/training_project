@@ -12,9 +12,4 @@ public class AuthController {
     public String login() {
         return "login";
     }
-    @GetMapping("/add")
-    public String showAdd(Model model){
-        model.addAttribute("employee",new Employee());
-        return "add";
-    }
 }
