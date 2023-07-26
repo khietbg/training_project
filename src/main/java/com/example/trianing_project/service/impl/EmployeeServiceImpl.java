@@ -40,8 +40,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeDTO save(EmployeeDTO employeeDTO) {
         Employee employee = employeeMapper.toEntity(employeeDTO);
-
-        return null;
+        return employeeMapper.toDto(employeeRepository.save(employee));
     }
 
     @Override

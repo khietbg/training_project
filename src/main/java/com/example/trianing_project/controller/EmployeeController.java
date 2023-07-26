@@ -1,27 +1,30 @@
 package com.example.trianing_project.controller;
 
-import com.example.trianing_project.domain.Employee;
 import com.example.trianing_project.repository.EmployeeRepository;
 import com.example.trianing_project.service.EmployeeService;
 import com.example.trianing_project.service.dto.EmployeeDTO;
+import com.example.trianing_project.service.sendEmail.SendEmailService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("employee")
+@RequestMapping("/employee")
 public class EmployeeController {
-    private EmployeeService employeeService;
-    private EmployeeRepository employeeRepository;
+    private final EmployeeService employeeService;
+    private final EmployeeRepository employeeRepository;
+    private final SendEmailService mailService;
 
-    public EmployeeController(EmployeeService employeeService, EmployeeRepository employeeRepository) {
+    public EmployeeController(EmployeeService employeeService, EmployeeRepository employeeRepository, SendEmailService mailService) {
         this.employeeService = employeeService;
         this.employeeRepository = employeeRepository;
+        this.mailService = mailService;
     }
 
     @GetMapping("/findAll")
@@ -37,7 +40,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/Add")
-    public String doAdd(@ModelAttribute EmployeeDTO employeeDTO, String rePassword, BindingResult bindingResult, Model model, HttpSession session) {
+    public String doAdd(@ModelAttribute EmployeeDTO employeeDTO, String rePassword, BindingResult bindingResult, Model model, HttpSession session) throws MessagingException {
         EmployeeDTO employeeLogin = (EmployeeDTO) session.getAttribute("employeeLogin");
         employeeDTO.setManagerId(employeeLogin.getId());
         if (employeeDTO.getPassword().equals(rePassword)) {
@@ -51,6 +54,11 @@ public class EmployeeController {
             model.addAttribute("email", "email existed please try a gain! ");
             return "employee/add";
         }
+        String html = "<i>welcome: </i>"+employeeDTO.getFirstName()+"<br>"+
+                "<b>password: </b>"+ employeeDTO.getPassword()+"<br>"+
+                "<p>let's  good experience</p>";
+
+        mailService.sendMail(employeeDTO.getEmail(),"register Successfully", html);
         employeeService.save(employeeDTO);
         return "redirect:findAll";
     }
@@ -69,7 +77,7 @@ public class EmployeeController {
 
     @PostMapping("edit")
     public String doEdit(@Valid @ModelAttribute("employee") EmployeeDTO employeeDTO, BindingResult bindingResult) {
-        return "redirect:findAll";
+        return "redirect:employee/findAll";
     }
 
 }

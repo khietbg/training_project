@@ -15,7 +15,7 @@ public class EmployeeDTO {
    private String email;
    @Size(min = 6)
    private String password;
-   @Pattern(regexp = "0\\\\d{9}")
+   @Pattern(regexp = "0\\d{9}")
    private String phone;
    private String address;
    private String employeeCode;
