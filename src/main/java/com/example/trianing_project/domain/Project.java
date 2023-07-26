@@ -22,9 +22,30 @@ public class Project {
     private LocalDate startDate;
     @Column(name = "end_date")
     private LocalDate endDate;
+    @Column(name = "employee_id")
+    private Long pmId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Employee pm;
 
     public Long getId() {
         return id;
+    }
+
+    public Long getPmId() {
+        return pmId;
+    }
+
+    public void setPmId(Long pmId) {
+        this.pmId = pmId;
+    }
+
+    public Employee getPm() {
+        return pm;
+    }
+
+    public void setPm(Employee pm) {
+        this.pm = pm;
     }
 
     public void setId(Long id) {
