@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout/layout}" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+            <div class="row">
+                <div class="col-xl-12 col-sm-12 col-12 mb-4">
+                    <div class="breadcrumb-path ">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><img th:src="@{/assets/img/dash.png}"
+                                                                                  class="mr-2" alt="breadcrumb">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active">
+
+                        </ul>
+                        <h3>Department</h3>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-sm-12 col-12 mb-4">
+                    <div class="head-link-set">
+                        <ul>
+                            <li><a class="active" href="#"></a></li>
+                            <li><a href="review-type.html">Review Types</a></li>
+                        </ul>
+                        <a class="btn-add" th:href="@{/departments/add}">Create Department</a>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-sm-12 col-12 ">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-titles">Departments</h2>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table  custom-table  no-footer">
+                                <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Name</th>
+                                    <th>Department code</th>
+                                    <th>Belonging</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody th:each="department,count : ${departments}">
+                                <tr>
+                                    <td>
+                                        <label th:text="${count.count}"></label>
+                                    </td>
+                                    <td>
+                                        <label th:text="${department.name}"></label>
+                                    </td>
+                                    <td>
+                                        <label th:text="${department.departmentCode}"></label>
+                                    </td>
+                                    <td>
+                                        <label th:if="${department.parentId == null}" th:text="${department.parentName}"></label>
+                                        <label th:unless="${department.parentId == null}" th:text=""></label>
+                                    </td>
+                                    <td>
+                                        <div class="actionset">
+                                            <label><a class="action_label5"
+                                                      th:href="@{'/departments/edit/' +${department.id}}">Edit <i
+                                                    data-feather="edit"></i></a></label>
+                                            <label><a class="action_label4" th:href="@{'/departments/delete/' +${department.id}}" data-target="#delete">Delete
+                                                <i data-feather="trash-2"></i></a></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

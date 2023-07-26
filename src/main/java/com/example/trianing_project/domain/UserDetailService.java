@@ -1,7 +1,5 @@
 package com.example.trianing_project.domain;
 
-
-import com.example.trianing_project.domain.Employee;
 import com.example.trianing_project.repository.EmployeeRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
