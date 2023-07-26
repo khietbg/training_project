@@ -1,11 +1,10 @@
 package com.example.trianing_project.service.sercuriry;
 
-
 import com.example.trianing_project.domain.Employee;
 import com.example.trianing_project.repository.EmployeeRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
