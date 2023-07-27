@@ -3,7 +3,7 @@ package com.example.trianing_project.controller;
 import com.example.trianing_project.repository.EmployeeRepository;
 import com.example.trianing_project.service.EmployeeService;
 import com.example.trianing_project.service.dto.EmployeeDTO;
-import com.example.trianing_project.service.sendEmail.SendEmailService;
+import com.example.trianing_project.service.email.SendEmailService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
