@@ -1,4 +1,4 @@
-package com.example.trianing_project.service.serviceImpl;
+package com.example.trianing_project.service.impl;
 
 
 import com.example.trianing_project.domain.Skill;

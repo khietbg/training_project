@@ -1,4 +1,4 @@
-package com.example.trianing_project.service.mapper.Impl;
+package com.example.trianing_project.service.mapper.impl;
 
 import com.example.trianing_project.domain.Employee;
 import com.example.trianing_project.domain.Skill;

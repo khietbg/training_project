@@ -2,36 +2,25 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="shortcut icon" href="assets/img/favicon.png">
-
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-
-    <link rel="stylesheet" href="assets/css/style.css">
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">layout</title>
+    <link rel="shortcut icon" th:href="@{/assets/img/favicon.png}">
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/plugins/fontawesome/css/fontawesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/plugins/fontawesome/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
 </head>
 <body>
-<div></div>
-<div class="container">
-    <div layout:fragment="content">
-
-    </div>
+<div th:replace="~{layout/header::header}"></div>
+<div th:insert="~{layout/sidebar::sidebar}"></div>
+<div layout:fragment="content">
 </div>
 </body>
-
-<script src="assets/js/jquery-3.6.0.min.js"></script>
-
-<script src="assets/js/popper.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-
-<script src="assets/js/feather.min.js"></script>
-
-<script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
-<script src="assets/plugins/apexchart/apexcharts.min.js"></script>
-<script src="assets/plugins/apexchart/chart-data.js"></script>
-
-<script src="assets/js/script.js"></script>
+<script th:src="@{/assets/js/jquery-3.6.0.min.js}"></script>
+<script th:src="@{assets/js/popper.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/feather.min.js}"></script>
+<script th:src="@{/assets/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+<script th:src="@{/assets/plugins/apexchart/apexcharts.min.js}"></script>
+<script th:src="@{/assets/plugins/apexchart/chart-data.js}"></script>
+<script th:src="@{/assets/js/script.js}"></script>
 </html>
