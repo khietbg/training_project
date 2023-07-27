@@ -36,7 +36,7 @@ public class DepartmentMapperImpl implements DepartmentMapper {
         departmentDTO.setDescription(entity.getDescription());
         Department department = entity.getDepartment();
         if (department != null) {
-            departmentDTO.setParentName(entity.getDepartment().getName());
+            departmentDTO.setParentName(department.getName());
         }
         return departmentDTO;
     }
