@@ -37,21 +37,6 @@ public class Project {
     private Employee pm;
 
 
-    public Project() {
-    }
-
-    public Project(Long id, String name, String os, String framework, String language, LocalDate startDate, LocalDate endDate, Long pmId, Employee pm) {
-        this.id = id;
-        this.name = name;
-        this.os = os;
-        this.framework = framework;
-        this.language = language;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.pmId = pmId;
-        this.pm = pm;
-    }
-
     public Long getId() {
         return id;
     }

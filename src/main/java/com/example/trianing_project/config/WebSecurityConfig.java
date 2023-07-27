@@ -1,7 +1,8 @@
+//
 //package com.example.trianing_project.config;
 //
 //
-//import com.example.trianing_project.domain.UserDetailService;
+//import com.example.trianing_project.service.sercuriry.UserDetailService;
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;
 //import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

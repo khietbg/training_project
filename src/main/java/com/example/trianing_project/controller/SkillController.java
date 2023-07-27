@@ -36,7 +36,7 @@ public class SkillController {
     @PostMapping("/edit")
     public ModelAndView doEdit(@ModelAttribute("skill") SkillDto skillDto) {
         skillService.save(skillDto);
-        ModelAndView modelAndView = new ModelAndView("redirect:/skill/index");
+        ModelAndView modelAndView = new ModelAndView("redirect:/skill/edit");
         return modelAndView;
     }
 
@@ -47,12 +47,6 @@ public class SkillController {
         return modelAndView;
     }
 
-    @GetMapping("/detail/{id}")
-    public ModelAndView showDetail(@PathVariable Long id){
-        ModelAndView modelAndView = new ModelAndView("/skill/detail");
-        modelAndView.addObject("department", skillService.findOne(id).get());
-        return modelAndView;
-    }
     @GetMapping("/delete/{id}")
     public ModelAndView doDelete(@PathVariable("id") Long id) {
         if (!skillRepository.existsById(id)) {

@@ -1,51 +1,84 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" layout:decorate="~{layout/layout}" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<div>
+<div layout:fragment="content">
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+            <!-- Breadcrumb section -->
+            <div class="row">
+                <div class="col-xl-12 col-sm-12 col-12 mb-4">
+                    <div class="breadcrumb-path">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><img th:src="@{/assets/img/dash.png}"
+                                                                                  class="mr-2" alt="breadcrumb">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                <!-- Breadcrumb for the current page will go here (not provided in the original code) -->
+                            </li>
+                        </ul>
+                        <h3>Department</h3>
+                    </div>
+                </div>
+            </div>
 
-    <form method="get" th:action="@{/project/index}">
-        <input type="text" name="name">
-        <button type="submit">Search</button>
-    </form>
-    <li><a th:href="@{/project/add}">Create Project</a></li>
-    <table border="1">
-        <tr>
-            <th>STT</th>
-            <th>Name Project </th>
-            <th>Operating system </th>
-            <th>Framework </th>
-            <th>Language </th>
-            <th>Start date </th>
-            <th>End date </th>
-            <th>PM name </th>
-            <th colspan="3">Action</th>
-        </tr>
-        <tbody th:each="project,count:${projectDto}">
-        <tr>
-            <td th:text="${count.count}"></td>
-            <td th:text="${project.name}"></td>
-            <td th:text="${project.os}"></td>
-            <td th:text="${project.framework}"></td>
-            <td th:text="${project.language}"></td>
-            <td th:text="${project.startDate}"></td>
-            <td th:text="${project.endDate}"></td>
-            <td th:text="${project.pmName}"></td>
-            <td><a th:href="@{'/project/edit/'+${project.id}}">
-                <button>Edit</button>
-            </a></td>
-            <td><a th:href="@{'/project/delete/'+${project.id}}">
-                <button>Delete</button>
-            </a></td>
-            <td><a th:href="@{'/project/detail/'+${project.id}}">
-                <button>Detail</button>
-            </a></td>
-        </tr>
-        </tbody>
-    </table>
+            <!-- Header links and "Create Department" button -->
+            <div class="row">
+                <div class="col-xl-12 col-sm-12 col-12 mb-4">
+                    <div class="head-link-set">
+                        <ul>
+                            <li><a class="active" href="#"></a></li>
+                            <li><a href="review-type.html">Review Types</a></li>
+                        </ul>
+                        <a class="btn-add" th:href="@{/project/add}">Create Project</a>
+                    </div>
+                </div>
+            </div>
+
+            <form method="get" th:action="@{/project/index}">
+                <input type="text" name="name">
+                <button type="submit">Search</button>
+            </form>
+            <table border="1">
+                <tr>
+                    <th>STT</th>
+                    <th>Name Project</th>
+                    <th>Operating system</th>
+                    <th>Framework</th>
+                    <th>Language</th>
+                    <th>Start date</th>
+                    <th>End date</th>
+                    <th>PM name</th>
+                    <th colspan="3">Action</th>
+                </tr>
+                <tbody th:each="project,count:${projectDto}">
+                <tr>
+                    <td th:text="${count.count}"></td>
+                    <td th:text="${project.name}"></td>
+                    <td th:text="${project.os}"></td>
+                    <td th:text="${project.framework}"></td>
+                    <td th:text="${project.language}"></td>
+                    <td th:text="${project.startDate}"></td>
+                    <td th:text="${project.endDate}"></td>
+                    <td th:text="${project.pmName}"></td>
+                    <td><a th:href="@{'/project/edit/'+${project.id}}">
+                        <button>Edit</button>
+                    </a></td>
+                    <td><a th:href="@{'/project/delete/'+${project.id}}">
+                        <button>Delete</button>
+                    </a></td>
+                    <td><a th:href="@{'/project/detail/'+${project.id}}">
+                        <button>Detail</button>
+                    </a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 </body>
 </html>
