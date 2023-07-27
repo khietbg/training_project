@@ -1,7 +1,6 @@
 package com.example.trianing_project.service.dto;
 
 
-
 import java.util.Map;
 
 public class DataMailDTO {

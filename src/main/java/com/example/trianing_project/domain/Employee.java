@@ -43,9 +43,9 @@ public class Employee {
     @Column(name = "license_date")
     private LocalDate licenseDate;
     @Column(name = "licensePlace")
-    private LocalDate licensePlace;
+    private String licensePlace;
     @Column(name = "employee_code")
-    private LocalDate employeeCode;
+    private String employeeCode;
     @Column(name = "start_date")
     private LocalDate startDate;
     @Column(name = "coefficients_salary")
@@ -178,19 +178,19 @@ public class Employee {
         this.licenseDate = licenseDate;
     }
 
-    public LocalDate getLicensePlace() {
+    public String getLicensePlace() {
         return licensePlace;
     }
 
-    public void setLicensePlace(LocalDate licensePlace) {
+    public void setLicensePlace(String licensePlace) {
         this.licensePlace = licensePlace;
     }
 
-    public LocalDate getEmployeeCode() {
+    public String getEmployeeCode() {
         return employeeCode;
     }
 
-    public void setEmployeeCode(LocalDate employeeCode) {
+    public void setEmployeeCode(String employeeCode) {
         this.employeeCode = employeeCode;
     }
 

@@ -1,10 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<table>
+  <thead>
+  <tr>
+    <th>Stt</th>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Position</th>
+    <th>birthDate</th>
+    <th>stateDate</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="e,status:${page}">
+    <td th:text="${status.count+1}"></td>
+    <td th:text="${e.firstName}"></td>
+    <td th:text="${e.lastName}"></td>
+    <td th:text="${e.position}"></td>
+    <td th:text="${e.startDate}"></td>
+  </tr>
+  </tbody>
+</table>
 </body>
 </html>

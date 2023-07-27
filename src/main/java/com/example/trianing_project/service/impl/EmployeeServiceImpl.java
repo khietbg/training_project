@@ -17,6 +17,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final EmployeeMapper employeeMapper;
 
+
     public EmployeeServiceImpl(EmployeeRepository employeeRepository, EmployeeMapper employeeMapper) {
         this.employeeRepository = employeeRepository;
         this.employeeMapper = employeeMapper;
@@ -29,7 +30,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Page<EmployeeDTO> findAll(String search, Pageable pageable) {
-        return employeeRepository.findAllByFirstNameOrlOrLastNameContainingIgnoreCase(search, pageable).map(employeeMapper::toDto);
+        Page<Employee> employees = employeeRepository.findAllByFirstNameContainingIgnoreCase(search, pageable);
+        Page<EmployeeDTO> dtos = employees.map(employeeMapper::toDto);
+        return dtos;
     }
 
     @Override

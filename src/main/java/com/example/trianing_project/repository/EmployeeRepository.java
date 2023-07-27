@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Employee findEmployeeByEmail(String usernameOrEmail);
     boolean existsByEmail(String email);
-    Page<Employee> findAllByFirstNameOrlOrLastNameContainingIgnoreCase(String textSearch, Pageable pageable);
+    Page<Employee> findAllByFirstNameContainingIgnoreCase(String search, Pageable pageable);
 }
