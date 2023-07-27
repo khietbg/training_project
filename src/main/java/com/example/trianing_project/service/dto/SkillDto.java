@@ -1,34 +1,22 @@
-package com.example.trianing_project.domain;
+package com.example.trianing_project.service.dto;
 
-import javax.persistence.*;
 
-@Entity
-@Table(name = "skill")
-public class Skill {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+import java.io.Serializable;
+
+public class SkillDto implements Serializable {
     private Long id;
-    @Column(name = "name")
     private String name;
-    @Column(name = "level")
     private int level;
-    @Column(name = "description")
     private String description;
-    @Column(name = "month")
     private int month;
-    @Column(name = "year")
     private int year;
-    @Column(name = "employee_id")
     private Long employeeId;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private Employee employee;
+    private String employeeName;
 
-    public Skill() {
+    public SkillDto() {
     }
 
-    public Skill(Long id, String name, int level, String description, int month, int year, Long employeeId, Employee employee) {
+    public SkillDto(Long id, String name, int level, String description, int month, int year, Long employeeId, String employeeName) {
         this.id = id;
         this.name = name;
         this.level = level;
@@ -36,7 +24,7 @@ public class Skill {
         this.month = month;
         this.year = year;
         this.employeeId = employeeId;
-        this.employee = employee;
+        this.employeeName = employeeName;
     }
 
     public Long getId() {
@@ -95,11 +83,11 @@ public class Skill {
         this.employeeId = employeeId;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public String getEmployeeName() {
+        return employeeName;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
     }
 }

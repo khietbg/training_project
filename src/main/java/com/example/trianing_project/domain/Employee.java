@@ -17,13 +17,13 @@ public class Employee {
 
     @Column(name = "avatar_url")
     private String avatarUrl;
+
     @Column(name = "first_name")
     @Size(min = 4)
     private String firstName;
     @Size(min = 4)
     @Column(name = "last_name")
     private String lastName;
-
     @Column(name = "email")
     @Email(message = "email in valid!")
     private String email;
@@ -59,14 +59,11 @@ public class Employee {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Employee manager;
-
     @Column(name = "department_id")
     private Long departmentId;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Department department;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "employee_role",

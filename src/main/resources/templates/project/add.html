@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <h2>Create Project</h2>
+    <form th:action="@{/project/add}" method="post" th:object="${project}">
+        <label>Name Project: </label>
+        <p th:if="${#fields.hasErrors('name')}" th:errorclass="error" th:errors="*{name}"></p>
+        <input type="text" th:field="*{name}" placeholder="name"><br>
+
+        <label>Operating system: </label>
+        <p th:if="${#fields.hasErrors('os')}" th:errorclass="error" th:errors="*{os}"></p>
+        <input type="text" th:field="*{os}" placeholder="os"><br>
+
+        <label>Frame work: </label>
+        <p th:if="${#fields.hasErrors('framework')}" th:errorclass="error" th:errors="*{framework}"></p>
+        <input type="text" th:field="*{framework}" placeholder="framework"><br>
+
+        <label>Language: </label>
+        <p th:if="${#fields.hasErrors('language')}" th:errorclass="error" th:errors="*{language}"></p>
+        <input type="text" th:field="*{language}" placeholder="language"><br>
+
+        <label>Start date: </label>
+        <p th:if="${#fields.hasErrors('startDate')}" th:errorclass="error" th:errors="*{startDate}"></p>
+        <input type="date" th:field="*{startDate}" placeholder="startDate"><br>
+
+        <label>End date: </label>
+        <p th:if="${#fields.hasErrors('endDate')}" th:errorclass="error" th:errors="*{endDate}"></p>
+        <input type="date" th:field="*{endDate}" placeholder="endDate"><br>
+
+        <label>PM name: </label>
+        <select th:field="*{pmId}">
+            <th:block th:each="project :${project}">
+                <option th:value="${project.id}" th:text="${project.name}"></option>
+            </th:block>
+        </select><br>
+        <br>
+        <br>
+
+<!--        <p th:if="${#fields.hasErrors('pmName')}" th:errorclass="error" th:errors="*{pmName}"></p>-->
+<!--        <input type="text" name="pmName" th:field="*{pmName}" placeholder="pmName"><br>-->
+            <li><a th:href="@{/project/add}">Add staff to the project</a></li>
+
+
+
+        <button type="submit">Create</button>
+    </form>
+</div>
+</body>
+</html>

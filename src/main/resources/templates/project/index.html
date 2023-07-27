@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+
+    <form method="get" th:action="@{/project/index}">
+        <input type="text" name="name">
+        <button type="submit">Search</button>
+    </form>
+    <li><a th:href="@{/project/add}">Create Project</a></li>
+    <table border="1">
+        <tr>
+            <th>STT</th>
+            <th>Name Project </th>
+            <th>Operating system </th>
+            <th>Framework </th>
+            <th>Language </th>
+            <th>Start date </th>
+            <th>End date </th>
+            <th>PM name </th>
+            <th colspan="3">Action</th>
+        </tr>
+        <tbody th:each="project,count:${projectDto}">
+        <tr>
+            <td th:text="${count.count}"></td>
+            <td th:text="${project.name}"></td>
+            <td th:text="${project.os}"></td>
+            <td th:text="${project.framework}"></td>
+            <td th:text="${project.language}"></td>
+            <td th:text="${project.startDate}"></td>
+            <td th:text="${project.endDate}"></td>
+            <td th:text="${project.pmName}"></td>
+            <td><a th:href="@{'/project/edit/'+${project.id}}">
+                <button>Edit</button>
+            </a></td>
+            <td><a th:href="@{'/project/delete/'+${project.id}}">
+                <button>Delete</button>
+            </a></td>
+            <td><a th:href="@{'/project/detail/'+${project.id}}">
+                <button>Detail</button>
+            </a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
