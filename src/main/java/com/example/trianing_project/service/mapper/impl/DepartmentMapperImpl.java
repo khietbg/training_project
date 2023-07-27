@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 @Component
-public class DepartmentMapperIMPL implements DepartmentMapper {
+public class DepartmentMapperImpl implements DepartmentMapper {
 
     @Override
     public Department toEntity(DepartmentDTO dto) {

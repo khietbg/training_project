@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 @Service
-public class CertificateServiceIMPL implements CertificateService {
+public class CertificateServiceImpl implements CertificateService {
     private final CertificateMapper certificateMapper;
     private final CertificateRepository certificateRepository;
 
-    public CertificateServiceIMPL(CertificateMapper certificateMapper, CertificateRepository certificateRepository) {
+    public CertificateServiceImpl(CertificateMapper certificateMapper, CertificateRepository certificateRepository) {
         this.certificateMapper = certificateMapper;
         this.certificateRepository = certificateRepository;
     }
