@@ -1,11 +1,7 @@
 package com.example.trianing_project.domain;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name = "project")
@@ -23,12 +19,8 @@ public class Project {
     @Column(name = "language")
     private String language;
     @Column(name = "start_date")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull(message = "Start date is required")
     private LocalDate startDate;
     @Column(name = "end_date")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull(message = "End date is required")
     private LocalDate endDate;
     @Column(name = "employee_id")
     private Long pmId;
@@ -36,24 +28,24 @@ public class Project {
     @JoinColumn(name = "employee_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Employee pm;
 
-
-    public Project() {
-    }
-
-    public Project(Long id, String name, String os, String framework, String language, LocalDate startDate, LocalDate endDate, Long pmId, Employee pm) {
-        this.id = id;
-        this.name = name;
-        this.os = os;
-        this.framework = framework;
-        this.language = language;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.pmId = pmId;
-        this.pm = pm;
-    }
-
     public Long getId() {
         return id;
+    }
+
+    public Long getPmId() {
+        return pmId;
+    }
+
+    public void setPmId(Long pmId) {
+        this.pmId = pmId;
+    }
+
+    public Employee getPm() {
+        return pm;
+    }
+
+    public void setPm(Employee pm) {
+        this.pm = pm;
     }
 
     public void setId(Long id) {
@@ -106,21 +98,5 @@ public class Project {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
-    }
-
-    public Long getPmId() {
-        return pmId;
-    }
-
-    public void setPmId(Long pmId) {
-        this.pmId = pmId;
-    }
-
-    public Employee getPm() {
-        return pm;
-    }
-
-    public void setPm(Employee pm) {
-        this.pm = pm;
     }
 }

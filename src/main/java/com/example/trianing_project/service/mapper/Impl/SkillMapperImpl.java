@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Component
 public class SkillMapperImpl implements SkillMapper {
     @Override
@@ -41,7 +42,7 @@ public class SkillMapperImpl implements SkillMapper {
         skillDto.setEmployeeId(entity.getEmployeeId());
         Employee employee = entity.getEmployee();
         if (employee != null) {
-            skillDto.setEmployeeName(employee.getFirst_name() + " " + employee.getLast_name());
+            skillDto.setEmployeeName(employee.getFirstName() + " " + employee.getLastName());
         }
 
         return skillDto;

@@ -45,9 +45,8 @@ public class ProjectMapperImpl implements ProjectMapper {
 
         Employee employee = entity.getPm();
         if (employee != null) {
-            projectDto.setPmName(employee.getFirst_name() + " " + employee.getLast_name());
+            projectDto.setPmName(employee.getFirstName() + " " + employee.getLastName());
         }
-
         return projectDto;
     }
 
