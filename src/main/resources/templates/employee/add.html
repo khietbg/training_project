@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" layout:decorate="~{layout/layout}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<html lang="en" layout:decorate="~{layout/layout}" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
@@ -34,11 +35,13 @@
                                     <div class="col-xl-6 col-sm-12 col-12 ">
                                         <div class="form-group">
                                             <input type="text" placeholder="First Name" th:field="*{firstName}">
+                                            <p th:if="${#fields.hasErrors('firstName')}" th:errorclass="error" th:errors="*{firstName}"></p>
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-sm-12 col-12 ">
                                         <div class="form-group">
                                             <input type="text" placeholder="Last Name" th:field="*{lastName}">
+                                            <p th:if="${#fields.hasErrors('lastName')}" th:errorclass="error" th:errors="*{lastName}"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -46,17 +49,14 @@
                                     <div class="col-xl-6 col-sm-12 col-12 ">
                                         <div class="form-group">
                                             <input type="text" placeholder="Email" th:field="*{email}">
+                                        <p th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}"></p>
                                         </div>
-                                        <p th:if="${email}" th:text="${email}"/>
-                                        <p th:if="${#fields.hasErrors('email')}" th:errorclass="error"
-                                           th:errors="*{email}"/>
                                     </div>
                                     <div class="col-xl-6 col-sm-12 col-12 ">
                                         <div class="form-group">
                                             <input type="text" placeholder="password" th:field="*{password}">
+                                        <p th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}"></p>
                                         </div>
-                                        <p th:if="${#fields.hasErrors('password')}" th:errorclass="error"
-                                           th:errors="*{password}"/>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -86,31 +86,35 @@
                                         <div class="col-xl-6 col-sm-12 col-12 ">
                                             <div class="form-group">
                                                 <input type="text" placeholder="Phone" th:field="*{phone}">
+                                            <p th:if="${#fields.hasErrors('phone')}" th:errorclass="error" th:errors="*{phone}"></p>
                                             </div>
-                                            <p th:if="${phone}" th:text="${phone}"/>
                                         </div>
                                         <div class="col-xl-6 col-sm-12 col-12 ">
                                             <div class="form-group">
                                                 <input type="text" placeholder="Position" th:field="*{position}">
+                                                <p th:if="${#fields.hasErrors('position')}" th:errorclass="error" th:errors="*{position}"></p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-xl-6 col-sm-12 col-12 ">
                                             <div class="form-group">
-                                                <input type="text" placeholder="coefficientsSalary" th:field="*{coefficientsSalary}">
+                                                <input type="text" placeholder="coefficientsSalary"
+                                                       th:field="*{coefficientsSalary}">
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-sm-12 col-12 ">
                                             <div class="form-group">
                                                 <input type="text" placeholder="Address" th:field="*{address}">
+                                                <p th:if="${#fields.hasErrors('address')}" th:errorclass="error" th:errors="*{address}"></p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-xl-6 col-sm-12 col-12 ">
                                             <div class="form-group">
-                                                <input type="text" placeholder="EmployeeCode" th:field="*{employeeCode}">
+                                                <input type="text" placeholder="EmployeeCode"
+                                                       th:field="*{employeeCode}">
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-sm-12 col-12 ">
@@ -130,7 +134,8 @@
                                         <div class="col-xl-6 col-sm-12 col-12 ">
                                             <div class="form-group">
                                                 <label>Department :</label>
-                                                <select  class="form-select" aria-label="Default select example" th:field="*{departmentId}" style="width: 200px">
+                                                <select class="form-select" aria-label="Default select example"
+                                                        th:field="*{departmentId}" style="width: 200px">
                                                     <th:block th:each="de : ${departments}">
                                                         <option th:value="${de.id}" th:text="${de.name}"></option>
                                                     </th:block>
@@ -140,9 +145,11 @@
                                         <div class="col-xl-6 col-sm-12 col-12 ">
                                             <div class="form-group">
                                                 <label>Manager :</label>
-                                                <select  class="form-select" aria-label="Default select example" th:field="*{managerId}" style="width: 200px">
+                                                <select class="form-select" aria-label="Default select example"
+                                                        th:field="*{managerId}" style="width: 200px">
                                                     <th:block th:each="e : ${employees}">
-                                                        <option th:value="${e.id}" th:text="${e.firstName+' '+e.lastName}"></option>
+                                                        <option th:value="${e.id}"
+                                                                th:text="${e.firstName+' '+e.lastName}"></option>
                                                     </th:block>
                                                 </select>
                                             </div>

@@ -19,9 +19,7 @@ public class Employee {
     private String avatarUrl;
 
     @Column(name = "first_name")
-    @Size(min = 4)
     private String firstName;
-    @Size(min = 4)
     @Column(name = "last_name")
     private String lastName;
     @Column(name = "email")

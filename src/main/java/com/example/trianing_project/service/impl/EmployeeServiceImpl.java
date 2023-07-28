@@ -55,6 +55,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             return employeeMapper.toDto(employeeRepository.save(employee));
         }
         Employee employee = employeeMapper.toEntity(employeeDTO);
+        employee.setStartDate(LocalDate.now());
         employee.setManager(employeeRepository.findById(employeeDTO.getDepartmentId()).get());
         employee.setDepartment(departmentRepository.findById(employeeDTO.getDepartmentId()).get());
         return employeeMapper.toDto(employeeRepository.save(employee));
