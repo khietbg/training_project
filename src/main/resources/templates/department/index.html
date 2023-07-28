@@ -59,7 +59,8 @@
                                         <label th:text="${department.departmentCode}"></label>
                                     </td>
                                     <td>
-                                        <label th:if="${department.parentId == null}" th:text="${department.parentName}"></label>
+                                        <label th:if="${department.parentId == null}"
+                                               th:text="${department.parentName}"></label>
                                         <label th:unless="${department.parentId == null}" th:text=""></label>
                                     </td>
                                     <td>
@@ -67,7 +68,9 @@
                                             <label><a class="action_label5"
                                                       th:href="@{'/departments/edit/' +${department.id}}">Edit <i
                                                     data-feather="edit"></i></a></label>
-                                            <label><a class="action_label4" th:href="@{'/departments/delete/' +${department.id}}" data-target="#delete">Delete
+                                            <label><a class="action_label4"
+                                                      th:href="@{'/departments/delete/' +${department.id}}"
+                                                      data-target="#delete">Delete
                                                 <i data-feather="trash-2"></i></a></label>
                                         </div>
                                     </td>
