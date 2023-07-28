@@ -202,7 +202,7 @@
                             <a href="index.html"><img src="assets/img/home.svg" alt="sidebar_img"> <span>Dashboard</span></a>
                         </li>
                         <li class="active">
-                            <a href="#"><img src="assets/img/employee.svg" alt="sidebar_img"><span> Employees</span></a>
+                            <a th:href="@{/employee/index}"><img th:src="@{/assets/img/employee.svg}" alt="sidebar_img"><span> Employees</span></a>
                         </li>
                         <li>
                             <a href="company.html"><img src="assets/img/company.svg" alt="sidebar_img"> <span> Company</span></a>
@@ -242,32 +242,11 @@
 
     <div class="page-wrapper">
         <div class="content container-fluid">
-            <table>
-                <thead>
-                <tr>
-                    <th>Stt</th>
-                    <th>First name</th>
-                    <th>Last name</th>
-                    <th>Position</th>
-                    <th>birthDate</th>
-                    <th>stateDate</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="e,status:${page}">
-                    <td th:text="${status.count+1}"></td>
-                    <td th:text="${e.firstName}"></td>
-                    <td th:text="${e.lastName}"></td>
-                    <td th:text="${e.position}"></td>
-                    <td th:text="${e.startDate}"></td>
-                </tr>
-                </tbody>
-            </table>
             <div class="row">
                 <div class="col-xl-12 col-sm-12 col-12">
                     <div class="breadcrumb-path mb-4">
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><img src="assets/img/dash.png" class="mr-2" alt="breadcrumb" />Home</a>
+                            <li class="breadcrumb-item"><a href="index.html"><img th:src="@{/assets/img/dash.png}" class="mr-2" alt="breadcrumb" />Home</a>
                             </li>
                             <li class="breadcrumb-item active"> Employees</li>
                         </ul>
@@ -281,13 +260,13 @@
                             <li><a href="employee-team.html">Teams</a></li>
                             <li><a href="employee-office.html">Offices</a></li>
                         </ul>
-                        <a class="btn-add" href="add-employee.html"><i data-feather="plus"></i> Add Person</a>
+                        <a class="btn-add" th:href="@{/employee/add}"><i data-feather="plus"></i> Add Employee</a>
                     </div>
                 </div>
                 <div class="col-xl-12 col-sm-12 col-12 mb-4">
                     <div class="row">
                         <div class="col-xl-10 col-sm-8 col-12 ">
-                            <label class="employee_count">7 People</label>
+                            <label class="employee_count" th:text="${page.content.size()+' Employee'}"></label>
                         </div>
                         <div class="col-xl-1 col-sm-2 col-12 ">
                             <a href="employee-grid.html" class="btn-view "><i data-feather="grid"></i> </a>
@@ -306,180 +285,37 @@
                             <table class="table  custom-table no-footer">
                                 <thead>
                                 <tr>
+                                    <th>STT</th>
                                     <th>Name</th>
-                                    <th>Line Manager</th>
-                                    <th>Team</th>
-                                    <th>Office</th>
-                                    <th>Permissions</th>
-                                    <th>Status</th>
+                                    <th>Department</th>
+                                    <th>Position</th>
+                                    <th>Address</th>
+                                    <th>Phone</th>
+                                    <th colspan="3">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="table-img">
-                                            <a href="profile.html">
-                                                <img src="assets/img/profiles/avatar-13.jpg" alt="profile" class="img-table" /><label>Sean Black</label>
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <label class="action_label">Richard Wilson </label>
-                                    </td>
-                                    <td>
-                                        <label class="action_label2">Design </label>
-                                    </td>
-                                    <td><label>Focus Technologies	</label></td>
-                                    <td><label>Team Lead</label></td>
-                                    <td class="tab-select">
-                                        <select class="select">
-                                            <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="table-img">
-                                            <a href="profile.html">
-                                                <img src="assets/img/profiles/avatar-16.jpg" alt="profile" class="img-table" /><label>Linda Craver</label>
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <label class="action_label">Richard Wilson </label>
-                                    </td>
-                                    <td>
-                                        <label class="action_label2">IOS </label>
-                                    </td>
-                                    <td><label>Focus Technologies	</label></td>
-                                    <td><label>Team Lead</label></td>
-                                    <td class="tab-select">
-                                        <select class="select">
-                                            <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="table-img">
-                                            <a href="profile.html">
-                                                <img src="assets/img/profiles/avatar-17.jpg" alt="profile" class="img-table" />
-                                            </a>
-                                            <label>Jenni Sims</label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <label class="action_label">Richard Wilson </label>
-                                    </td>
-                                    <td>
-                                        <label class="action_label2">Android </label>
-                                    </td>
-                                    <td><label>Focus Technologies	</label></td>
-                                    <td><label>Team Lead</label></td>
-                                    <td class="tab-select">
-                                        <select class="select">
-                                            <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="table-img">
-                                            <a href="profile.html">
-                                                <img src="assets/img/profiles/avatar-19.jpg" alt="profile" class="img-table" />
-                                            </a>
-                                            <label>Stacey Linville</label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <label class="action_label">Richard Wilson </label>
-                                    </td>
-                                    <td>
-                                        <label class="action_label2">Testing </label>
-                                    </td>
-                                    <td><label>Focus Technologies	</label></td>
-                                    <td><label>Team Lead</label></td>
-                                    <td class="tab-select">
-                                        <select class="select">
-                                            <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="table-img">
-                                            <a href="profile.html">
-                                                <img src="assets/img/profiles/avatar-14.jpg" alt="profile" class="img-table" />
-                                            </a>
-                                            <label>Maria Cotton</label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <label class="action_label">Richard Wilson </label>
-                                    </td>
-                                    <td>
-                                        <label class="action_label2">PHP </label>
-                                    </td>
-                                    <td><label>Focus Technologies	</label></td>
-                                    <td><label>Team Lead</label></td>
-                                    <td class="tab-select">
-                                        <select class="select">
-                                            <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="table-img">
-                                            <a href="profile.html">
-                                                <img src="assets/img/profiles/avatar-18.jpg" alt="profile" class="img-table" />
-                                            </a>
-                                            <label>John Gibbs</label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <label class="action_label">Richard Wilson </label>
-                                    </td>
-                                    <td>
-                                        <label class="action_label2">PHP </label>
-                                    </td>
-                                    <td><label>Focus Technologies	</label></td>
-                                    <td><label>Team Lead</label></td>
-                                    <td class="tab-select">
-                                        <select class="select">
-                                            <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
+                                <tr th:each="e,status:${page}">
+                                    <td th:text="${status.count}"></td>
                                     <td>
                                         <div class="table-img">
                                             <a href="profile.html">
                                                 <img src="assets/img/profiles/avatar-10.jpg" alt="profile" class="img-table" />
                                             </a>
-                                            <label>Richard Wilson</label>
+                                            <label th:text="${e.firstName+' '+e.lastName}"></label>
                                         </div>
                                     </td>
                                     <td>
-                                        <label class="action_label in_active">No </label>
+                                        <label class="action_label in_active" th:text="${e.departmentName}"></label>
                                     </td>
                                     <td>
-                                        <label class="action_label2">Business </label>
+                                        <label class="action_label2" th:text="${e.position}"> </label>
                                     </td>
-                                    <td><label>Focus Technologies	</label></td>
-                                    <td><label>Super Admin</label></td>
-                                    <td class="tab-select">
-                                        <select class="select">
-                                            <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option>
-                                        </select>
-                                    </td>
+                                    <td><label th:text="${e.address}"></label></td>
+                                    <td><label th:text="${e.phone}"></label></td>
+                                    <td><a th:href="@{'/employee/edit/'+${e.id}}">Edit</a></td>
+                                    <td><a th:href="@{'/employee/delete/'+${e.id}}">Delete</a></td>
+                                    <td><a th:href="@{'/employee/detail/'+${e.id}}">Detail</a></td>
                                 </tr>
                                 </tbody>
                             </table>

@@ -249,123 +249,159 @@
         </div>
     </div>
 
-<form th:action="@{/employee/add}" method="post" th:object="${employee}">
-    <div class="page-wrapper">
-        <div class="content container-fluid">
-            <div class="row">
-                <div class="col-xl-12 col-sm-12 col-12 ">
-                    <div class="breadcrumb-path mb-4">
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a>
-                            </li>
-                            <li class="breadcrumb-item active"> Employees</li>
-                        </ul>
-                        <h3>Create Employees</h3>
-                    </div>
-                </div>
-                <div class="col-xl-12 col-sm-12 col-12 ">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="card-titles">Basic Details <span>Organized and secure.</span></h2>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-xl-6 col-sm-12 col-12 ">
-                                    <div class="form-group">
-                                        <input type="text" placeholder="First Name" th:field="*{firstName}">
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-sm-12 col-12 ">
-                                    <div class="form-group">
-                                        <input type="text" placeholder="Last Name" th:field="*{lastName}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-6 col-sm-12 col-12 ">
-                                    <div class="form-group">
-                                        <input type="text" placeholder="Email" th:field="*{email}">
-                                    </div>
-                                    <p th:if="${email}" th:text="${email}" />
-                                    <p th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}" />
-                                </div>
-                                <div class="col-xl-6 col-sm-12 col-12 ">
-                                    <div class="form-group">
-                                        <input type="text" placeholder="password" th:field="*{password}">
-                                    </div>
-                                    <p th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-6 col-sm-12 col-12 ">
-                                    <div class="form-group">
-                                        <input type="text" placeholder="rePassword" name="rePassword">
-                                    </div>
-                                </div>
-                                <div class="form-group mx-3">
-                                    <select class="select" th:field="*{sex}">
-                                        <option > sex </option>
-                                        <option th:value="'true'"> Male</option>
-                                        <option th:value="'false'">Female</option>
-                                    </select>
-                                </div>
-                            </div>
+    <form th:action="@{/employee/add}" method="post" th:object="${employee}">
+        <div class="page-wrapper">
+            <div class="content container-fluid">
+                <div class="row">
+                    <div class="col-xl-12 col-sm-12 col-12 ">
+                        <div class="breadcrumb-path mb-4">
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                </li>
+                                <li class="breadcrumb-item active"> Employees</li>
+                            </ul>
+                            <h3>Create Employees</h3>
                         </div>
                     </div>
                     <div class="col-xl-12 col-sm-12 col-12 ">
-                        <div class="card ">
+                        <div class="card">
                             <div class="card-header">
-                                <h2 class="card-titles">Employment Details<span>Let everyone know the essentials so they're fully prepared.</span></h2>
+                                <h2 class="card-titles">Basic Details <span>Organized and secure.</span></h2>
                             </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-xl-6 col-sm-12 col-12 ">
                                         <div class="form-group">
-                                            <input type="text" placeholder="Phone" th:field="*{phone}">
+                                            <input type="text" placeholder="First Name" th:field="*{firstName}">
                                         </div>
-                                        <p th:if="${phone}" th:text="${phone}" />
                                     </div>
                                     <div class="col-xl-6 col-sm-12 col-12 ">
                                         <div class="form-group">
-                                            <input type="text" placeholder="Address" th:field="*{address}">
+                                            <input type="text" placeholder="Last Name" th:field="*{lastName}">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xl-6 col-sm-12 col-12 ">
                                         <div class="form-group">
-                                            <input type="text" placeholder="Position" th:field="*{position}">
+                                            <input type="text" placeholder="Email" th:field="*{email}">
                                         </div>
+                                        <p th:if="${email}" th:text="${email}"/>
+                                        <p th:if="${#fields.hasErrors('email')}" th:errorclass="error"
+                                           th:errors="*{email}"/>
                                     </div>
                                     <div class="col-xl-6 col-sm-12 col-12 ">
                                         <div class="form-group">
-                                            <select class="select" th:field="*{level}">
-                                                <option>level	</option>
-                                                <option th:value="'1'">Junior</option>
-                                                <option th:value="'2'">Senior</option>
-                                                <option th:value="'3'">Lead</option>
-                                                <option th:value="'4'">Mid</option>
-                                                <option th:value="'5'">Senior leader</option>
-                                            </select>
+                                            <input type="text" placeholder="password" th:field="*{password}">
+                                        </div>
+                                        <p th:if="${#fields.hasErrors('password')}" th:errorclass="error"
+                                           th:errors="*{password}"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-6 col-sm-12 col-12 ">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="rePassword" name="rePassword">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mx-3">
+                                        <select class="select" th:field="*{sex}">
+                                            <option th:value="'true'"> sex</option>
+                                            <option th:value="'true'"> Male</option>
+                                            <option th:value="'false'">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-12 col-sm-12 col-12 ">
+                            <div class="card ">
+                                <div class="card-header">
+                                    <h2 class="card-titles">Employment Details<span>Let everyone know the essentials so they're fully prepared.</span>
+                                    </h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-xl-6 col-sm-12 col-12 ">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Phone" th:field="*{phone}">
+                                            </div>
+                                            <p th:if="${phone}" th:text="${phone}"/>
+                                        </div>
+                                        <div class="col-xl-6 col-sm-12 col-12 ">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Position" th:field="*{position}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-6 col-sm-12 col-12 ">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="coefficientsSalary" th:field="*{coefficientsSalary}">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-sm-12 col-12 ">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Address" th:field="*{address}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-6 col-sm-12 col-12 ">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="EmployeeCode" th:field="*{employeeCode}">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-sm-12 col-12 ">
+                                            <div class="form-group">
+                                                <select class="select" th:field="*{level}">
+                                                    <option th:value="'1'">level</option>
+                                                    <option th:value="'1'">Junior</option>
+                                                    <option th:value="'2'">Senior</option>
+                                                    <option th:value="'3'">Lead</option>
+                                                    <option th:value="'4'">Mid</option>
+                                                    <option th:value="'5'">Senior leader</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-6 col-sm-12 col-12 ">
+                                            <div class="form-group">
+                                                <label>Department :</label>
+                                                <select  class="form-select" aria-label="Default select example" th:field="*{departmentId}" style="width: 200px">
+                                                    <th:block th:each="de : ${departments}">
+                                                        <option th:value="${de.id}" th:text="${de.name}"></option>
+                                                    </th:block>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-sm-12 col-12 ">
+                                            <div class="form-group">
+                                                <label>Manager :</label>
+                                                <select  class="form-select" aria-label="Default select example" th:field="*{managerId}" style="width: 200px">
+                                                    <th:block th:each="e : ${employees}">
+                                                        <option th:value="${e.id}" th:text="${e.firstName+' '+e.lastName}"></option>
+                                                    </th:block>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xl-12 col-sm-12 col-12 ">
-                            <div class="form-btn">
-                                <button type="submit" class="btn btn-apply w-auto">Add Team Member</button>
+                        <div class="row">
+                            <div class="col-xl-12 col-sm-12 col-12 ">
+                                <div class="form-btn">
+                                    <button type="submit" class="btn btn-apply w-auto">Create Employee</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-    </div>
-</form>
+    </form>
 </div>
 
 
