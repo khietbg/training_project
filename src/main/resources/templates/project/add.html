@@ -1,54 +1,152 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" layout:decorate="~{layout/layout}" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<div>
-    <h2>Create Project</h2>
-    <form th:action="@{/project/add}" method="post" th:object="${project}">
-        <label>Name Project: </label>
-        <p th:if="${#fields.hasErrors('name')}" th:errorclass="error" th:errors="*{name}"></p>
-        <input type="text" th:field="*{name}" placeholder="name"><br>
+<div layout:fragment="content">
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+            <div class="row">
+                <div class="col-xl-12 col-sm-12 col-12 mb-4">
+                    <div class="breadcrumb-path">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><img th:src="@{/assets/img/dash.png}"
+                                                                                  class="mr-2" alt="breadcrumb">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                Projects
+                            </li>
+                        </ul>
+                        <h3>Create Project</h3>
+                    </div>
+                </div>
+            </div>
 
-        <label>Operating system: </label>
-        <p th:if="${#fields.hasErrors('os')}" th:errorclass="error" th:errors="*{os}"></p>
-        <input type="text" th:field="*{os}" placeholder="os"><br>
+            <div class="col-xl-12 col-sm-12 col-12 ">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-titles">Create Project</h2>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/project/add}" method="post" th:object="${project}">
+                            <div class="row">
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>Name Project: </label>
+                                        <p th:if="${#fields.hasErrors('name')}" th:errorclass="error"
+                                           th:errors="*{name}"></p>
+                                        <input type="text" th:field="*{name}" placeholder="name"><br>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>Operating system: </label>
+                                        <p th:if="${#fields.hasErrors('os')}" th:errorclass="error"
+                                           th:errors="*{os}"></p>
+                                        <select th:field="*{os}">
+                                            <option th:value="'Mac'" th:text="'Mac'"></option>
+                                            <option th:value="'Window'" th:text="'Window'"></option>
+                                            <option th:value="'Linux'" th:text="'Linux'"></option>
+                                            <option th:value="'Android'" th:text="'Android'"></option>
+                                            <option th:value="'Chrome OS'" th:text="'Chrome OS'"></option>
+                                            <option th:value="'Ubuntu'" th:text="'Ubuntu'"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>Language: </label>
+                                        <p th:if="${#fields.hasErrors('language')}" th:errorclass="error"
+                                           th:errors="*{language}"></p>
+                                        <select th:field="*{language}">
+                                            <option th:value="'Java'" th:text="'Java'"></option>
+                                            <option th:value="'Python'" th:text="'Python'"></option>
+                                            <option th:value="'PHP'" th:text="'PHP'"></option>
+                                            <option th:value="'JavaScript'" th:text="'JavaScript'"></option>
+                                            <option th:value="'HTML'" th:text="'HTML'"></option>
+                                            <option th:value="'Css'" th:text="'Css'"></option>
+                                            <option th:value="'C++'" th:text="'C++'"></option>
+                                            <option th:value="'TypeScript'" th:text="'TypeScript'"></option>
+                                            <option th:value="'Ruby'" th:text="'Ruby'"></option>
+                                            <option th:value="'Swift'" th:text="'Swift'"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>Frame work: </label>
+                                        <p th:if="${#fields.hasErrors('framework')}" th:errorclass="error"
+                                           th:errors="*{framework}"></p>
+                                        <select th:field="*{framework}">
+                                            <option th:value="'ReactJs'" th:text="'ReactJs'"></option>
+                                            <option th:value="'Angular'" th:text="'Angular'"></option>
+                                            <option th:value="'Vue.js'" th:text="'Vue.js'"></option>
+                                            <option th:value="'Node.js'" th:text="'Node.js'"></option>
+                                            <option th:value="'ASP.NET Core'" th:text="'ASP.NET Core'"></option>
+                                            <option th:value="'RubyonRails'" th:text="'RubyonRails'"></option>
+                                            <option th:value="'Django'" th:text="'Django'"></option>
+                                            <option th:value="'Express.js'" th:text="'Express.js'"></option>
+                                            <option th:value="'Larave'" th:text="'Laravel'"></option>
+                                            <option th:value="'SpringBoot'" th:text="'SpringBoot'"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>Start date: </label>
+                                        <p th:if="${#fields.hasErrors('startDate')}" th:errorclass="error"
+                                           th:errors="*{startDate}"></p>
+                                        <input type="date" th:field="*{startDate}" placeholder="startDate">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>End date: </label>
+                                        <p th:if="${#fields.hasErrors('endDate')}" th:errorclass="error"
+                                           th:errors="*{endDate}"></p>
+                                        <input type="date" th:field="*{endDate}" placeholder="endDate">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>PM name: </label>
+                                        <select th:field="*{pmId}">
+                                            <th:block th:each="project :${project}">
+                                                <option th:value="${project.id}" th:text="${project.name}"></option>
+                                            </th:block>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <li><a th:href="@{/project/add}">Add staff to the project</a></li>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-sm-12 col-12 ">
+                                    <div class="form-btn">
+                                        <button type="submit" class="btn btn-apply">Save</button>
+                                        <a style="width: 100px;padding: 9px 15px" href="#" class="btn btn-secondary">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
 
-        <label>Frame work: </label>
-        <p th:if="${#fields.hasErrors('framework')}" th:errorclass="error" th:errors="*{framework}"></p>
-        <input type="text" th:field="*{framework}" placeholder="framework"><br>
-
-        <label>Language: </label>
-        <p th:if="${#fields.hasErrors('language')}" th:errorclass="error" th:errors="*{language}"></p>
-        <input type="text" th:field="*{language}" placeholder="language"><br>
-
-        <label>Start date: </label>
-        <p th:if="${#fields.hasErrors('startDate')}" th:errorclass="error" th:errors="*{startDate}"></p>
-        <input type="date" th:field="*{startDate}" placeholder="startDate"><br>
-
-        <label>End date: </label>
-        <p th:if="${#fields.hasErrors('endDate')}" th:errorclass="error" th:errors="*{endDate}"></p>
-        <input type="date" th:field="*{endDate}" placeholder="endDate"><br>
-
-        <label>PM name: </label>
-        <select th:field="*{pmId}">
-            <th:block th:each="project :${project}">
-                <option th:value="${project.id}" th:text="${project.name}"></option>
-            </th:block>
-        </select><br>
-        <br>
-        <br>
-
-<!--        <p th:if="${#fields.hasErrors('pmName')}" th:errorclass="error" th:errors="*{pmName}"></p>-->
-<!--        <input type="text" name="pmName" th:field="*{pmName}" placeholder="pmName"><br>-->
-            <li><a th:href="@{/project/add}">Add staff to the project</a></li>
-
-
-
-        <button type="submit">Create</button>
-    </form>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

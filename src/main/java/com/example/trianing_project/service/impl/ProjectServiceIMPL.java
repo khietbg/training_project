@@ -3,7 +3,7 @@ package com.example.trianing_project.service.impl;
 import com.example.trianing_project.domain.Project;
 import com.example.trianing_project.repository.ProjectRepository;
 import com.example.trianing_project.service.ProjectService;
-import com.example.trianing_project.service.dto.ProjectDto;
+import com.example.trianing_project.service.dto.ProjectDTO;
 import com.example.trianing_project.service.mapper.ProjectMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,29 +12,29 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class ProjectServiceImpl implements ProjectService {
+public class ProjectServiceIMPL implements ProjectService {
     private final ProjectRepository projectRepository;
     private final ProjectMapper projectMapper;
 
-    public ProjectServiceImpl(ProjectRepository projectRepository, ProjectMapper projectMapper) {
+    public ProjectServiceIMPL(ProjectRepository projectRepository, ProjectMapper projectMapper) {
         this.projectRepository = projectRepository;
         this.projectMapper = projectMapper;
     }
 
     @Override
-    public ProjectDto save(ProjectDto projectDto) {
+    public ProjectDTO save(ProjectDTO projectDto) {
         Project project = projectMapper.toEntity(projectDto);
         project = projectRepository.save(project);
         return projectMapper.toDto(project);
     }
 
     @Override
-    public Page<ProjectDto> findAll(String textSearch, Pageable pageable) {
+    public Page<ProjectDTO> findAll(String textSearch, Pageable pageable) {
         return projectRepository.findAllByNameContainingIgnoreCase(textSearch,pageable).map(projectMapper::toDto);
     }
 
     @Override
-    public Optional<ProjectDto> findOne(Long id) {
+    public Optional<ProjectDTO> findOne(Long id) {
         return projectRepository.findById(id).map(projectMapper::toDto);
     }
 

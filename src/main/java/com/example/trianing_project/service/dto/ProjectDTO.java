@@ -1,6 +1,5 @@
 package com.example.trianing_project.service.dto;
 
-import com.example.trianing_project.domain.Employee;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
@@ -8,20 +7,17 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
-public class ProjectDto implements Serializable {
+public class ProjectDTO implements Serializable {
     private Long id;
     @NotEmpty(message = "Name is required")
     @Size(min = 5, message = "Project name must have at least 1 character")
     private String name;
-    @NotEmpty(message = "Operating system is required")
-    @Size(min = 1, message = "Operating system must have at least 1 character")
+
     private String os;
-    @NotEmpty(message = "Framework is required")
-    @Size(min = 1, message = "Framework must have at least 1 character")
+
     private String framework;
-    @Size(min = 2, max = 8, message = "Language must have 2 to 8 characters")
+
     private String language;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Start date is required")
@@ -33,10 +29,10 @@ public class ProjectDto implements Serializable {
     private String pmName;
 
 
-    public ProjectDto() {
+    public ProjectDTO() {
     }
 
-    public ProjectDto(Long id, String name, String os, String framework, String language, LocalDate startDate, LocalDate endDate, Long pmId, String pmName) {
+    public ProjectDTO(Long id, String name, String os, String framework, String language, LocalDate startDate, LocalDate endDate, Long pmId, String pmName) {
         this.id = id;
         this.name = name;
         this.os = os;

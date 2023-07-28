@@ -2,7 +2,7 @@ package com.example.trianing_project.controller;
 
 import com.example.trianing_project.repository.ProjectRepository;
 import com.example.trianing_project.service.ProjectService;
-import com.example.trianing_project.service.dto.ProjectDto;
+import com.example.trianing_project.service.dto.ProjectDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -30,13 +28,13 @@ public class ProjectController {
     @GetMapping("/index")
     public ModelAndView index(@RequestParam(name = "name", required = false, defaultValue = "") String name, Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("/project/index");
-        Page<ProjectDto> projectDtos = projectService.findAll(name, pageable);
+        Page<ProjectDTO> projectDtos = projectService.findAll(name, pageable);
         modelAndView.addObject("projectDto", projectDtos);
         return modelAndView;
     }
 
     @PostMapping("/add")
-    public ModelAndView doAdd(@Valid @ModelAttribute("project") ProjectDto projectDto, BindingResult bindingResult) {
+    public ModelAndView doAdd(@Valid @ModelAttribute("project") ProjectDTO projectDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()){
             ModelAndView modelAndView = new ModelAndView("project/add",bindingResult.getModel());
             return modelAndView;
@@ -48,13 +46,13 @@ public class ProjectController {
     @GetMapping("/add")
     public ModelAndView showAdd() {
         ModelAndView modelAndView = new ModelAndView("project/add");
-        modelAndView.addObject("project", new ProjectDto());
+        modelAndView.addObject("project", new ProjectDTO());
         return modelAndView;
     }
     @GetMapping("/edit/{id}")
     public ModelAndView showEdit(@PathVariable("id") Long id) {
         ModelAndView modelAndView = new ModelAndView("project/edit");
-        Optional<ProjectDto> projectDto = projectService.findOne(id);
+        Optional<ProjectDTO> projectDto = projectService.findOne(id);
         if (projectDto.isPresent()) {
             return modelAndView.addObject("project", projectDto.get());
         }
@@ -62,7 +60,7 @@ public class ProjectController {
     }
 
     @PostMapping("/edit")
-    public ModelAndView doEdit(@Valid @ModelAttribute("project") ProjectDto projectDto,BindingResult bindingResult) {
+    public ModelAndView doEdit(@Valid @ModelAttribute("project") ProjectDTO projectDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             ModelAndView modelAndView = new ModelAndView("project/edit", bindingResult.getModel());
             return modelAndView;
@@ -82,7 +80,7 @@ public class ProjectController {
     @GetMapping("/detail/{id}")
     private ModelAndView showDetail(@PathVariable("id") Long id) {
         ModelAndView modelAndView = new ModelAndView("project/detail");
-        Optional<ProjectDto> projectDto = projectService.findOne(id);
+        Optional<ProjectDTO> projectDto = projectService.findOne(id);
         if (projectDto.isPresent()) {
             modelAndView.addObject("project", projectDto.get());
             return modelAndView;

@@ -2,7 +2,7 @@ package com.example.trianing_project.controller;
 
 import com.example.trianing_project.repository.SkillRepository;
 import com.example.trianing_project.service.SkillService;
-import com.example.trianing_project.service.dto.SkillDto;
+import com.example.trianing_project.service.dto.SkillDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,7 +20,7 @@ public class SkillController {
     }
 
     @PostMapping("/add")
-    public ModelAndView doAdd(@ModelAttribute("skill") SkillDto skillDto) {
+    public ModelAndView doAdd(@ModelAttribute("skill") SkillDTO skillDto) {
         skillService.save(skillDto);
         ModelAndView modelAndView = new ModelAndView("redirect:/skill/add");
         return modelAndView;
@@ -29,12 +29,12 @@ public class SkillController {
     @GetMapping("/add")
     public ModelAndView showAdd() {
         ModelAndView modelAndView = new ModelAndView("/skill/add");
-        modelAndView.addObject("skill", new SkillDto());
+        modelAndView.addObject("skill", new SkillDTO());
         return modelAndView;
     }
 
     @PostMapping("/edit")
-    public ModelAndView doEdit(@ModelAttribute("skill") SkillDto skillDto) {
+    public ModelAndView doEdit(@ModelAttribute("skill") SkillDTO skillDto) {
         skillService.save(skillDto);
         ModelAndView modelAndView = new ModelAndView("redirect:/skill/edit");
         return modelAndView;
@@ -43,7 +43,7 @@ public class SkillController {
     @GetMapping("/edit/{id}")
     public ModelAndView showEdit(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("/skill/edit");
-        modelAndView.addObject("skills", skillService.findOne(id).get());
+        modelAndView.addObject("skill", skillService.findOne(id).get());
         return modelAndView;
     }
 

@@ -1,38 +1,218 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<div>
-    <h3>Edit Project</h3>
-    <form th:action="@{/project/edit}" method="post" th:object="${project}">
-        <input th:value="*{id}" th:field="*{id}" type="hidden"><br>
-        <label>Name Project:</label>
-        <input type="text" th:field="*{name}" th:value="${project.name}" placeholder="name"><br>
+<div layout:fragment="content">
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+            <div class="row">
+                <div class="col-xl-12 col-sm-12 col-12 mb-4">
+                    <div class="breadcrumb-path">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><img th:src="@{/assets/img/dash.png}"
+                                                                                  class="mr-2" alt="breadcrumb">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                Projects
+                            </li>
+                        </ul>
+                        <h3>Edit Project</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-12 col-sm-12 col-12 ">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-titles">Edit Project</h2>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/project/edit}" method="post" th:object="${project}">
+                            <div class="row">
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <input th:value="*{id}" th:field="*{id}" type="hidden"><br>
+                                        <label>Name Project: </label>
+                                        <input type="text" th:field="*{name}" th:value="${project.name}"
+                                               placeholder="name"><br>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>Operating system: </label>
+                                        <select th:field="*{os}" th:value="${project.os}">
+                                            <option th:value="'Mac'" th:text="'Mac'"></option>
+                                            <option th:value="'Window'" th:text="'Window'"></option>
+                                            <option th:value="'Linux'" th:text="'Linux'"></option>
+                                            <option th:value="'Android'" th:text="'Android'"></option>
+                                            <option th:value="'Chrome OS'" th:text="'Chrome OS'"></option>
+                                            <option th:value="'Ubuntu'" th:text="'Ubuntu'"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>Language: </label>
+                                        <select th:field="*{language}" th:value="${project.language}">
+                                            <option th:value="'Java'" th:text="'Java'"></option>
+                                            <option th:value="'Python'" th:text="'Python'"></option>
+                                            <option th:value="'PHP'" th:text="'PHP'"></option>
+                                            <option th:value="'JavaScript'" th:text="'JavaScript'"></option>
+                                            <option th:value="'HTML'" th:text="'HTML'"></option>
+                                            <option th:value="'Css'" th:text="'Css'"></option>
+                                            <option th:value="'C++'" th:text="'C++'"></option>
+                                            <option th:value="'TypeScript'" th:text="'TypeScript'"></option>
+                                            <option th:value="'Ruby'" th:text="'Ruby'"></option>
+                                            <option th:value="'Swift'" th:text="'Swift'"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>Frame work: </label>
+                                        <select th:field="*{framework}" th:value="${project.framework}">
+                                            <option th:value="'ReactJs'" th:text="'ReactJs'"></option>
+                                            <option th:value="'Angular'" th:text="'Angular'"></option>
+                                            <option th:value="'Vue.js'" th:text="'Vue.js'"></option>
+                                            <option th:value="'Node.js'" th:text="'Node.js'"></option>
+                                            <option th:value="'ASP.NET Core'" th:text="'ASP.NET Core'"></option>
+                                            <option th:value="'RubyonRails'" th:text="'RubyonRails'"></option>
+                                            <option th:value="'Django'" th:text="'Django'"></option>
+                                            <option th:value="'Express.js'" th:text="'Express.js'"></option>
+                                            <option th:value="'Larave'" th:text="'Laravel'"></option>
+                                            <option th:value="'SpringBoot'" th:text="'SpringBoot'"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>Start date: </label>
+                                        <input type="date" th:field="*{startDate}" th:value="${project.startDate}"
+                                               placeholder="startDate">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>End date: </label>
+                                        <input type="date" th:field="*{endDate}" th:value="${project.endDate}"
+                                               placeholder="endDate">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>PM name:</label>
+                                        <input type="text" th:field="*{pmName}" th:value="${project.pmName}"
+                                               placeholder="PM name"><br>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-sm-12 col-12 ">
+                                <div class="form-group">
+                                    <li><a th:href="@{/project/add}">Add staff to the project</a></li>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-sm-12 col-12 ">
+                                    <div class="form-btn">
+                                        <button type="submit" class="btn btn-apply">Upload</button>
+                                        <a style="width: 100px;padding: 9px 15px" href="#" class="btn btn-secondary">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <label>Operating system:</label>
-        <input type="text" th:field="*{os}" th:value="${project.os}" placeholder="Operating system"><br>
 
-        <label>Frame work:</label>
-        <input type="text" th:field="*{framework}" th:value="${project.framework}" placeholder="Frame work"><br>
+    <!--    <div class="page-wrapper">-->
+    <!--        <div class="content container-fluid">-->
+    <!--            &lt;!&ndash; Breadcrumb section &ndash;&gt;-->
+    <!--            <div class="row">-->
+    <!--                <div class="col-xl-12 col-sm-12 col-12 mb-4">-->
+    <!--                    <div class="breadcrumb-path">-->
+    <!--                        <ul class="breadcrumb">-->
+    <!--                            <li class="breadcrumb-item"><a href="index.html"><img th:src="@{/assets/img/dash.png}"-->
+    <!--                                                                                  class="mr-2" alt="breadcrumb">Home</a>-->
+    <!--                            </li>-->
+    <!--                            <li class="breadcrumb-item active">-->
+    <!--                                &lt;!&ndash; Breadcrumb for the current page will go here (not provided in the original code) &ndash;&gt;-->
+    <!--                            </li>-->
+    <!--                        </ul>-->
+    <!--                        <h3>Project</h3>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--            <h3>Edit Project</h3>-->
+    <!--            <form th:action="@{/project/edit}" method="post" th:object="${project}">-->
+    <!--                <input th:value="*{id}" th:field="*{id}" type="hidden"><br>-->
+    <!--                <label>Name Project:</label>-->
+    <!--                <input type="text" th:field="*{name}" th:value="${project.name}" placeholder="name"><br>-->
+    <!--                <div>-->
+    <!--                    <label>Operating system:</label>-->
+    <!--                    <select th:field="*{os}" th:value="${project.os}">-->
+    <!--                        <option th:value="'Mac'" th:text="'Mac'"></option>-->
+    <!--                        <option th:value="'Window'" th:text="'Window'"></option>-->
+    <!--                        <option th:value="'Linux'" th:text="'Linux'"></option>-->
+    <!--                        <option th:value="'Android'" th:text="'Android'"></option>-->
+    <!--                        <option th:value="'Chrome OS'" th:text="'Chrome OS'"></option>-->
+    <!--                        <option th:value="'Ubuntu'" th:text="'Ubuntu'"></option>-->
+    <!--                    </select>-->
+    <!--                </div>-->
+    <!--                <div>-->
+    <!--                    <label>Language:</label>-->
+    <!--                    <select th:field="*{language}" th:value="${project.language}">-->
+    <!--                        <option th:value="'Java'" th:text="'Java'"></option>-->
+    <!--                        <option th:value="'Python'" th:text="'Python'"></option>-->
+    <!--                        <option th:value="'PHP'" th:text="'PHP'"></option>-->
+    <!--                        <option th:value="'JavaScript'" th:text="'JavaScript'"></option>-->
+    <!--                        <option th:value="'HTML'" th:text="'HTML'"></option>-->
+    <!--                        <option th:value="'Css'" th:text="'Css'"></option>-->
+    <!--                        <option th:value="'C++'" th:text="'C++'"></option>-->
+    <!--                        <option th:value="'TypeScript'" th:text="'TypeScript'"></option>-->
+    <!--                        <option th:value="'Ruby'" th:text="'Ruby'"></option>-->
+    <!--                        <option th:value="'Swift'" th:text="'Swift'"></option>-->
+    <!--                    </select>-->
+    <!--                </div>-->
+    <!--                <div>-->
+    <!--                    <label>Frame work:</label>-->
+    <!--                    <select th:field="*{framework}" th:value="${project.framework}">-->
+    <!--                        <option th:value="'ReactJs'" th:text="'ReactJs'"></option>-->
+    <!--                        <option th:value="'Angular'" th:text="'Angular'"></option>-->
+    <!--                        <option th:value="'Vue.js'" th:text="'Vue.js'"></option>-->
+    <!--                        <option th:value="'Node.js'" th:text="'Node.js'"></option>-->
+    <!--                        <option th:value="'ASP.NET Core'" th:text="'ASP.NET Core'"></option>-->
+    <!--                        <option th:value="'RubyonRails'" th:text="'RubyonRails'"></option>-->
+    <!--                        <option th:value="'Django'" th:text="'Django'"></option>-->
+    <!--                        <option th:value="'Express.js'" th:text="'Express.js'"></option>-->
+    <!--                        <option th:value="'Larave'" th:text="'Laravel'"></option>-->
+    <!--                        <option th:value="'SpringBoot'" th:text="'SpringBoot'"></option>-->
+    <!--                    </select>-->
+    <!--                </div>-->
+    <!--                <label>Start date:</label>-->
+    <!--                <input type="text" th:field="*{startDate}" th:value="${project.startDate}" placeholder="Start date"><br>-->
 
-        <label>Language:</label>
-        <input type="text" th:field="*{language}" th:value="${project.language}" placeholder="Language"><br>
+    <!--                <label>End date:</label>-->
+    <!--                <input type="text" th:field="*{endDate}" th:value="${project.endDate}" placeholder="End date"><br>-->
 
-        <label>Start date:</label>
-        <input type="text" th:field="*{startDate}" th:value="${project.startDate}" placeholder="Start date"><br>
+    <!--                <label>PM name:</label>-->
+    <!--                <input type="text" th:field="*{pmName}" th:value="${project.pmName}" placeholder="PM name"><br>-->
 
-        <label>End date:</label>
-        <input type="text" th:field="*{endDate}" th:value="${project.endDate}" placeholder="End date"><br>
-
-        <label>PM name:</label>
-        <input type="text" th:field="*{pmName}" th:value="${project.pmName}" placeholder="PM name"><br>
-
-        <button type="submit">Upload</button>
-    </form>
+    <!--                <button type="submit">Upload</button>-->
+    <!--            </form>-->
+    <!--        </div>-->
+    <!--    </div>-->
 </div>
-
 </body>
 </html>
