@@ -19,13 +19,13 @@ import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/employee")
-public class EmployController {
+public class EmployeeController {
     private final EmployeeService employeeService;
     private final EmployeeRepository employeeRepository;
     private final SendEmailService mailService;
     private final DepartmentService departmentService;
 
-    public EmployController(EmployeeService employeeService, EmployeeRepository employeeRepository, SendEmailService mailService, DepartmentService departmentService) {
+    public EmployeeController(EmployeeService employeeService, EmployeeRepository employeeRepository, SendEmailService mailService, DepartmentService departmentService) {
         this.employeeService = employeeService;
         this.employeeRepository = employeeRepository;
         this.mailService = mailService;
@@ -83,7 +83,7 @@ public class EmployController {
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model) {
-        model.addAttribute("employee", employeeService.findOne(id));
+        model.addAttribute("employee", employeeService.findOne(id).get());
         model.addAttribute("departments", departmentService.findAll());
         return "employee/edit";
     }
