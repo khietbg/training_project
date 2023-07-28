@@ -13,7 +13,6 @@
                     <div class="offcanvas-menu">
                         <div class="user-info align-center bg-theme text-center">
                             <span class="lnr lnr-cross  text-white" id="mobile_btn_close">X</span>
-
                             <a href="javascript:void(0)" class="d-block menu-style text-white">
                                 <div class="user-avatar d-inline-block mr-3">
                                     <img th:src="@{/assets/img/profiles/avatar-18.jpg}" alt="user avatar"
@@ -37,11 +36,11 @@
                             <span>Dashboard</span></a>
                     </li>
                     <li>
-                        <a th:href="@{/emplyoee/index}"><img th:src="@{/assets/img/employee.svg}"
+                        <a th:href="@{/employee/index}"><img th:src="@{/assets/img/employee.svg}"
                                                              alt="sidebar_img"><span> Employees</span></a>
                     </li>
                     <li>
-                        <a th:href="@{/departments/index}"><img th:src="@{/assets/img/company.svg}" alt="sidebar_img"><span>Department</span></a>
+                        <a th:href="@{'/departments/index?page=0&&size=5'}"><img th:src="@{/assets/img/company.svg}" alt="sidebar_img"><span>Department</span></a>
                     </li>
                     <li>
                         <a th:href="@{/project/index}"><img th:src="@{/assets/img/calendar.svg}" alt="sidebar_img"><span>Project</span></a>

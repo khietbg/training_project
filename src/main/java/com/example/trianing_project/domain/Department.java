@@ -17,7 +17,7 @@ public class Department {
     @Column(name = "description")
     private String description;
     @Column(name = "department_code")
-    private String department_code;
+    private String departmentCode;
     @Column(name = "parent_id")
     private Long parentId;
 
@@ -51,12 +51,12 @@ public class Department {
         this.description = description;
     }
 
-    public String getDepartment_code() {
-        return department_code;
+    public String getDepartmentCode() {
+        return departmentCode;
     }
 
-    public void setDepartment_code(String department_code) {
-        this.department_code = department_code;
+    public void setDepartmentCode(String department_code) {
+        this.departmentCode = department_code;
     }
 
     public Long getParentId() {

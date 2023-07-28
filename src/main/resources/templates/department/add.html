@@ -13,7 +13,8 @@
                 <div class="col-xl-12 col-sm-12 col-12 mb-4">
                     <div class="breadcrumb-path ">
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><img src="assets/img/dash.png" class="mr-2"
+                            <li class="breadcrumb-item"><a href="index.html"><img th:src="@{/assets/img/dash.png}"
+                                                                                  class="mr-2"
                                                                                   alt="breadcrumb">Home</a>
                             </li>
                             <li class="breadcrumb-item active"> Create Department</li>
@@ -23,7 +24,6 @@
                 </div>
             </div>
             <div class="row">
-
                 <div class="col-xl-12 col-sm-12 col-12 ">
                     <div class="card">
                         <div class="card-header">
@@ -35,7 +35,8 @@
                                     <div class="col-xl-6 col-sm-6 col-12 ">
                                         <div class="form-group">
                                             <label>Name <span class="mandatory">*</span></label>
-                                            <p style="color: red" th:if=""></p>
+                                            <p style="color: red" th:if="${#fields.hasErrors()}" th:errorclass="error"
+                                               th:errors="*{name}"></p>
                                             <input type="text" th:field="*{name}">
                                         </div>
                                     </div>
@@ -44,6 +45,9 @@
                                     <div class="col-xl-6 col-sm-12 col-12 ">
                                         <div class="form-group">
                                             <label>Department Code</label>
+                                            <p style="color: red" th:if="${massage != null}" th:text="${massage}"></p>
+                                            <p style="color: red" th:if="${#fields.hasErrors()}" th:errorclass="error"
+                                               th:errors="*{departmentCode}"></p>
                                             <input type="text" th:field="*{departmentCode}">
                                         </div>
                                     </div>
@@ -57,7 +61,6 @@
                                                 <th:block th:each="parent : ${parents}">
                                                     <option th:value="${parent.id}" th:text="${parent.name}"></option>
                                                 </th:block>
-
                                             </select>
                                         </div>
                                     </div>
@@ -78,7 +81,8 @@
                                     <div class="col-xl-12 col-sm-12 col-12 ">
                                         <div class="form-btn">
                                             <button type="submit" class="btn btn-apply">Save</button>
-                                            <a style="padding: 9px 15px;width: 120px" th:href="@{/departments/index}"
+                                            <a style="padding: 9px 15px;width: 110px"
+                                               th:href="@{'/departments/index?page=0&&size=5'}"
                                                class="btn btn-secondary">Cancel</a>
                                         </div>
                                     </div>
