@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout/layout}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Dleohr - Bootstrap Admin HTML Template</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+            <div class="row">
+                <div class="col-xl-12 col-sm-12 col-12">
+                    <div class="breadcrumb-path mb-4">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><img th:src="@{/assets/img/dash.png}" class="mr-2" alt="breadcrumb" />Home</a>
+                            </li>
+                            <li class="breadcrumb-item active"> Employees</li>
+                        </ul>
+                        <h3>Employees</h3>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-sm-12 col-12 mb-4">
+                    <div class="head-link-set">
+                        <ul>
+                            <li><a class="active" href="#">All</a></li>
+                            <li><a href="employee-team.html">Teams</a></li>
+                            <li><a href="employee-office.html">Offices</a></li>
+                        </ul>
+                        <a class="btn-add" th:href="@{/employee/add}"><i data-feather="plus"></i> Add Employee</a>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-sm-12 col-12 mb-4">
+                    <div class="row">
+                        <div class="col-xl-10 col-sm-8 col-12 ">
+                            <label class="employee_count" th:text="${page.content.size()+' Employee'}"></label>
+                        </div>
+                        <div class="col-xl-1 col-sm-2 col-12 ">
+                            <a href="employee-grid.html" class="btn-view "><i data-feather="grid"></i> </a>
+                        </div>
+                        <div class="col-xl-1 col-sm-2 col-12 ">
+                            <a href="#" class="btn-view active"><i data-feather="list"></i> </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-sm-12 col-12 mb-4">
+                    <div class="card">
+                        <div class="table-heading">
+                            <h2>Project Summery</h2>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table  custom-table no-footer">
+                                <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Name</th>
+                                    <th>Department</th>
+                                    <th>Position</th>
+                                    <th>Address</th>
+                                    <th>Phone</th>
+                                    <th colspan="3">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="e,status:${page}">
+                                    <td th:text="${status.count}"></td>
+                                    <td>
+                                        <div class="table-img">
+                                            <a href="profile.html">
+                                                <img src="assets/img/profiles/avatar-10.jpg" alt="profile" class="img-table" />
+                                            </a>
+                                            <label th:text="${e.firstName+' '+e.lastName}"></label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <label class="action_label in_active" th:text="${e.departmentName}"></label>
+                                    </td>
+                                    <td>
+                                        <label class="action_label2" th:text="${e.position}"> </label>
+                                    </td>
+                                    <td><label th:text="${e.address}"></label></td>
+                                    <td><label th:text="${e.phone}"></label></td>
+                                    <td><a th:href="@{'/employee/edit/'+${e.id}}">Edit</a></td>
+                                    <td><a th:href="@{'/employee/delete/'+${e.id}}">Delete</a></td>
+                                    <td><a th:href="@{'/employee/detail/'+${e.id}}">Detail</a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

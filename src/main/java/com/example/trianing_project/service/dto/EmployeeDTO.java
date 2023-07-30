@@ -1,6 +1,9 @@
 package com.example.trianing_project.service.dto;
 
+import net.bytebuddy.implementation.bind.annotation.Empty;
+
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
@@ -9,22 +12,32 @@ import java.util.Set;
 public class EmployeeDTO {
     private Long id;
     private String avatarUrl;
+    @NotEmpty(message = "not empty!")
     private String firstName;
+    @NotEmpty(message = "not empty!")
     private String lastName;
-    @Email(message = "email in valid")
+    @Email(message = "email in valid !")
+    @NotEmpty(message = "not empty!")
     private String email;
-    @Size(min = 6)
+    @Size(min = 6,message = "password from 6 character !")
+    @NotEmpty(message = "not empty!")
     private String password;
-    @Pattern(regexp = "0\\d{9}")
+    @Pattern(regexp = "0\\d{9}", message = "phone number in valid! ")
+    @NotEmpty(message = "not empty!")
     private String phone;
+    @NotEmpty(message = "not empty!")
     private String address;
+    @NotEmpty(message = "not empty!")
     private String employeeCode;
+//    @NotEmpty(message = "not empty!")
     private LocalDate birthDate;
     private String citizenCode;
     private LocalDate licenseDate;
     private String licensePlace;
     private LocalDate startDate;
     private float coefficientsSalary;
+    @NotEmpty(message = "not empty!")
+
     private String position;
     private String departmentName;
     private Long departmentId;
