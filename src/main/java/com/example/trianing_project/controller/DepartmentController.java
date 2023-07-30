@@ -4,9 +4,10 @@ import com.example.trianing_project.service.DepartmentService;
 import com.example.trianing_project.service.dto.DepartmentDTO;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.Optional;
@@ -22,90 +23,78 @@ public class DepartmentController {
     }
 
     @GetMapping("/index")
-    public ModelAndView index(@RequestParam(name = "search", required = false, defaultValue = "") String search, Pageable pageable, @ModelAttribute("message") String message) {
-        ModelAndView modelAndView = new ModelAndView("department/index");
-        modelAndView.addObject("message", message);
-        modelAndView.addObject("departments", departmentService.findAllByName(search, pageable));
-        modelAndView.addObject("page", pageable);
-        return modelAndView;
+    public String index(@RequestParam(name = "search", required = false, defaultValue = "") String search, Pageable pageable, @ModelAttribute("message") String message, Model model) {
+        model.addAttribute("message", message);
+        model.addAttribute("departments", departmentService.findAllByName(search, pageable));
+        model.addAttribute("page", pageable);
+        return "department/index";
     }
 
     @GetMapping("/add")
-    public ModelAndView showAdd() {
-        ModelAndView modelAndView = new ModelAndView("department/add");
-        modelAndView.addObject("department", new DepartmentDTO());
-        modelAndView.addObject("parents", departmentService.findAll());
-        return modelAndView;
+    public String showAdd(Model model, @ModelAttribute("message") String message) {
+        model.addAttribute("message", message);
+        model.addAttribute("department", new DepartmentDTO());
+        model.addAttribute("parents", departmentService.findAll());
+        return "department/add";
     }
 
     @PostMapping("/add")
-    public ModelAndView doAdd(@Valid @ModelAttribute("department") DepartmentDTO departmentDTO, BindingResult bindingResult) {
+    public String doAdd(@Valid @ModelAttribute("department") DepartmentDTO departmentDTO, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            ModelAndView modelAndView = new ModelAndView("department/add", bindingResult.getModel());
-            modelAndView.addObject("department", departmentDTO);
-            modelAndView.addObject("parents", departmentService.findAll());
-            return modelAndView;
+            model.addAttribute("department", departmentDTO);
+            model.addAttribute("parents", departmentService.findAll());
+            return "department/add";
         }
         Optional<DepartmentDTO> department = departmentService.findByDepartmentCode(departmentDTO.getDepartmentCode());
         if (department.isPresent()) {
-            ModelAndView modelAndView = new ModelAndView("redirect:/departments/add");
-            modelAndView.addObject("department", departmentDTO);
-            modelAndView.addObject("massage", "Department Code is already in use!!!");
-            modelAndView.addObject("parents", departmentService.findAll());
-            return modelAndView;
+            redirectAttributes.addFlashAttribute("message", "Department ton tai");
+            return "redirect:/departments/add";
         }
         departmentService.save(departmentDTO);
-        return new ModelAndView("redirect:/departments/index?page=0&&size=5");
+        return "redirect:/departments/index";
     }
 
     @GetMapping("/edit/{id}")
-    public ModelAndView showEdit(@PathVariable("id") Long id) {
+    public String showEdit(@PathVariable("id") Long id, Model model, @ModelAttribute("message") String message, RedirectAttributes redirectAttributes) {
         Optional<DepartmentDTO> departmentDTO = departmentService.findOne(id);
         if (!departmentDTO.isPresent()) {
-            ModelAndView modelAndView = new ModelAndView("redirect:/departments/index?page=0&&size=5");
-            modelAndView.addObject("message", "No Content!!!");
-            return modelAndView;
+            redirectAttributes.addFlashAttribute("message", "No Content!!!");
+            return "redirect:/departments/index";
         }
-        ModelAndView modelAndView = new ModelAndView("department/edit");
-        modelAndView.addObject("parents", departmentService.findAll());
-        modelAndView.addObject("department", departmentDTO.get());
-        return modelAndView;
+        model.addAttribute("message", message);
+        model.addAttribute("parents", departmentService.findAll());
+        model.addAttribute("department", departmentDTO.get());
+        return "department/edit";
     }
 
     @PostMapping("/edit")
-    public ModelAndView doEdit(@ModelAttribute("department") DepartmentDTO departmentDTO, @Valid BindingResult bindingResult) {
+    public String doEdit(@ModelAttribute("department") DepartmentDTO departmentDTO, @Valid BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         Optional<DepartmentDTO> department = departmentService.findByDepartmentCode(departmentDTO.getDepartmentCode());
         if (bindingResult.hasErrors()) {
-            ModelAndView modelAndView = new ModelAndView("department/edit", bindingResult.getModel());
-            modelAndView.addObject("parents", departmentService.findAll());
-            modelAndView.addObject("department", new DepartmentDTO());
-            return modelAndView;
+            model.addAttribute("department", departmentDTO);
+            model.addAttribute("parents", departmentService.findAll());
+            return "department/edit";
         }
         if (department.isPresent() && !department.get().getId().equals(departmentDTO.getId())) {
-            ModelAndView modelAndView = new ModelAndView("department/edit", bindingResult.getModel());
-            modelAndView.addObject("massage", "Department Code is already in use!!!");
-            modelAndView.addObject("parents", departmentService.findAll());
-            modelAndView.addObject("department", new DepartmentDTO());
-            return modelAndView;
+            redirectAttributes.addFlashAttribute("message", "Department Code is already in use!!!");
+            return "redirect:/departments/edit/" + departmentDTO.getId();
         }
         departmentService.save(departmentDTO);
-        return new ModelAndView("redirect:/departments/index?page=0&&size=5");
+        return "redirect:/departments/index";
     }
 
     @GetMapping("/delete/{id}")
-    public ModelAndView doDelete(@PathVariable("id") Long id) {
+    public String doDelete(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
         if (!departmentService.findOne(id).isPresent()) {
-            ModelAndView modelAndView = new ModelAndView("redirect:/departments/index?page=0&&size=5");
-            modelAndView.addObject("message", "No Content!!!");
-            return new ModelAndView();
+            redirectAttributes.addFlashAttribute("message", "No Content!!!");
+            return "redirect:/departments/index";
         }
         if (departmentService.existsByParentId(id)) {
-            ModelAndView modelAndView = new ModelAndView("redirect:/departments/index?page=0&&size=5");
-            modelAndView.addObject("message", "remove the element belonging to this element first!!!");
-            return modelAndView;
+            redirectAttributes.addFlashAttribute("message", "remove the element belonging to this element first!!!");
+            return "redirect:/departments/index";
         }
         departmentService.delete(id);
-        return new ModelAndView("redirect:/departments/index?page=0&&size=5");
+        return "redirect:/departments/index";
 
     }
 }
