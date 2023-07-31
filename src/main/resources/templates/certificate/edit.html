@@ -13,11 +13,11 @@
         <div class="col-xl-12 col-sm-12 col-12 mb-4">
           <div class="breadcrumb-path ">
             <ul class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html"><img src="assets/img/dash.png" class="mr-2" alt="breadcrumb">Home</a>
+              <li class="breadcrumb-item"><a href="index.html"><img th:src="@{/assets/img/dash.png}" class="mr-2" alt="breadcrumb">Home</a>
               </li>
-              <li class="breadcrumb-item active"> Create Certificate</li>
+              <li class="breadcrumb-item active"> Update Certificate</li>
             </ul>
-            <h3>Create Certificate</h3>
+            <h3>Update Certificate</h3>
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@
                   <div class="col-xl-12 col-sm-12 col-12 ">
                     <div class="form-btn">
                       <button type="submit" class="btn btn-apply">Apply</button>
-                      <a th:href="@{/emplyoee/index}" style="padding: 9px 15px;width: 110px" class="btn btn-secondary">Cancel</a>
+                      <a th:href="@{'/emplyoee/edit/'+*{employeeId}}" style="padding: 9px 15px;width: 110px" class="btn btn-secondary">Cancel</a>
                     </div>
                   </div>
                 </div>
