@@ -3,8 +3,8 @@ package com.example.trianing_project.controller;
 import com.example.trianing_project.service.CertificateService;
 import com.example.trianing_project.service.EmployeeService;
 import com.example.trianing_project.service.dto.CertificateDTO;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+//import org.springframework.security.core.Authentication;
+//import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,12 +20,16 @@ public class CertificateController {
     private final EmployeeService employeeService;
     private final CertificateService certificateService;
 
-
     public CertificateController(EmployeeService employeeService, CertificateService certificateService) {
         this.employeeService = employeeService;
         this.certificateService = certificateService;
     }
-
+    @GetMapping("/detail/{id}")
+    public String showDetail(@PathVariable("id")Long id,Model model){
+        Optional<CertificateDTO> certificateDTO = certificateService.findOne(id);
+        model.addAttribute("certificate",certificateDTO.get());
+        return "certificate/detail";
+    }
     @GetMapping("/add")
     public String showAdd(Model model) {
         model.addAttribute("certificate", new CertificateDTO());
@@ -78,7 +82,8 @@ public class CertificateController {
     }
 
     public Long getUserId() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return employeeService.findEmployeeByEmail(authentication.getName()).getId();
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        return employeeService.findEmployeeByEmail(authentication.getName()).getId();
+        return 1L;
     }
 }
