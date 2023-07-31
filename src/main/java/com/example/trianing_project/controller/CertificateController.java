@@ -3,8 +3,8 @@ package com.example.trianing_project.controller;
 import com.example.trianing_project.service.CertificateService;
 import com.example.trianing_project.service.EmployeeService;
 import com.example.trianing_project.service.dto.CertificateDTO;
-//import org.springframework.security.core.Authentication;
-//import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -82,8 +82,7 @@ public class CertificateController {
     }
 
     public Long getUserId() {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        return employeeService.findEmployeeByEmail(authentication.getName()).getId();
-        return 1L;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return employeeService.findEmployeeByEmail(authentication.getName()).getId();
     }
 }
