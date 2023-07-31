@@ -49,7 +49,7 @@ public class ExperienceMapperImpl implements ExperienceMapper {
         experienceDTO.setTimeStart(entity.getTimeStart());
         experienceDTO.setTimeEnd(entity.getTimeEnd());
         experienceDTO.setWorkPlace(entity.getWorkPlace());
-        return null;
+        return experienceDTO;
     }
 
     @Override

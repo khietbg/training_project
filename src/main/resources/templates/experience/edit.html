@@ -1,10 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" layout:decorate="~{layout/layout}" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-
+<div layout:fragment="content">
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+            <h3>Edit experience</h3>
+            <form th:action="@{/experience/edit}" method="post" th:object="${experience}">
+                <table>
+                    <tr>
+                        <td>os:</td>
+                        <td><input type="text" th:field="*{os}"/></td>
+                    </tr>
+                    <tr>
+                        <td>language:</td>
+                        <td><input type="text" th:field="*{language}"/></td>
+                    </tr>
+                    <tr>
+                        <td>framework:</td>
+                        <td><input type="text" th:field="*{framework}"/></td>
+                    </tr>
+                    <tr>
+                        <td>link:</td>
+                        <td><input type="text" th:field="*{link}"/></td>
+                    </tr>
+                    <tr>
+                        <td>timeStart:</td>
+                        <td><input type="text" th:field="*{timeStart}"/></td>
+                    </tr>
+                    <tr>
+                        <td>timeEnd:</td>
+                        <td><input type="text" th:field="*{timeEnd}"/></td>
+                    </tr>
+                    <tr>
+                        <td>teamSize:</td>
+                        <td><input type="text" th:field="*{teamSize}"/></td>
+                    </tr>
+                    <tr>
+                        <td>position:</td>
+                        <td><input type="text" th:field="*{position}"/></td>
+                    </tr>
+                    <tr>
+                        <td>workPlace:</td>
+                        <td><input type="text" th:field="*{workPlace}"/></td>
+                    </tr>
+                    <tr>
+                        <td>description:</td>
+                        <td><input type="text" th:field="*{description}"/></td>
+                    </tr>
+                    <tr>
+                        <td>employeeId:</td>
+                        <td><input type="text" th:field="*{employeeId}"/></td>
+                    </tr>
+                </table>
+                <button type="submit">Update</button>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

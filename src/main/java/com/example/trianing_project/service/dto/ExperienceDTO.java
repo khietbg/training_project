@@ -1,5 +1,7 @@
 package com.example.trianing_project.service.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 public class ExperienceDTO {
@@ -7,7 +9,9 @@ public class ExperienceDTO {
     private String language;
     private String os;
     private String framework;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate timeStart;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate timeEnd;
     private int teamSize;
     private String link;

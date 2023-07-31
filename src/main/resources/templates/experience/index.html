@@ -1,10 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" layout:decorate="~{layout/layout}" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-
+<div layout:fragment="content">
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+            <h3>Experience Manager</h3><br>
+            <a th:href="@{/experience/add}">add</a>
+            <table border="1">
+                <thead>
+                <tr>
+                    <th>Stt</th>
+                    <th>Language</th>
+                    <th>os</th>
+                    <th>frameword</th>
+                    <th>startDate</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="e : ${list}">
+                    <td th:text="${e.id}"></td>
+                    <td th:text="${e.language}"></td>
+                    <td th:text="${e.os}"></td>
+                    <td th:text="${e.framework}"></td>
+                    <td th:text="${e.timeStart}"></td>
+                    <td><a th:href="@{'/experience/delete/'+${e.id}}">delete</a></td>
+                    <td><a th:href="@{'/experience/edit/'+${e.id}}">edit</a></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 </body>
 </html>
