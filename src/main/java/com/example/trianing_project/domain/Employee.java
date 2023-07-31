@@ -1,5 +1,7 @@
 package com.example.trianing_project.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
@@ -35,16 +37,19 @@ public class Employee {
     @Column(name = "sex")
     private boolean sex;
     @Column(name = "date_of_birth")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthDate;
     @Column(name = "citizen_code")
     private String citizenCode;
     @Column(name = "license_date")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate licenseDate;
     @Column(name = "licensePlace")
     private String licensePlace;
     @Column(name = "employee_code")
     private String employeeCode;
     @Column(name = "start_date")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate startDate;
     @Column(name = "coefficients_salary")
     private float coefficientsSalary;

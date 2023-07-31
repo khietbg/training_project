@@ -75,4 +75,14 @@ public class EmployeeController {
         employeeService.save(employeeDTO);
         return "redirect:/employee/index";
     }
+
+    @GetMapping("/detail/{id}")
+    public String detail(@PathVariable Long id, Model model) {
+        model.addAttribute("employee", employeeService.findOne(id).get());
+        return "employee/detail";
+    }
+    @GetMapping("/back")
+    public String back() {
+        return "redirect:/employee/index";
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.trianing_project.service.dto;
 
 import net.bytebuddy.implementation.bind.annotation.Empty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -29,11 +30,13 @@ public class EmployeeDTO {
     private String address;
     @NotEmpty(message = "not empty!")
     private String employeeCode;
-//    @NotEmpty(message = "not empty!")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthDate;
     private String citizenCode;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate licenseDate;
     private String licensePlace;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate startDate;
     private float coefficientsSalary;
     @NotEmpty(message = "not empty!")
