@@ -66,4 +66,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepository.deleteById(id);
     }
 
+    @Override
+    public EmployeeDTO findEmployeeByEmail(String usernameOrEmail) {
+        return employeeMapper.toDto(employeeRepository.findEmployeeByEmail(usernameOrEmail));
+    }
 }

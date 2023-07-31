@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout/layout}" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Dleohr - Bootstrap Admin HTML Template</title>
+
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+            <div class="row">
+                <div class="col-xl-12 col-sm-12 col-12 ">
+                    <div class="breadcrumb-path mb-4">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><img src="assets/img/dash.png" class="mr-2"
+                                                                                  alt="breadcrumb">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active">Certificate Detail</li>
+                        </ul>
+                        <h3>Certificate Detail</h3>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-sm-12 col-12 ">
+                    <div class="row">
+                        <div class="col-xl-8 col-sm-12 col-12 d-flex ">
+                            <div class="card card-lists flex-fill">
+                                <div class="card-header">
+                                    <h2 class="card-titles" th:text="${certificate.name}"></h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-xl-6 col-sm-12 col-12 d-flex ">
+                                            <div class="member-registor flex-fill">
+                                                <ul>
+                                                    <li>
+                                                        <label>Issue Date:</label>
+                                                        <span th:text="${certificate.issueDate}"></span>
+                                                    </li>
+                                                    <li>
+                                                        <label>Expiration Date:</label>
+                                                        <span th:text="${certificate.expirationDate}"></span>
+                                                    </li>
+                                                    <li>
+                                                        <label>Certificate Officer:</label>
+                                                        <span th:text="${certificate.certificateOfficer}"></span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-sm-12 col-12 d-flex">
+                                            <div class="member-address flex-fill">
+                                                <label>Description:</label>
+                                                <span th:text="${certificate.description}"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-12 col-sm-12 col-12 ">
+                                            <div class="btn-link my-3">
+                                                <a th:href="@{'/employee/detail/'+ ${certificate.employeeId}}"
+                                                   class="btn btn-secondary">Cancel</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
