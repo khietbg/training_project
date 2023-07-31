@@ -12,6 +12,7 @@
             <h3>Edit experience</h3>
             <form th:action="@{/experience/edit}" method="post" th:object="${experience}">
                 <table>
+                    <input type="hidden" th:field="*{id}">
                     <tr>
                         <td>os:</td>
                         <td><input type="text" th:field="*{os}"/></td>

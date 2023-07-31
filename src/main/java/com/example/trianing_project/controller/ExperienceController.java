@@ -18,13 +18,13 @@ public class ExperienceController {
     @GetMapping("/index")
     public String index(Model model) {
         model.addAttribute("list", experienceService.findAll());
-        return "experience/index";
+        return "/experience/index";
     }
 
     @GetMapping("/add")
     public String showAdd(Model model) {
         model.addAttribute("experience", new ExperienceDTO());
-        return "experience/add";
+        return "/experience/add";
     }
 
     @PostMapping("/add")
@@ -36,18 +36,18 @@ public class ExperienceController {
     @GetMapping("/edit/{id}")
     public String showEdit(@PathVariable Long id, Model model) {
         model.addAttribute("experience", experienceService.findOne(id).get());
-        return "experience/edit";
+        return "/experience/edit";
     }
 
     @PostMapping("/edit")
     public String doEdit(@ModelAttribute ExperienceDTO experienceDTO) {
         experienceService.save(experienceDTO);
-        return "redirect:experience/index";
+        return "redirect:/experience/index";
     }
     @GetMapping("delete/{id}")
     public String delete(@PathVariable Long id){
         experienceService.delete(id);
-        return "experience/edit";
+        return "redirect:/experience/index";
     }
 }
 
