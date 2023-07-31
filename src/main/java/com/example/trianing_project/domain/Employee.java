@@ -1,6 +1,8 @@
 package com.example.trianing_project.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,18 +14,24 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "avatar_url")
     private String avatarUrl;
+
     @Column(name = "first_name")
+    @Size(min = 4)
     private String firstName;
+    @Size(min = 4)
     @Column(name = "last_name")
-    private String last_name;
+    private String lastName;
     @Column(name = "email")
+    @Email(message = "email in valid!")
     private String email;
     @Column(name = "address")
     private String address;
     @Column(name = "phone")
     private String phone;
+    @Size(min = 6)
     @Column(name = "password")
     private String password;
     @Column(name = "sex")
@@ -35,9 +43,9 @@ public class Employee {
     @Column(name = "license_date")
     private LocalDate licenseDate;
     @Column(name = "licensePlace")
-    private LocalDate licensePlace;
+    private String licensePlace;
     @Column(name = "employee_code")
-    private LocalDate employeeCode;
+    private String employeeCode;
     @Column(name = "start_date")
     private LocalDate startDate;
     @Column(name = "coefficients_salary")
@@ -96,11 +104,11 @@ public class Employee {
     }
 
     public String getLast_name() {
-        return last_name;
+        return lastName;
     }
 
     public void setLast_name(String last_name) {
-        this.last_name = last_name;
+        this.lastName = last_name;
     }
 
     public String getEmail() {
@@ -167,19 +175,19 @@ public class Employee {
         this.licenseDate = licenseDate;
     }
 
-    public LocalDate getLicensePlace() {
+    public String getLicensePlace() {
         return licensePlace;
     }
 
-    public void setLicensePlace(LocalDate licensePlace) {
+    public void setLicensePlace(String licensePlace) {
         this.licensePlace = licensePlace;
     }
 
-    public LocalDate getEmployeeCode() {
+    public String getEmployeeCode() {
         return employeeCode;
     }
 
-    public void setEmployeeCode(LocalDate employeeCode) {
+    public void setEmployeeCode(String employeeCode) {
         this.employeeCode = employeeCode;
     }
 

@@ -1,4 +1,4 @@
-package com.example.trianing_project.service.mapper.impl;
+package com.example.trianing_project.service.mapper.Impl;
 
 import com.example.trianing_project.domain.Employee;
 import com.example.trianing_project.domain.Project;
@@ -47,7 +47,6 @@ public class ProjectMapperImpl implements ProjectMapper {
         if (employee != null) {
             projectDto.setPmName(employee.getFirstName() + " " + employee.getLast_name());
         }
-
         return projectDto;
     }
 

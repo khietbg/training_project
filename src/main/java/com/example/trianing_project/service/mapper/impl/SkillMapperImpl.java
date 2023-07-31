@@ -1,4 +1,4 @@
-package com.example.trianing_project.service.mapper.impl;
+package com.example.trianing_project.service.mapper.Impl;
 
 import com.example.trianing_project.domain.Employee;
 import com.example.trianing_project.domain.Skill;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Component
 public class SkillMapperImpl implements SkillMapper {
     @Override

@@ -1,11 +1,7 @@
 package com.example.trianing_project.domain;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name = "project")
@@ -23,12 +19,8 @@ public class Project {
     @Column(name = "language")
     private String language;
     @Column(name = "start_date")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull(message = "Start date is required")
     private LocalDate startDate;
     @Column(name = "end_date")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull(message = "End date is required")
     private LocalDate endDate;
     @Column(name = "employee_id")
     private Long pmId;

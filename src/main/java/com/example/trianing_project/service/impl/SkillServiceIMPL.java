@@ -12,11 +12,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 @Service
-public class SkillServiceIMPL implements SkillService {
+public class SkillServiceImpl implements SkillService {
     private final SkillRepository skillRepository;
     private final SkillMapper skillMapper;
 
-    public SkillServiceIMPL(SkillRepository skillRepository, SkillMapper skillMapper) {
+    public SkillServiceImpl(SkillRepository skillRepository, SkillMapper skillMapper) {
         this.skillRepository = skillRepository;
         this.skillMapper = skillMapper;
     }
