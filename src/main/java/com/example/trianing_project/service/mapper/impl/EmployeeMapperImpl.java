@@ -77,7 +77,7 @@ public class EmployeeMapperImpl implements EmployeeMapper {
         }
         Set<Role> roles = entity.getRoles();
         if (roles != null) {
-            employeeDTO.setRoles(roles.stream().map(Role::getRole_name).collect(Collectors.toSet()));
+            employeeDTO.setRoles(roles.stream().map(Role::getRoleName).collect(Collectors.toSet()));
         }
         Set<Project> projects = entity.getProjects();
         if (projects != null) {
