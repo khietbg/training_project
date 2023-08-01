@@ -25,8 +25,16 @@
                 <div class="col-xl-12 col-sm-12 col-12 mb-4">
                     <div class="head-link-set">
                         <ul>
-                            <li><a class="active" href="#"></a></li>
-                            <li><a href="review-type.html">Review Types</a></li>
+                            <li th:if="${departments.hasPrevious()}">
+                                <a th:href="@{'/departments/index?page='+${departments.number -1}+'&&size=5'}">Previous</a>
+                            </li>
+                            <li style="text-align: center">
+                                <p><span th:text="${departments.number + 1}"></span>/<span
+                                        th:text="${departments.getTotalPages()}"></span></p>
+                            </li>
+                            <li th:if="${departments.hasNext()}">
+                                <a th:href="@{'/departments/index?page='+${departments.number +1}+'&&size=5'}">Next</a>
+                            </li>
                         </ul>
                         <a class="btn-add" th:href="@{/departments/add}">Create Department</a>
                     </div>
@@ -34,7 +42,8 @@
                 <div class="col-xl-12 col-sm-12 col-12 ">
                     <div class="card">
                         <div class="card-header">
-                            <h2 class="card-titles">Departments</h2>
+                            <h2 th:unless="${message != null}" class="card-titles" th:text="Departments"></h2>
+                            <h4 th:if="${message != null}" th:text="${message}" style="color: red"></h4>
                         </div>
                         <div class="table-responsive">
                             <table class="table  custom-table  no-footer">
@@ -50,7 +59,7 @@
                                 <tbody th:each="department,count : ${departments}">
                                 <tr>
                                     <td>
-                                        <label th:text="${count.count}"></label>
+                                        <label th:text="${count.count +(page.getPageSize()*page.getPageNumber())}"></label>
                                     </td>
                                     <td>
                                         <label th:text="${department.name}"></label>
@@ -69,7 +78,7 @@
                                                       th:href="@{'/departments/edit/' +${department.id}}">Edit <i
                                                     data-feather="edit"></i></a></label>
                                             <label><a class="action_label4"
-                                                      th:href="@{'/departments/delete/' +${department.id}}"
+                                                      th:href="@{'/departments/delete/'+${department.id}}"
                                                       data-target="#delete">Delete
                                                 <i data-feather="trash-2"></i></a></label>
                                         </div>

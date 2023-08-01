@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>$Title$</title>
 </head>
 <body>
 <div layout:fragment="content">
@@ -13,13 +13,13 @@
                 <div class="col-xl-12 col-sm-12 col-12 mb-4">
                     <div class="breadcrumb-path ">
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><img th:src="@{/assets/img/dash.png}"
-                                                                                  class="mr-2"
-                                                                                  alt="breadcrumb">Home</a>
+                            <li class="breadcrumb-item"><a href="detail.html"><img th:src="@{/assets/img/dash.png}"
+                                                                                   class="mr-2"
+                                                                                   alt="breadcrumb">Home</a>
                             </li>
-                            <li class="breadcrumb-item active"> Create Department</li>
+                            <li class="breadcrumb-item active"> Update Certificate</li>
                         </ul>
-                        <h3>Create Department</h3>
+                        <h3>Update Certificate</h3>
                     </div>
                 </div>
             </div>
@@ -27,45 +27,36 @@
                 <div class="col-xl-12 col-sm-12 col-12 ">
                     <div class="card">
                         <div class="card-header">
-                            <h2 class="card-titles">Create Department</h2>
+                            <h2 class="card-titles"> Create Certificate </h2>
                         </div>
-                        <form th:action="@{/departments/add}" method="post" th:object="${department}">
-                            <div class="form-creation">
+                        <div class="form-creation">
+                            <form method="post" th:action="@{/employee/certificate/add}" th:object="${certificate}">
+                                <input type="hidden" th:field="*{id}" th:value="*{id}">
                                 <div class="row">
                                     <div class="col-xl-6 col-sm-6 col-12 ">
                                         <div class="form-group">
-                                            <label>Name <span class="mandatory">*</span></label>
-                                            <p style="color: red" th:if="${#fields.hasErrors()}" th:errorclass="error"
-                                               th:errors="*{name}"></p>
+                                            <label>Name<span class="mandatory">*</span></label>
                                             <input type="text" th:field="*{name}">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="col-xl-6 col-sm-6 col-12 ">
                                         <div class="form-group">
-                                            <label>Department Code</label>
-                                            <p style="color: red" th:if="${message != null}" th:text="${message}"></p>
-                                            <p style="color: red" th:if="${#fields.hasErrors()}" th:errorclass="error"
-                                               th:errors="*{departmentCode}"></p>
-                                            <input type="text" th:field="*{departmentCode}">
+                                            <label>Certificate Officer</label>
+                                            <input type="text" th:field="*{certificateOfficer}">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xl-6 col-sm-12 col-12 ">
                                         <div class="form-group">
-                                            <label>Belonging<span class="mandatory">*</span> </label>
-                                            <select class="select" th:field="*{parentId}">
-                                                <option th:value="null">Select</option>
-                                                <th:block th:each="parent : ${parents}">
-                                                    <option th:value="${parent.id}" th:text="${parent.name}"></option>
-                                                </th:block>
-                                            </select>
+                                            <label>Issue Date </label>
+                                            <input type="date" th:field="*{issueDate}">
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-sm-12 col-12 ">
                                         <div class="form-group">
+                                            <label>Expiration Date</label>
+                                            <input type="date" th:field="*{expirationDate}">
                                         </div>
                                     </div>
                                 </div>
@@ -73,22 +64,22 @@
                                     <div class="col-xl-12 col-sm-12 col-12 ">
                                         <div class="form-group">
                                             <label>Description </label>
-                                            <textarea rows="4" cols="50" th:field="*{description}"> </textarea>
+                                            <textarea rows="4" cols="50" th:field="*{description}"></textarea>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xl-12 col-sm-12 col-12 ">
                                         <div class="form-btn">
-                                            <button type="submit" class="btn btn-apply">Save</button>
-                                            <a style="padding: 9px 15px;width: 110px"
-                                               th:href="@{/departments/index}"
+                                            <button type="submit" class="btn btn-apply">Apply</button>
+                                            <a th:href="@{'/emplyoee/edit/'+*{employeeId}}"
+                                               style="padding: 9px 15px;width: 110px"
                                                class="btn btn-secondary">Cancel</a>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

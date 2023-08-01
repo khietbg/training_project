@@ -53,4 +53,10 @@ public class DepartmentServiceImpl implements DepartmentService {
     public boolean existsByParentId(Long id) {
         return departmentRepository.existsByParentId(id);
     }
+
+    @Override
+    public Optional<DepartmentDTO> findByDepartmentCode(String departmentCode) {
+        Optional<DepartmentDTO> departmentDTO = departmentRepository.findByDepartmentCode(departmentCode).map(departmentMapper::toDto);
+        return departmentDTO;
+    }
 }

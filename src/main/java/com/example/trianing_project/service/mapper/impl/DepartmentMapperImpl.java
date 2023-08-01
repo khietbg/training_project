@@ -18,7 +18,7 @@ public class DepartmentMapperImpl implements DepartmentMapper {
         Department department = new Department();
         department.setId(dto.getId());
         department.setName(dto.getName());
-        department.setDepartment_code(dto.getDepartmentCode());
+        department.setDepartmentCode(dto.getDepartmentCode());
         department.setDescription(dto.getDescription());
         department.setParentId(dto.getParentId());
         return department;
@@ -31,7 +31,7 @@ public class DepartmentMapperImpl implements DepartmentMapper {
         }
         DepartmentDTO departmentDTO = new DepartmentDTO();
         departmentDTO.setId(entity.getId());
-        departmentDTO.setDepartmentCode(entity.getDepartment_code());
+        departmentDTO.setDepartmentCode(entity.getDepartmentCode());
         departmentDTO.setName(entity.getName());
         departmentDTO.setDescription(entity.getDescription());
         Department department = entity.getDepartment();
