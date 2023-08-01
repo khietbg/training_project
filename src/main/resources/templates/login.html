@@ -12,8 +12,8 @@
     <link rel="stylesheet" th:href="@{/assets/plugins/fontawesome/css/fontawesome.min.css}">
     <link rel="stylesheet" th:href="@{/assets/plugins/fontawesome/css/all.min.css}">
     <link rel="stylesheet" th:href="@{/assets/css/style.css}">
-    <script src="assets/js/html5shiv.min.js"></script>
-    <script src="assets/js/respond.min.js"></script>
+    <script th:src="@{/assets/js/html5shiv.min.js}"></script>
+    <script th:src="@{/assets/js/respond.min.js}"></script>
 
 </head>
 <body>
@@ -27,15 +27,23 @@
                     <div class="login-right-wrap">
                         <h1>Login</h1>
                         <p class="account-subtitle">Access to our dashboard</p>
-                        <form action="index.html">
+                        <form method="post"
+                              role="form"
+                              th:action="@{/login}">
+                            <div th:if="${param.error}">
+                               <div class="alert alert-danger">invalid email or password, please try again! </div>
+                            </div>
+                            <div th:if="${param.logout}">
+                               <div class="alert alert-success">logout success </div>
+                            </div>
                             <div class="form-group">
                                 <label class="form-control-label">Email Address</label>
-                                <input type="email" class="form-control">
+                                <input type="email" class="form-control" name="email" id="email">
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label">Password</label>
                                 <div class="pass-group">
-                                    <input type="password" class="form-control pass-input">
+                                    <input type="password" class="form-control pass-input" name="password" id="password">
                                     <span class="fas fa-eye toggle-password"></span>
                                 </div>
                             </div>
@@ -60,10 +68,13 @@
 
                             <div class="social-login mb-3">
                                 <span>Login with</span>
-                                <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a><a href="#" class="google"><i class="fab fa-google"></i></a>
+                                <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a><a href="#"
+                                                                                                     class="google"><i
+                                    class="fab fa-google"></i></a>
                             </div>
 
-                            <div class="text-center dont-have">Don't have an account yet? <a href="register.html">Register</a></div>
+                            <div class="text-center dont-have">Don't have an account yet? <a href="register.html">Register</a>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -71,13 +82,13 @@
         </div>
     </div>
 </div>
-<script src="assets/js/jquery-3.5.1.min.js"></script>
+<script th:src="@{/assets/js/jquery-3.5.1.min.js}"></script>
 
-<script src="assets/js/popper.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
+<script th:src="@{/assets/js/popper.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
 
-<script src="assets/js/feather.min.js"></script>
+<script th:src="@{/assets/js/feather.min.js}"></script>
 
-<script src="assets/js/script.js"></script>
+<script th:src="@{/assets/js/script.js}"></script>
 </body>
 </html>
