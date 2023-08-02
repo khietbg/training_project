@@ -1,4 +1,4 @@
-package com.example.trianing_project.service.mapper.Impl;
+package com.example.trianing_project.service.mapper.impl;
 
 import com.example.trianing_project.domain.Certificate;
 import com.example.trianing_project.domain.Employee;
@@ -36,10 +36,9 @@ public class CertificateMapperImpl implements CertificateMapper {
         certificateDTO.setCertificateOfficer(entity.getCertificateOfficer());
         certificateDTO.setDescription(entity.getDescription());
         certificateDTO.setEmployeeId(entity.getEmployeeId());
-        certificateDTO.setEmployeeName(entity.getEmployee().getFirstName()+" "+entity.getEmployee().getLast_name());
         Employee employee = entity.getEmployee();
         if (employee != null) {
-            certificateDTO.setEmployeeName(employee.getFirstName() + " " + employee.getLast_name());
+            certificateDTO.setEmployeeName(employee.getFirstName() + " " + employee.getLastName());
         }
         certificateDTO.setExpirationDate(entity.getExpirationDate());
         certificateDTO.setIssueDate(entity.getIssueDate());

@@ -25,6 +25,7 @@ public class ProjectServiceImpl implements ProjectService {
     public ProjectDTO save(ProjectDTO projectDto) {
         Project project = projectMapper.toEntity(projectDto);
         project = projectRepository.save(project);
+
         return projectMapper.toDto(project);
     }
 

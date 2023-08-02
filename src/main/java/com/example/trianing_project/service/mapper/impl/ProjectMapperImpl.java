@@ -1,4 +1,4 @@
-package com.example.trianing_project.service.mapper.Impl;
+package com.example.trianing_project.service.mapper.impl;
 
 import com.example.trianing_project.domain.Employee;
 import com.example.trianing_project.domain.Project;
@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 public class ProjectMapperImpl implements ProjectMapper {
@@ -45,7 +47,11 @@ public class ProjectMapperImpl implements ProjectMapper {
 
         Employee employee = entity.getPm();
         if (employee != null) {
-            projectDto.setPmName(employee.getFirstName() + " " + employee.getLast_name());
+            projectDto.setPmName(employee.getFirstName() + " " + employee.getLastName());
+        }
+        Set<Employee> employees = entity.getEmployees();
+        if (employee != null) {
+            projectDto.setEmployeeIds(employees);
         }
         return projectDto;
     }

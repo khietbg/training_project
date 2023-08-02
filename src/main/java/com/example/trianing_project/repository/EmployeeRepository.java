@@ -13,6 +13,4 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     boolean existsByEmail(String email);
 
     Page<Employee> findAllByFirstNameContainingIgnoreCase(String search, Pageable pageable);
-
-
 }

@@ -2,6 +2,8 @@ package com.example.trianing_project.domain;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "project")
@@ -27,7 +29,12 @@ public class Project {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Employee pm;
-
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "employee_project",
+            joinColumns = {@JoinColumn(name = "employee_id")},
+            inverseJoinColumns = {@JoinColumn(name = "project_id")})
+    private Set<Employee> Employees = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -39,6 +46,14 @@ public class Project {
 
     public String getName() {
         return name;
+    }
+
+    public Set<Employee> getEmployees() {
+        return Employees;
+    }
+
+    public void setEmployees(Set<Employee> employees) {
+        Employees = employees;
     }
 
     public void setName(String name) {

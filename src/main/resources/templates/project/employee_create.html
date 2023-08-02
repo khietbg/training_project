@@ -7,65 +7,75 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="tile">
-                <div class="tile-body">
-                    <div class="row element-button">
-                        <div class="col-sm-2">
-                            <a class="btn btn-add btn-sm" th:href="@{/employee/add}"><i
-                                    class="fas fa-plus"></i>
-                                Thêm mới nhân viên vào dự án</a>
-                        </div>
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+            <div class="row">
+                <div class="col-xl-12 col-sm-12 col-12 mb-4">
+                    <div class="breadcrumb-path">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a th:href="@{/layout/index}"><img th:src="@{/assets/img/dash.png}"
+                                                                                  class="mr-2" alt="breadcrumb">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                Projects
+                            </li>
+                        </ul>
+                        <h3>Add Employee To Project</h3>
                     </div>
-                    <!--                    <div class="input-group">-->
-                    <!--                        <form class="search-bar" method="get" th:action="@{/employee/index}" style="display: flex">-->
-                    <!--                            <input type="text" class="form-control" placeholder="Tìm kiếm nhân viên" id="searchInput"-->
-                    <!--                                   name="textSearch">-->
-                    <!--                            <button class="btn btn-primary" type="submit" id="searchButton">Tìm</button>-->
-                    <!--                        </form>-->
-                    <!--                    </div>-->
-                    <!-- Employee table -->
-                    <h1>Danh sách nhân viên</h1>
-
-                    <form method="post" th:action="@{/project/add/employee}">
-                        <table class="table table-hover table-bordered js-copytextarea" id="sampleTable">
-                            <thead>
-                            <tr>
-                                <!--                                <th style="width: 10px"><input type="checkbox" id="all"></th>-->
-                                <th>ID nhân viên</th>
-                                <th style="width: 150px">Họ và tên</th>
-                                <th>Ngày sinh</th>
-                                <th>Giới tính</th>
-                                <th>SĐT</th>
-                                <th>Chức vụ</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="employee : ${listOfEmployees}">
-                                <td th:text="${employee.firstName + ' ' + employee.lastName}"></td>
-                                <td th:text="${employee.address}"></td>
-                                <td>
-                                    <span th:if="${employee.sex == 0}">Nam</span>
-                                    <span th:if="${employee.sex == 1}">Nữ</span>
-                                </td>
-                                <td th:text="${employee.phone}"></td>
-                                <td th:text="${employee.position}"></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <button type="submit">Send</button>
-                    </form>
-                    <a th:if="${listOfEmployees.hasPrevious()}"
-                       th:href="@{/employees/index(page=${listOfEmployees.previousPageable().pageNumber})}">
-                        Previous
-                    </a>
-                    <a th:if="${listOfEmployees.hasNext()}"
-                       th:href="@{/employees/index(page=${listOfEmployees.nextPageable().pageNumber})}">
-                        Next
-                    </a>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xl-12 col-sm-12 col-12 mb-4">
+                    <div class="head-link-set">
+                        <ul>
+                            <li><a class="active" href="#">Overview</a></li>
+                            <li><a href="review-type.html">Review Types</a></li>
+                        </ul>
+                        <a class="btn-add" th:href="@{/project/add}">Create Project</a>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <h2 style="text-align: center">Danh sách nhân viên</h2>
+
+                <form method="post" th:action="@{/project/add/employee}">
+                    <table border="1" class="table custom-table no-footer">
+                        <thead>
+                        <tr>
+                            <th style="width: 10px"><input type="checkbox" id="all"></th>
+                            <th>ID</th>
+                            <th style="width: 200px">First and last name</th>
+                            <th style="width: 100px">Address</th>
+                            <th>Sex</th>
+                            <th>Phone number</th>
+                            <th>Position</th>
+                        </tr>
+                        </thead>
+                        <tbody th:each="employee : ${listOfEmployees}">
+                        <tr>
+                            <td><input type="checkbox" name="selectedEmployeeCodes" th:value="${employee.id}"/></td>
+                            <td th:text="${employee.id}"></td>
+                            <td th:text="${employee.firstName + ' ' + employee.lastName}"></td>
+                            <td th:text="${employee.address}"></td>
+                            <td th:text="${employee.sex}"></td>
+                            <td th:text="${employee.phone}"></td>
+                            <td th:text="${employee.position}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-success">Send</button>
+                </form>
+            </div>
+<!--            <a th:if="${listOfEmployees.hasPrevious()}"-->
+<!--               th:href="@{/employees/index(page=${listOfEmployees.previousPageable().pageNumber})}">-->
+<!--                Previous-->
+<!--            </a>-->
+<!--            <a th:if="${listOfEmployees.hasNext()}"-->
+<!--               th:href="@{/employees/index(page=${listOfEmployees.nextPageable().pageNumber})}">-->
+<!--                Next-->
+<!--            </a>-->
         </div>
     </div>
 </div>

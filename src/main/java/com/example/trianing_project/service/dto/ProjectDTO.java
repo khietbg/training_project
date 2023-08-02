@@ -1,17 +1,18 @@
 package com.example.trianing_project.service.dto;
 
+import com.example.trianing_project.domain.Employee;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ProjectDTO implements Serializable {
     private Long id;
     @NotEmpty(message = "Name is required")
-    @Size(min = 5, message = "Project name must have at least 1 character")
     private String name;
 
     private String os;
@@ -27,23 +28,18 @@ public class ProjectDTO implements Serializable {
     private LocalDate endDate;
     private Long pmId;
     private String pmName;
-
+    Set<Employee> employeeIds =new HashSet<>();
 
     public ProjectDTO() {
     }
 
-    public ProjectDTO(Long id, String name, String os, String framework, String language, LocalDate startDate, LocalDate endDate, Long pmId, String pmName) {
-        this.id = id;
-        this.name = name;
-        this.os = os;
-        this.framework = framework;
-        this.language = language;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.pmId = pmId;
-        this.pmName = pmName;
+    public Set<Employee> getEmployeeIds() {
+        return employeeIds;
     }
 
+    public void setEmployeeIds(Set<Employee> employeeIds) {
+        this.employeeIds = employeeIds;
+    }
 
     public Long getId() {
         return id;

@@ -46,14 +46,7 @@
                                         <label>Operating system: </label>
                                         <p th:if="${#fields.hasErrors('os')}" th:errorclass="error"
                                            th:errors="*{os}"></p>
-                                        <select th:field="*{os}">
-                                            <option th:value="'Mac'" th:text="'Mac'"></option>
-                                            <option th:value="'Window'" th:text="'Window'"></option>
-                                            <option th:value="'Linux'" th:text="'Linux'"></option>
-                                            <option th:value="'Android'" th:text="'Android'"></option>
-                                            <option th:value="'Chrome OS'" th:text="'Chrome OS'"></option>
-                                            <option th:value="'Ubuntu'" th:text="'Ubuntu'"></option>
-                                        </select>
+                                        <input type="text" th:field="*{os}" placeholder="name"><br>
                                     </div>
                                 </div>
                             </div>
@@ -63,18 +56,7 @@
                                         <label>Language: </label>
                                         <p th:if="${#fields.hasErrors('language')}" th:errorclass="error"
                                            th:errors="*{language}"></p>
-                                        <select th:field="*{language}">
-                                            <option th:value="'Java'" th:text="'Java'"></option>
-                                            <option th:value="'Python'" th:text="'Python'"></option>
-                                            <option th:value="'PHP'" th:text="'PHP'"></option>
-                                            <option th:value="'JavaScript'" th:text="'JavaScript'"></option>
-                                            <option th:value="'HTML'" th:text="'HTML'"></option>
-                                            <option th:value="'Css'" th:text="'Css'"></option>
-                                            <option th:value="'C++'" th:text="'C++'"></option>
-                                            <option th:value="'TypeScript'" th:text="'TypeScript'"></option>
-                                            <option th:value="'Ruby'" th:text="'Ruby'"></option>
-                                            <option th:value="'Swift'" th:text="'Swift'"></option>
-                                        </select>
+                                        <input type="text" th:field="*{language}" placeholder="name"><br>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-sm-12 col-12 ">
@@ -82,19 +64,7 @@
                                         <label>Frame work: </label>
                                         <p th:if="${#fields.hasErrors('framework')}" th:errorclass="error"
                                            th:errors="*{framework}"></p>
-                                        <select th:field="*{framework}" multiple="multiple">
-                                            <option th:value="'ReactJs'" th:text="'ReactJs'"></option>
-                                            <option th:value="'Angular'" th:text="'Angular'"></option>
-                                            <option th:value="'Vue.js'" th:text="'Vue.js'"></option>
-                                            <option th:value="'Node.js'" th:text="'Node.js'"></option>
-                                            <option th:value="'ASP.NET Core'" th:text="'ASP.NET Core'"></option>
-                                            <option th:value="'RubyonRails'" th:text="'RubyonRails'"></option>
-                                            <option th:value="'Django'" th:text="'Django'"></option>
-                                            <option th:value="'Express.js'" th:text="'Express.js'"></option>
-                                            <option th:value="'Larave'" th:text="'Laravel'"></option>
-                                            <option th:value="'Spring Security'" th:text="'Spring Security'"></option>
-                                            <option th:value="'Spring Boot'" th:text="'Spring Boot'"></option>
-                                        </select>
+                                        <input type="text" th:field="*{framework}" placeholder="name"><br>
                                     </div>
                                 </div>
                             </div>
@@ -116,18 +86,47 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="col-xl-6 col-sm-12 col-12 ">
                                     <div class="form-group">
-                                        <label>PM name: </label>
-                                        <select th:field="*{pmId}">
-                                            <th:block th:each="employee :${employees}">
-                                                <option th:value="${employee.id}"
-                                                        th:text="${employee.lastName+' '+employee.firstName}"></option>
-                                            </th:block>
-                                        </select>
+                                      <button><a th:href="@{/project/show/employee}">Add employee to project</a></button>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table border="1" class="table custom-table no-footer">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th style="width: 200px">First and last name</th>
+                                        <th style="width: 100px">Address</th>
+                                        <th>Sex</th>
+                                        <th>Phone number</th>
+                                        <th>Position</th>
+                                        <th colspan="2">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="employee : ${selectedEmployees}" th:field="*{employeeIds}">
+                                        <td th:text="${employee.id}"></td>
+                                        <td th:text="${employee.firstName + ' ' + employee.lastName}"></td>
+                                        <td th:text="${employee.address}"></td>
+                                        <td th:text="${employee.sex}"></td>
+                                        <td th:text="${employee.phone}"></td>
+                                        <td th:text="${employee.position}"></td>
+                                        <td>
+                                            <div class="actionset">
+                                                <label><a class="action_label4"
+                                                          th:href="@{'/project/employee/delete/'+${employee.id}}">Delete<i
+                                                        data-feather="trash-2"></i></a></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <br>
+                                <br>
                                 <div class="row">
                                     <div class="col-xl-12 col-sm-12 col-12 ">
                                         <div class="form-btn">
@@ -139,46 +138,6 @@
                                 </div>
                             </div>
                         </form>
-
-                        <div class="row">
-                            <div class="col-xl-6 col-sm-12 col-12 ">
-                                <div class="form-group">
-                                    <a th:href="@{/project/employee_create}">
-                                        <button>Add employee to project</button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <table border="1">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th style="width: 200px">First and last name</th>
-                                <th style="width: 100px">Address</th>
-                                <th>Sex</th>
-                                <th>Phone number</th>
-                                <th>Position</th>
-                                <th colspan="2">Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="employees : ${employees}">
-                                <td th:text="${employee.id}"></td>
-                                <td th:text="${employee.firstName + ' ' + employee.lastName}"></td>
-                                <td th:text="${employee.address}"></td>
-                                <td th:text="${employee.sex}"></td>
-                                <td th:text="${employee.phone}"></td>
-                                <td th:text="${employee.position}"></td>
-                                <td>
-                                    <div class="actionset">
-                                        <label><a class="action_label4"
-                                                  th:href="@{'/project/employee/delete/'+${employee.id}}">Delete<i
-                                                data-feather="trash-2"></i></a></label>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>

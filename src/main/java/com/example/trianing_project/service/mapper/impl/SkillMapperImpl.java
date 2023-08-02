@@ -1,4 +1,4 @@
-package com.example.trianing_project.service.mapper.Impl;
+package com.example.trianing_project.service.mapper.impl;
 
 import com.example.trianing_project.domain.Employee;
 import com.example.trianing_project.domain.Skill;
@@ -42,7 +42,7 @@ public class SkillMapperImpl implements SkillMapper {
         skillDto.setEmployeeId(entity.getEmployeeId());
         Employee employee = entity.getEmployee();
         if (employee != null) {
-            skillDto.setEmployeeName(employee.getFirstName() + " " + employee.getLast_name());
+            skillDto.setEmployeeName(employee.getFirstName() + " " + employee.getLastName());
         }
 
         return skillDto;
