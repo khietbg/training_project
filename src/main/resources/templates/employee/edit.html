@@ -20,6 +20,20 @@
                     <td><input type="text" th:field="*{position}"/></td>
                 </tr>
                 <tr>
+                    <td><label>Position:</label>
+                    </td>
+                    <td><div class="form-group">
+                        <select class="select" th:field="*{level}">
+                            <option th:value="'1'">level</option>
+                            <option th:value="'1'">Junior</option>
+                            <option th:value="'2'">Senior</option>
+                            <option th:value="'3'">Lead</option>
+                            <option th:value="'4'">Mid</option>
+                            <option th:value="'5'">Senior leader</option>
+                        </select>
+                    </div></td>
+                </tr>
+                <tr>
                     <td><label>coefficientsSalary: </label></td>
                     <td><input type="text" th:field="*{coefficientsSalary}"/></td>
                 </tr>

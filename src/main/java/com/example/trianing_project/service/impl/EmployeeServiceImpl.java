@@ -54,12 +54,27 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDTO save(EmployeeDTO employeeDTO) {
-        if (employeeDTO.getId() != null){
+        if (employeeDTO.getId() != null) {
             Employee employee = employeeRepository.findById(employeeDTO.getId()).get();
-            employee.setPosition(employeeDTO.getPosition());
-            employee.setCoefficientsSalary(employeeDTO.getCoefficientsSalary());
-            employee.setDepartmentId(employeeDTO.getDepartmentId());
-            employee.setDepartment(departmentRepository.findById(employeeDTO.getDepartmentId()).get());
+            for (Role r : employee.getRoles()) {
+                if (roleService.findByRoleName("ADMIN").equals(r)) {
+                    employee.setPosition(employeeDTO.getPosition());
+                    employee.setCoefficientsSalary(employeeDTO.getCoefficientsSalary());
+                    employee.setDepartmentId(employeeDTO.getDepartmentId());
+                    employee.setLevel(employeeDTO.getLevel());
+                    employee.setDepartment(departmentRepository.findById(employeeDTO.getDepartmentId()).get());
+                    return employeeMapper.toDto(employeeRepository.save(employee));
+                }
+            }
+            employee.setAvatarUrl(employeeDTO.getAvatarUrl());
+            employee.setFirstName(employeeDTO.getFirstName());
+            employee.setLastName(employeeDTO.getLastName());
+            employee.setPhone(employeeDTO.getPhone());
+            employee.setAddress(employeeDTO.getAddress());
+            employee.setBirthDate(employeeDTO.getBirthDate());
+            employee.setCitizenCode(employeeDTO.getCitizenCode());
+            employee.setLicenseDate(employeeDTO.getLicenseDate());
+            employee.setLicensePlace(employeeDTO.getLicensePlace());
             return employeeMapper.toDto(employeeRepository.save(employee));
         }
         Employee employee = employeeMapper.toEntity(employeeDTO);
@@ -80,6 +95,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             });
         }
         employee.setRoles(roles);
+
         employee.setPassword(passwordEncoder.encode(employee.getPassword()));
         employee.setStartDate(LocalDate.now());
         employee.setManager(employeeRepository.findById(employeeDTO.getDepartmentId()).get());
@@ -95,5 +111,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeDTO findEmployeeByEmail(String usernameOrEmail) {
         return employeeMapper.toDto(employeeRepository.findEmployeeByEmail(usernameOrEmail));
+    }
+
+    @Override
+    public EmployeeDTO updatePassword(EmployeeDTO employeeDTO) {
+        Employee employee = employeeMapper.toEntity(employeeDTO);
+        employee.setPassword(passwordEncoder.encode(employee.getPassword()));
+        return employeeMapper.toDto(employeeRepository.save(employee));
     }
 }

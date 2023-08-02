@@ -30,13 +30,13 @@ public class EmployeeDTO {
     private String address;
     @NotEmpty(message = "not empty!")
     private String employeeCode;
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
     private String citizenCode;
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate licenseDate;
     private String licensePlace;
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
     private float coefficientsSalary;
     @NotEmpty(message = "not empty!")

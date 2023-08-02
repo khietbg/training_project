@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/employee/certificate")
+@RequestMapping("/certificate")
 public class CertificateController {
     private final EmployeeService employeeService;
     private final CertificateService certificateService;

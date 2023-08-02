@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface ExperienceRepository extends JpaRepository<Experience, Long> {
-    List<Experience> findAllByEmployee(Employee employee);
+    List<Experience> findAllByEmployeeId(Long id);
 }

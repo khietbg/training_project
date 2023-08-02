@@ -52,6 +52,7 @@ public class EmployeeMapperImpl implements EmployeeMapper {
         employeeDTO.setId(entity.getId());
         employeeDTO.setEmail(entity.getEmail());
         employeeDTO.setAddress(entity.getAddress());
+        employeeDTO.setPassword(entity.getPassword());
         employeeDTO.setAvatarUrl(entity.getAvatarUrl());
         employeeDTO.setCitizenCode(entity.getCitizenCode());
         employeeDTO.setBirthDate(entity.getBirthDate());

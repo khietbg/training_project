@@ -68,7 +68,7 @@
                                     <td>
                                         <div class="table-img">
                                             <a href="profile.html">
-                                                <img src="assets/img/profiles/avatar-10.jpg" alt="profile" class="img-table" />
+                                                <img th:src="@{'~/assets/img/' + ${e.avatarUrl}}" alt="profile" class="img-table" />
                                             </a>
                                             <label th:text="${e.firstName+' '+e.lastName}"></label>
                                         </div>

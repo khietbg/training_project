@@ -44,10 +44,17 @@ public class ExperienceController {
         experienceService.save(experienceDTO);
         return "redirect:/experience/index";
     }
+
     @GetMapping("delete/{id}")
-    public String delete(@PathVariable Long id){
+    public String delete(@PathVariable Long id) {
         experienceService.delete(id);
         return "redirect:/experience/index";
+    }
+
+    @GetMapping("/detail/{id}")
+    public String detail(@PathVariable Long id, Model model) {
+        model.addAttribute("experience", experienceService.findOne(id).get());
+        return "/experience/detail";
     }
 }
 
