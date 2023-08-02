@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -61,7 +60,6 @@ public class ProjectController {
         return "redirect:/project/index";
     }
 
-
     @GetMapping("/edit/{id}")
     public String showEdit(@PathVariable("id") Long id, Model model) {
         Optional<ProjectDTO> projectDto = projectService.findOne(id);
@@ -101,7 +99,6 @@ public class ProjectController {
         }
         return "redirect:/project/index";
     }
-
 
     @GetMapping("/show/employee")
     public String indexE(@RequestParam(required = false, defaultValue = "") String textSearch,

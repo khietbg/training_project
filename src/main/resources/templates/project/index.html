@@ -49,7 +49,6 @@
                         <th>Language</th>
                         <th>Start date</th>
                         <th>End date</th>
-                        <th>PM name</th>
                         <th colspan="4" style="text-align: center">Action</th>
                     </tr>
                     <tbody th:each="project,count:${projectDto}">
@@ -61,7 +60,6 @@
                         <td><b th:text="${project.language}"></b></td>
                         <td><b th:text="${project.startDate}"></b></td>
                         <td><b th:text="${project.endDate}"></b></td>
-                        <td><b th:text="${project.pmName}"></b></td>
                         <td>
                             <div class="actionset">
                                 <label><a class="action_label5" th:href="@{'/project/edit/'+${project.id}}">Edit <i

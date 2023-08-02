@@ -29,7 +29,6 @@ public class ThymeleafConfig implements WebMvcConfigurer {
         return templateEngine;
     }
 
-
     @Bean
     public ThymeleafViewResolver thymeleafViewResolver() {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
