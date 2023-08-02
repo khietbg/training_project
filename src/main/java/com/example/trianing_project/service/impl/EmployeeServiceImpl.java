@@ -96,4 +96,5 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeDTO findEmployeeByEmail(String usernameOrEmail) {
         return employeeMapper.toDto(employeeRepository.findEmployeeByEmail(usernameOrEmail));
     }
+
 }
