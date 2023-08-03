@@ -4,6 +4,7 @@ package com.example.trianing_project.service.impl;
 import com.example.trianing_project.domain.Skill;
 import com.example.trianing_project.repository.SkillRepository;
 import com.example.trianing_project.service.SkillService;
+import com.example.trianing_project.service.dto.GetData;
 import com.example.trianing_project.service.dto.SkillDTO;
 import com.example.trianing_project.service.mapper.SkillMapper;
 import org.springframework.stereotype.Service;
@@ -42,5 +43,10 @@ public class SkillServiceImpl implements SkillService {
     @Override
     public void delete(Long id) {
         skillRepository.deleteById(id);
+    }
+
+    @Override
+    public List<GetData> getDataByName() {
+        return skillRepository.getDataByName();
     }
 }
