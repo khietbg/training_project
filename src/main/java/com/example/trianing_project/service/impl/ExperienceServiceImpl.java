@@ -52,7 +52,6 @@ public class ExperienceServiceImpl implements ExperienceService {
 
     @Override
     public List<ExperienceDTO> findAllByEmployeeId(Long id) {
-
         return experienceMapper.toDto(experienceRepository.findAllByEmployeeId(id));
     }
 }

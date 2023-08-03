@@ -1,7 +1,11 @@
 package com.example.trianing_project.controller;
 
+import com.example.trianing_project.service.EmployeeService;
 import com.example.trianing_project.service.ExperienceService;
+import com.example.trianing_project.service.dto.EmployeeDTO;
 import com.example.trianing_project.service.dto.ExperienceDTO;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,9 +14,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/experience")
 public class ExperienceController {
     private final ExperienceService experienceService;
+    private final EmployeeService employeeService;
 
-    public ExperienceController(ExperienceService experienceService) {
+    public ExperienceController(ExperienceService experienceService, EmployeeService employeeService) {
         this.experienceService = experienceService;
+        this.employeeService = employeeService;
     }
 
     @GetMapping("/index")
@@ -29,8 +35,11 @@ public class ExperienceController {
 
     @PostMapping("/add")
     public String doAdd(@ModelAttribute("experience") ExperienceDTO experienceDTO) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        EmployeeDTO employeeLogin = employeeService.findEmployeeByEmail(authentication.getName());
+        experienceDTO.setEmployeeId(employeeLogin.getId());
         experienceService.save(experienceDTO);
-        return "redirect:/experience/index";
+        return "redirect:/profile/index";
     }
 
     @GetMapping("/edit/{id}")
@@ -41,14 +50,17 @@ public class ExperienceController {
 
     @PostMapping("/edit")
     public String doEdit(@ModelAttribute ExperienceDTO experienceDTO) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        EmployeeDTO employeeLogin = employeeService.findEmployeeByEmail(authentication.getName());
+        experienceDTO.setEmployeeId(employeeLogin.getId());
         experienceService.save(experienceDTO);
-        return "redirect:/experience/index";
+        return "redirect:/profile/index";
     }
 
     @GetMapping("delete/{id}")
     public String delete(@PathVariable Long id) {
         experienceService.delete(id);
-        return "redirect:/experience/index";
+        return "redirect:/profile/index";
     }
 
     @GetMapping("/detail/{id}")
