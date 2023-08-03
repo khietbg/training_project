@@ -1,5 +1,6 @@
 package com.example.trianing_project.service;
 
+import com.example.trianing_project.service.dto.GetData;
 import com.example.trianing_project.service.dto.SkillDTO;
 
 import java.util.List;
@@ -13,4 +14,5 @@ public interface SkillService {
     Optional<SkillDTO> findOne(Long id);
 
     void delete(Long id);
+    List<GetData> getDataByName();
 }
