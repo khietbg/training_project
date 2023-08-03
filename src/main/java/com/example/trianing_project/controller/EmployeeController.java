@@ -1,6 +1,5 @@
 package com.example.trianing_project.controller;
 
-
 import com.example.trianing_project.repository.EmployeeRepository;
 import com.example.trianing_project.service.DepartmentService;
 import com.example.trianing_project.service.EmployeeService;
@@ -21,10 +20,10 @@ import org.thymeleaf.context.Context;
 import org.xhtmlrenderer.pdf.ITextFontResolver;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
+
 import javax.mail.MessagingException;
 import javax.validation.Valid;
 import java.io.ByteArrayOutputStream;
-
 
 @Controller
 @RequestMapping("/employee")
@@ -34,6 +33,7 @@ public class EmployeeController {
     private final SendEmailService mailService;
     private final DepartmentService departmentService;
     private final TemplateEngine templateEngine;
+
 
     public EmployeeController(EmployeeService employeeService, EmployeeRepository employeeRepository, SendEmailService mailService, DepartmentService departmentService, TemplateEngine templateEngine) {
         this.employeeService = employeeService;
@@ -58,7 +58,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/add")
-    public String doAdd(@Valid @ModelAttribute("department") EmployeeDTO employeeDTO, BindingResult bindingResult, Model model) throws MessagingException, MessagingException {
+    public String doAdd(@Valid @ModelAttribute("department") EmployeeDTO employeeDTO, BindingResult bindingResult, Model model) throws MessagingException {
         if (bindingResult.hasErrors()) {
             model.addAttribute("employee", employeeDTO);
             model.addAttribute("employees", employeeService.findAll());
