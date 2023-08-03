@@ -1,54 +1,148 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" layout:decorate="~{layout/layout}" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<div>
-    <h2>Create Project</h2>
-    <form th:action="@{/project/add}" method="post" th:object="${project}">
-        <label>Name Project: </label>
-        <p th:if="${#fields.hasErrors('name')}" th:errorclass="error" th:errors="*{name}"></p>
-        <input type="text" th:field="*{name}" placeholder="name"><br>
+<div layout:fragment="content">
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+            <div class="row">
+                <div class="col-xl-12 col-sm-12 col-12 mb-4">
+                    <div class="breadcrumb-path">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><img th:src="@{/assets/img/dash.png}"
+                                                                                  class="mr-2" alt="breadcrumb">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                Projects
+                            </li>
+                        </ul>
+                        <h3>Create Project</h3>
+                    </div>
+                </div>
+            </div>
 
-        <label>Operating system: </label>
-        <p th:if="${#fields.hasErrors('os')}" th:errorclass="error" th:errors="*{os}"></p>
-        <input type="text" th:field="*{os}" placeholder="os"><br>
+            <div class="col-xl-12 col-sm-12 col-12 ">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-titles">Create Project</h2>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/project/add}" method="post" th:object="${project}">
+                            <div class="row">
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>Name Project: </label>
+                                        <p th:if="${#fields.hasErrors('name')}" th:errorclass="error"
+                                           th:errors="*{name}"></p>
+                                        <input type="text" th:field="*{name}" placeholder="name"><br>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>Operating system: </label>
+                                        <p th:if="${#fields.hasErrors('os')}" th:errorclass="error"
+                                           th:errors="*{os}"></p>
+                                        <input type="text" th:field="*{os}" placeholder="name"><br>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>Language: </label>
+                                        <p th:if="${#fields.hasErrors('language')}" th:errorclass="error"
+                                           th:errors="*{language}"></p>
+                                        <input type="text" th:field="*{language}" placeholder="name"><br>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>Frame work: </label>
+                                        <p th:if="${#fields.hasErrors('framework')}" th:errorclass="error"
+                                           th:errors="*{framework}"></p>
+                                        <input type="text" th:field="*{framework}" placeholder="name"><br>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>Start date: </label>
+                                        <p th:if="${#fields.hasErrors('startDate')}" th:errorclass="error"
+                                           th:errors="*{startDate}"></p>
+                                        <input type="date" th:field="*{startDate}" placeholder="startDate">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>End date: </label>
+                                        <p th:if="${#fields.hasErrors('endDate')}" th:errorclass="error"
+                                           th:errors="*{endDate}"></p>
+                                        <input type="date" th:field="*{endDate}" placeholder="endDate">
+                                    </div>
+                                </div>
+                            </div>
 
-        <label>Frame work: </label>
-        <p th:if="${#fields.hasErrors('framework')}" th:errorclass="error" th:errors="*{framework}"></p>
-        <input type="text" th:field="*{framework}" placeholder="framework"><br>
-
-        <label>Language: </label>
-        <p th:if="${#fields.hasErrors('language')}" th:errorclass="error" th:errors="*{language}"></p>
-        <input type="text" th:field="*{language}" placeholder="language"><br>
-
-        <label>Start date: </label>
-        <p th:if="${#fields.hasErrors('startDate')}" th:errorclass="error" th:errors="*{startDate}"></p>
-        <input type="date" th:field="*{startDate}" placeholder="startDate"><br>
-
-        <label>End date: </label>
-        <p th:if="${#fields.hasErrors('endDate')}" th:errorclass="error" th:errors="*{endDate}"></p>
-        <input type="date" th:field="*{endDate}" placeholder="endDate"><br>
-
-        <label>PM name: </label>
-        <select th:field="*{pmId}">
-            <th:block th:each="project :${project}">
-                <option th:value="${project.id}" th:text="${project.name}"></option>
-            </th:block>
-        </select><br>
-        <br>
-        <br>
-
-<!--        <p th:if="${#fields.hasErrors('pmName')}" th:errorclass="error" th:errors="*{pmName}"></p>-->
-<!--        <input type="text" name="pmName" th:field="*{pmName}" placeholder="pmName"><br>-->
-            <li><a th:href="@{/project/add}">Add staff to the project</a></li>
-
-
-
-        <button type="submit">Create</button>
-    </form>
+                            <div class="row">
+                                <div class="col-xl-12 col-sm-12 col-12 mb-4">
+                                    <div class="head-link-set">
+                                      <a class="btn-add" th:href="@{/project/show/employee}">Add employee to project</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table border="1" class="table custom-table no-footer">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th style="width: 200px">First and last name</th>
+                                        <th style="width: 100px">Address</th>
+                                        <th>Gender</th>
+                                        <th>Phone number</th>
+                                        <th>Position</th>
+                                        <th colspan="2">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="employee : ${selectedEmployees}" th:field="*{employeeIds}">
+                                        <td th:text="${employee.id}"></td>
+                                        <td th:text="${employee.firstName + ' ' + employee.lastName}"></td>
+                                        <td th:text="${employee.address}"></td>
+                                        <td th:text="${employee.sex}"></td>
+                                        <td th:text="${employee.phone}"></td>
+                                        <td th:text="${employee.position}"></td>
+                                        <td>
+                                            <div class="actionset">
+                                                <label><a class="action_label4"
+                                                          th:href="@{'/project/employee/delete/'+${employee.id}}">Delete<i
+                                                        data-feather="trash-2"></i></a></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <br>
+                                <br>
+                                <div class="row">
+                                    <div class="col-xl-12 col-sm-12 col-12 ">
+                                        <div class="form-btn">
+                                            <button type="submit" class="btn btn-apply">Save</button>
+                                            <a style="width: 100px;padding: 9px 15px" th:href="@{/project/index}"
+                                               class="btn btn-secondary">Cancel</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" layout:decorate="~{layout/layout}" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<div>
+<div layout:fragment="content">
+
     <h2>Project Detail</h2>
     <div th:if="${project}">
         <p>ID: <span th:text="${project.id}"></span></p>
@@ -16,9 +18,6 @@
         <p>Start date: <span th:text="${project.startDate}"></span></p>
         <p>End date: <span th:text="${project.endDate}"></span></p>
         <p>PM name: <span th:text="${project.pmName}"></span></p>
-    </div>
-    <div th:if="${message}">
-        <p th:text="${message}"></p>
     </div>
 </div>
 </body>

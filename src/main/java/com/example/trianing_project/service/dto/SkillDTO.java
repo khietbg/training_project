@@ -3,7 +3,7 @@ package com.example.trianing_project.service.dto;
 
 import java.io.Serializable;
 
-public class SkillDto implements Serializable {
+public class SkillDTO implements Serializable {
     private Long id;
     private String name;
     private int level;
@@ -13,10 +13,10 @@ public class SkillDto implements Serializable {
     private Long employeeId;
     private String employeeName;
 
-    public SkillDto() {
+    public SkillDTO() {
     }
 
-    public SkillDto(Long id, String name, int level, String description, int month, int year, Long employeeId, String employeeName) {
+    public SkillDTO(Long id, String name, int level, String description, int month, int year, Long employeeId, String employeeName) {
         this.id = id;
         this.name = name;
         this.level = level;

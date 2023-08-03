@@ -2,11 +2,10 @@ package com.example.trianing_project.controller;
 
 import com.example.trianing_project.repository.SkillRepository;
 import com.example.trianing_project.service.SkillService;
-import com.example.trianing_project.service.dto.SkillDto;
+import com.example.trianing_project.service.dto.SkillDTO;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
 
 @Controller
 @RequestMapping("/skill")
@@ -20,45 +19,35 @@ public class SkillController {
     }
 
     @PostMapping("/add")
-    public ModelAndView doAdd(@ModelAttribute("skill") SkillDto skillDto) {
+    public String doAdd(@ModelAttribute("skill") SkillDTO skillDto) {
         skillService.save(skillDto);
-        ModelAndView modelAndView = new ModelAndView("redirect:/skill/add");
-        return modelAndView;
+        return "redirect:/skill/add";
     }
 
     @GetMapping("/add")
-    public ModelAndView showAdd() {
-        ModelAndView modelAndView = new ModelAndView("/skill/add");
-        modelAndView.addObject("skill", new SkillDto());
-        return modelAndView;
+    public String showAdd(Model model) {
+        model.addAttribute("skill", new SkillDTO());
+        return "/skill/add";
     }
 
     @PostMapping("/edit")
-    public ModelAndView doEdit(@ModelAttribute("skill") SkillDto skillDto) {
+    public String doEdit(@ModelAttribute("skill") SkillDTO skillDto) {
         skillService.save(skillDto);
-        ModelAndView modelAndView = new ModelAndView("redirect:/skill/index");
-        return modelAndView;
+        return "redirect:/skill/edit";
     }
 
     @GetMapping("/edit/{id}")
-    public ModelAndView showEdit(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("/skill/edit");
-        modelAndView.addObject("skills", skillService.findOne(id).get());
-        return modelAndView;
+    public String showEdit(@PathVariable Long id, Model model) {
+        model.addAttribute("skill", skillService.findOne(id).get());
+        return "/skill/edit";
     }
 
-    @GetMapping("/detail/{id}")
-    public ModelAndView showDetail(@PathVariable Long id){
-        ModelAndView modelAndView = new ModelAndView("/skill/detail");
-        modelAndView.addObject("department", skillService.findOne(id).get());
-        return modelAndView;
-    }
     @GetMapping("/delete/{id}")
-    public ModelAndView doDelete(@PathVariable("id") Long id) {
+    public String doDelete(@PathVariable("id") Long id) {
         if (!skillRepository.existsById(id)) {
-            return new ModelAndView("/skill/index");
+            return "redirect:/skill/index";
         }
         skillService.delete(id);
-        return new ModelAndView("redirect:/skill/index");
+        return "redirect:/skill/index";
     }
 }

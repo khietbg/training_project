@@ -2,17 +2,19 @@ package com.example.trianing_project.service.mapper.impl;
 
 import com.example.trianing_project.domain.Employee;
 import com.example.trianing_project.domain.Project;
-import com.example.trianing_project.service.dto.ProjectDto;
+import com.example.trianing_project.service.dto.ProjectDTO;
 import com.example.trianing_project.service.mapper.ProjectMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 public class ProjectMapperImpl implements ProjectMapper {
     @Override
-    public Project toEntity(ProjectDto dto) {
+    public Project toEntity(ProjectDTO dto) {
         if (dto == null) {
             return null;
         }
@@ -29,11 +31,11 @@ public class ProjectMapperImpl implements ProjectMapper {
     }
 
     @Override
-    public ProjectDto toDto(Project entity) {
+    public ProjectDTO toDto(Project entity) {
         if (entity == null) {
             return null;
         }
-        ProjectDto projectDto = new ProjectDto();
+        ProjectDTO projectDto = new ProjectDTO();
         projectDto.setId(entity.getId());
         projectDto.setName(entity.getName());
         projectDto.setOs(entity.getOs());
@@ -47,27 +49,31 @@ public class ProjectMapperImpl implements ProjectMapper {
         if (employee != null) {
             projectDto.setPmName(employee.getFirstName() + " " + employee.getLastName());
         }
+        Set<Employee> employees = entity.getEmployees();
+        if (employee != null) {
+            projectDto.setEmployeeIds(employees);
+        }
         return projectDto;
     }
 
     @Override
-    public List<Project> toEntity(List<ProjectDto> dtoList) {
+    public List<Project> toEntity(List<ProjectDTO> dtoList) {
         if (dtoList == null) {
             return null;
         }
         List<Project> list = new ArrayList<>(dtoList.size());
-        for (ProjectDto projectDto : dtoList) {
+        for (ProjectDTO projectDto : dtoList) {
             list.add(toEntity(projectDto));
         }
         return list;
     }
 
     @Override
-    public List<ProjectDto> toDto(List<Project> entityList) {
+    public List<ProjectDTO> toDto(List<Project> entityList) {
         if (entityList == null) {
             return null;
         }
-        List<ProjectDto> list = new ArrayList<>(entityList.size());
+        List<ProjectDTO> list = new ArrayList<>(entityList.size());
         for (Project project : entityList) {
             list.add(toDto(project));
         }
