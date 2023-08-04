@@ -54,14 +54,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDTO save(EmployeeDTO employeeDTO) {
-        if (employeeDTO.getId() != null){
-            Employee employee = employeeRepository.findById(employeeDTO.getId()).get();
-            employee.setPosition(employeeDTO.getPosition());
-            employee.setCoefficientsSalary(employeeDTO.getCoefficientsSalary());
-            employee.setDepartmentId(employeeDTO.getDepartmentId());
-            employee.setDepartment(departmentRepository.findById(employeeDTO.getDepartmentId()).get());
-            return employeeMapper.toDto(employeeRepository.save(employee));
-        }
         Employee employee = employeeMapper.toEntity(employeeDTO);
         Set<Role> roles = new HashSet<>();
         if (employeeDTO.getRoles() == null || employeeDTO.getRoles().isEmpty()) {
@@ -95,5 +87,36 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeDTO findEmployeeByEmail(String usernameOrEmail) {
         return employeeMapper.toDto(employeeRepository.findEmployeeByEmail(usernameOrEmail));
+    }
+
+    @Override
+    public EmployeeDTO update(EmployeeDTO employeeDTO) {
+        Employee employee = employeeMapper.toEntity(employeeDTO);
+        return employeeMapper.toDto(employeeRepository.save(employee));
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return employeeRepository.existsByEmail(email);
+    }
+
+    @Override
+    public boolean existsByPhone(String phone) {
+        return employeeRepository.existsByPhone(phone);
+    }
+
+    @Override
+    public boolean existsByEmployeeCode(String employeeCode) {
+        return employeeRepository.existsByEmployeeCode(employeeCode);
+    }
+
+    @Override
+    public EmployeeDTO findEmployeeByPhone(String phone) {
+        return employeeMapper.toDto(employeeRepository.findEmployeeByPhone(phone));
+    }
+
+    @Override
+    public EmployeeDTO findEmployeeByEmployeeCode(String employeeCode) {
+        return employeeMapper.toDto(employeeRepository.findEmployeeByEmployeeCode(employeeCode));
     }
 }

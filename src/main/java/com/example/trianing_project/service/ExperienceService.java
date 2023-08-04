@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface ExperienceService extends GenericService<ExperienceDTO, Long> {
-    List<ExperienceDTO> findAllByEmployee(EmployeeDTO employeeDTO);
+    List<ExperienceDTO> findAllByEmployeeId(Long id);
 }

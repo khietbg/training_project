@@ -59,7 +59,7 @@
                                     <th>Position</th>
                                     <th>Address</th>
                                     <th>Phone</th>
-                                    <th colspan="3">Action</th>
+                                    <th colspan="2">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -67,8 +67,8 @@
                                     <td th:text="${status.count}"></td>
                                     <td>
                                         <div class="table-img">
-                                            <a href="profile.html">
-                                                <img src="assets/img/profiles/avatar-10.jpg" alt="profile" class="img-table" />
+                                            <a href="../profile/index.html">
+                                                <img th:src="@{'~/assets/img/' + ${e.avatarUrl}}" alt="profile" class="img-table" />
                                             </a>
                                             <label th:text="${e.firstName+' '+e.lastName}"></label>
                                         </div>
@@ -81,9 +81,8 @@
                                     </td>
                                     <td><label th:text="${e.address}"></label></td>
                                     <td><label th:text="${e.phone}"></label></td>
-                                    <td><a th:href="@{'/employee/edit/'+${e.id}}">Edit</a></td>
-                                    <td><a th:href="@{'/employee/delete/'+${e.id}}">Delete</a></td>
-                                    <td><a th:href="@{'/employee/detail/'+${e.id}}">Detail</a></td>
+                                    <td><a class="btn btn-danger" th:href="@{'/employee/delete/'+${e.id}}">Delete</a></td>
+                                    <td><a class="btn btn-info" th:href="@{'/employee/detail/'+${e.id}}">Detail</a></td>
                                 </tr>
                                 </tbody>
                             </table>
