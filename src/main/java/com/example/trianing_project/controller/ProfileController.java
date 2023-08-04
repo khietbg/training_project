@@ -41,7 +41,7 @@ public class ProfileController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         EmployeeDTO employeeLogin = employeeService.findEmployeeByEmail(authentication.getName());
         model.addAttribute("skills", skillService.findAllByEmployeeId(employeeLogin.getId()));
-//        model.addAttribute("projects", projectService.findAllByEmployeeId(employeeLogin.getId()));
+        model.addAttribute("projects", employeeLogin.getProjects());
         model.addAttribute("experiences", experienceService.findAllByEmployeeId(employeeLogin.getId()));
         model.addAttribute("certificates", certificateService.findAllByEmployeeId(employeeLogin.getId()));
         model.addAttribute("employee", employeeLogin);

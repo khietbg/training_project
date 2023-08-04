@@ -159,20 +159,18 @@ public class EmployeeController {
         }else {
             employeeDTO.setAvatarUrl(employeeUpdate.getAvatarUrl());
         }
-        employeeDTO.setPassword(employeeUpdate.getPassword());
-        employeeDTO.setStartDate(employeeUpdate.getStartDate());
-        employeeDTO.setRoles(employeeUpdate.getRoles());
         employeeService.update(employeeDTO);
         return "redirect:/profile/index";
     }
 
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable Long id, Model model) {
+        EmployeeDTO employeeDTO = employeeService.findOne(id).get();
         model.addAttribute("skills", skillService.findAllByEmployeeId(id));
-//        model.addAttribute("projects", projectService.findAllByEmployeeId(id));
+        model.addAttribute("projects", employeeDTO.getProjects());
         model.addAttribute("experiences", experienceService.findAllByEmployeeId(id));
         model.addAttribute("certificates", certificateService.findAllByEmployeeId(id));
-        model.addAttribute("employee", employeeService.findOne(id).get());
+        model.addAttribute("employee", employeeDTO);
         return "employee/detail";
     }
 

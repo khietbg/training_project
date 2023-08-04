@@ -34,7 +34,7 @@ public class Project {
             name = "employee_project",
             joinColumns = {@JoinColumn(name = "employee_id")},
             inverseJoinColumns = {@JoinColumn(name = "project_id")})
-    private Set<Employee> Employees = new HashSet<>();
+    private Set<Employee> employees = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -49,11 +49,11 @@ public class Project {
     }
 
     public Set<Employee> getEmployees() {
-        return Employees;
+        return employees;
     }
 
     public void setEmployees(Set<Employee> employees) {
-        Employees = employees;
+        this.employees = employees;
     }
 
     public void setName(String name) {

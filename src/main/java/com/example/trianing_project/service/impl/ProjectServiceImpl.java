@@ -3,6 +3,7 @@ package com.example.trianing_project.service.impl;
 import com.example.trianing_project.domain.Project;
 import com.example.trianing_project.repository.ProjectRepository;
 import com.example.trianing_project.service.ProjectService;
+import com.example.trianing_project.service.dto.EmployeeDTO;
 import com.example.trianing_project.service.dto.ProjectDTO;
 import com.example.trianing_project.service.mapper.ProjectMapper;
 import org.springframework.data.domain.Page;
@@ -31,7 +32,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Page<ProjectDTO> findAll(String textSearch, Pageable pageable) {
-        return projectRepository.findAllByNameContainingIgnoreCase(textSearch,pageable).map(projectMapper::toDto);
+        return projectRepository.findAllByNameContainingIgnoreCase(textSearch, pageable).map(projectMapper::toDto);
     }
 
     @Override
@@ -43,5 +44,6 @@ public class ProjectServiceImpl implements ProjectService {
     public void delete(Long id) {
         projectRepository.deleteById(id);
     }
+
 
 }

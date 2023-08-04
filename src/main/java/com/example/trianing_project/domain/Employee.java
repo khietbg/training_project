@@ -73,11 +73,7 @@ public class Employee {
             joinColumns = {@JoinColumn(name = "employee_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_name")})
     private Set<Role> roles = new HashSet<>();
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "employee_project",
-            joinColumns = {@JoinColumn(name = "employee_id")},
-            inverseJoinColumns = {@JoinColumn(name = "project_id")})
+    @ManyToMany(mappedBy = "employees")
     private Set<Project> projects = new HashSet<>();
     @Column(name = "status")
     private boolean status;
