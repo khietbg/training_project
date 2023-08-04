@@ -1,6 +1,6 @@
 package com.example.trianing_project.service.dto;
 
-import net.bytebuddy.implementation.bind.annotation.Empty;
+import com.example.trianing_project.domain.Project;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Email;
@@ -49,7 +49,7 @@ public class EmployeeDTO {
     private boolean sex;
     private int level;
     private Set<String> roles;
-    private Set<String> projects;
+    private Set<Project> projects;
 
     public Long getId() {
         return id;
@@ -235,11 +235,11 @@ public class EmployeeDTO {
         this.roles = roles;
     }
 
-    public Set<String> getProjects() {
+    public Set<Project> getProjects() {
         return projects;
     }
 
-    public void setProjects(Set<String> projects) {
+    public void setProjects(Set<Project> projects) {
         this.projects = projects;
     }
 }

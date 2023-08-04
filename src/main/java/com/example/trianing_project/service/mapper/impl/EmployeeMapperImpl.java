@@ -70,6 +70,7 @@ public class EmployeeMapperImpl implements EmployeeMapper {
         employeeDTO.setStartDate(entity.getStartDate());
         employeeDTO.setPosition(entity.getPosition());
         employeeDTO.setDepartmentId(entity.getDepartmentId());
+        employeeDTO.setProjects(entity.getProjects());
         if (entity.getManager() != null) {
             employeeDTO.setManagerName(entity.getManager().getFirstName());
         }
@@ -79,10 +80,6 @@ public class EmployeeMapperImpl implements EmployeeMapper {
         Set<Role> roles = entity.getRoles();
         if (roles != null) {
             employeeDTO.setRoles(roles.stream().map(Role::getRoleName).collect(Collectors.toSet()));
-        }
-        Set<Project> projects = entity.getProjects();
-        if (projects != null) {
-            employeeDTO.setProjects(projects.stream().map(Project::getName).collect(Collectors.toSet()));
         }
         return employeeDTO;
     }
