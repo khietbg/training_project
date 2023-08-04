@@ -23,6 +23,7 @@ import org.thymeleaf.context.Context;
 import org.xhtmlrenderer.pdf.ITextFontResolver;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
+
 import javax.mail.MessagingException;
 import javax.validation.Valid;
 import java.io.File;
@@ -30,6 +31,7 @@ import java.io.IOException;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Optional;
+
 
 @Controller
 @RequestMapping("/employee")
@@ -174,7 +176,6 @@ public class EmployeeController {
         return "employee/detail";
     }
 
-
     @GetMapping("/back")
     public String back() {
         return "redirect:/employee/index";
@@ -208,3 +209,4 @@ public class EmployeeController {
         }
     }
 }
+

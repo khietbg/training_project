@@ -4,7 +4,8 @@ package com.example.trianing_project.service.impl;
 import com.example.trianing_project.domain.Skill;
 import com.example.trianing_project.repository.SkillRepository;
 import com.example.trianing_project.service.SkillService;
-import com.example.trianing_project.service.dto.SkillDto;
+import com.example.trianing_project.service.dto.GetData;
+import com.example.trianing_project.service.dto.SkillDTO;
 import com.example.trianing_project.service.mapper.SkillMapper;
 import org.springframework.stereotype.Service;
 
@@ -22,25 +23,30 @@ public class SkillServiceImpl implements SkillService {
     }
 
     @Override
-    public SkillDto save(SkillDto skillDto) {
+    public SkillDTO save(SkillDTO skillDto) {
         Skill skill = skillMapper.toEntity(skillDto);
         skill = skillRepository.save(skill);
         return skillMapper.toDto(skill);
     }
 
     @Override
-    public List<SkillDto> findAllByEmployeeId(Long employeeId) {
+    public List<SkillDTO> findAllByEmployeeId(Long employeeId) {
         return skillMapper.toDto(skillRepository.findAllByEmployeeId(employeeId));
     }
 
 
     @Override
-    public Optional<SkillDto> findOne(Long id) {
+    public Optional<SkillDTO> findOne(Long id) {
         return skillRepository.findById(id).map(skillMapper::toDto);
     }
 
     @Override
     public void delete(Long id) {
         skillRepository.deleteById(id);
+    }
+
+    @Override
+    public List<GetData> getDataByName() {
+        return skillRepository.getDataByName();
     }
 }

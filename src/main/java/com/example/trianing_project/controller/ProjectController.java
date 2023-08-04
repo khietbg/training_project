@@ -1,92 +1,146 @@
 package com.example.trianing_project.controller;
 
 import com.example.trianing_project.repository.ProjectRepository;
+import com.example.trianing_project.service.EmployeeService;
 import com.example.trianing_project.service.ProjectService;
-import com.example.trianing_project.service.dto.ProjectDto;
+import com.example.trianing_project.service.dto.EmployeeDTO;
+import com.example.trianing_project.service.dto.ProjectDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 
 @Controller
 @RequestMapping("/project")
 public class ProjectController {
     private final ProjectService projectService;
     private final ProjectRepository projectRepository;
+    private final EmployeeService employeeService;
 
-    public ProjectController(ProjectService projectService, ProjectRepository projectRepository) {
+    public ProjectController(ProjectService projectService, ProjectRepository projectRepository, EmployeeService employeeService) {
         this.projectService = projectService;
         this.projectRepository = projectRepository;
+        this.employeeService = employeeService;
     }
 
     @GetMapping("/index")
-    public ModelAndView index(@RequestParam(name = "name", required = false, defaultValue = "") String name, Pageable pageable) {
-        ModelAndView modelAndView = new ModelAndView("/project/index");
-        Page<ProjectDto> projectDtos = projectService.findAll(name, pageable);
-        modelAndView.addObject("projectDto", projectDtos);
-        return modelAndView;
-    }
-
-    @PostMapping("/add")
-    public ModelAndView doAdd(@Valid @ModelAttribute("project") ProjectDto projectDto, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()){
-            ModelAndView modelAndView = new ModelAndView("project/add",bindingResult.getModel());
-            return modelAndView;
-        }
-        projectService.save(projectDto);
-        return new ModelAndView("redirect:/project/index");
+    public String index(@RequestParam(name = "name", required = false, defaultValue = "") String name, Pageable pageable, Model model) {
+        Page<ProjectDTO> projectDtos = projectService.findAll(name, pageable);
+        model.addAttribute("projectDto", projectDtos);
+        return "/project/index";
     }
 
     @GetMapping("/add")
-    public ModelAndView showAdd() {
-        ModelAndView modelAndView = new ModelAndView("project/add");
-        modelAndView.addObject("project", new ProjectDto());
-        return modelAndView;
-    }
-    @GetMapping("/edit/{id}")
-    public ModelAndView showEdit(@PathVariable("id") Long id) {
-        ModelAndView modelAndView = new ModelAndView("project/edit");
-        Optional<ProjectDto> projectDto = projectService.findOne(id);
-        if (projectDto.isPresent()) {
-            return modelAndView.addObject("project", projectDto.get());
+    public String showAdd(Model model, HttpSession session) {
+        model.addAttribute("employees", employeeService.findAll());
+        model.addAttribute("project", new ProjectDTO());
+        List<EmployeeDTO> selectedEmployees = (List<EmployeeDTO>) session.getAttribute("selectedEmployees");
+        if (selectedEmployees != null && !selectedEmployees.isEmpty()) {
+            model.addAttribute("selectedEmployees", selectedEmployees);
         }
-        return new ModelAndView("project/index");
+        return "project/add";
+    }
+
+    @PostMapping("/add")
+    public String doAdd(@Valid @ModelAttribute("project") ProjectDTO projectDto, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("employees", employeeService.findAll());
+            return "project/add";
+        }
+        projectDto.setPmId(getUserId());
+        projectService.save(projectDto);
+        return "redirect:/project/index";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String showEdit(@PathVariable("id") Long id, Model model) {
+        Optional<ProjectDTO> projectDto = projectService.findOne(id);
+        model.addAttribute("employees", employeeService.findAll());
+        if (!projectDto.isPresent()) {
+            return "redirect:/project/index";
+        }
+
+        model.addAttribute("project", projectDto.get());
+        return "project/edit";
     }
 
     @PostMapping("/edit")
-    public ModelAndView doEdit(@Valid @ModelAttribute("project") ProjectDto projectDto,BindingResult bindingResult) {
+    public String doEdit(@Valid @ModelAttribute("project") ProjectDTO projectDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            ModelAndView modelAndView = new ModelAndView("project/edit", bindingResult.getModel());
-            return modelAndView;
+            return "project/edit";
         }
         projectService.save(projectDto);
-        ModelAndView modelAndView = new ModelAndView("redirect:/project/index");
-        return modelAndView;
+        return "redirect:/project/index";
     }
+
     @GetMapping("/delete/{id}")
-    public ModelAndView doDelete(@PathVariable("id") Long id) {
+    public String doDelete(@PathVariable("id") Long id) {
         if (!projectRepository.existsById(id)) {
-            return new ModelAndView("project/index");
+            return "redirect:/project/index";
         }
         projectService.delete(id);
-        return new ModelAndView("redirect:/project/index");
+        return "redirect:/project/index";
     }
+
     @GetMapping("/detail/{id}")
-    private ModelAndView showDetail(@PathVariable("id") Long id) {
-        ModelAndView modelAndView = new ModelAndView("project/detail");
-        Optional<ProjectDto> projectDto = projectService.findOne(id);
+    public String showDetail(@PathVariable("id") Long id, Model model) {
+        Optional<ProjectDTO> projectDto = projectService.findOne(id);
         if (projectDto.isPresent()) {
-            modelAndView.addObject("project", projectDto.get());
-            return modelAndView;
+            model.addAttribute("project", projectDto.get());
+            return "project/detail";
         }
-        return new ModelAndView("project/index");
+        return "redirect:/project/index";
+    }
+
+    @GetMapping("/show/employee")
+    public String indexE(@RequestParam(required = false, defaultValue = "") String textSearch,
+                         Pageable pageable, Model model) {
+        Page<EmployeeDTO> listOfEmployees = employeeService.findAll(textSearch, pageable);
+        model.addAttribute("listOfEmployees", listOfEmployees);
+        return "project/employee_create";
+    }
+
+    @PostMapping("/add/employee")
+    public String doAdd(@RequestParam(value = "selectedEmployeeCodes", required = false) List<String> selectedEmployees,
+                        HttpSession session, Model model) {
+        if (selectedEmployees == null || selectedEmployees.isEmpty()) {
+            return "project/employee_create";
+        }
+        List<EmployeeDTO> selectedEmployee = new ArrayList<>();
+        for (String employeeCode : selectedEmployees) {
+            Long employeeId = Long.parseLong(employeeCode);
+            Optional<EmployeeDTO> employee = employeeService.findOne(employeeId);
+            if (employee.isPresent()) {
+                selectedEmployee.add(employee.get());
+            }
+        }
+        session.setAttribute("selectedEmployees", selectedEmployee);
+
+        return "redirect:/project/add";
+    }
+
+    @GetMapping("/employee/delete/{id}")
+    public String doDelete(@PathVariable Long id, HttpSession session, Model model) {
+        List<EmployeeDTO> selectedEmployees = (List<EmployeeDTO>) session.getAttribute("selectedEmployees");
+        if (selectedEmployees != null) {
+            selectedEmployees.removeIf(employee -> employee.getId().equals(id));
+            session.setAttribute("selectedEmployees", selectedEmployees);
+        }
+        model.addAttribute("selectedEmployees", selectedEmployees);
+        return "redirect:/project/add";
+    }
+
+    public Long getUserId() {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        return employeeService.findEmployeeByEmail(authentication.getName()).getId();
+        return 1L;
     }
 }

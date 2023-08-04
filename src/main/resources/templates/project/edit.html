@@ -1,38 +1,115 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<div>
-    <h3>Edit Project</h3>
-    <form th:action="@{/project/edit}" method="post" th:object="${project}">
-        <input th:value="*{id}" th:field="*{id}" type="hidden"><br>
-        <label>Name Project:</label>
-        <input type="text" th:field="*{name}" th:value="${project.name}" placeholder="name"><br>
-
-        <label>Operating system:</label>
-        <input type="text" th:field="*{os}" th:value="${project.os}" placeholder="Operating system"><br>
-
-        <label>Frame work:</label>
-        <input type="text" th:field="*{framework}" th:value="${project.framework}" placeholder="Frame work"><br>
-
-        <label>Language:</label>
-        <input type="text" th:field="*{language}" th:value="${project.language}" placeholder="Language"><br>
-
-        <label>Start date:</label>
-        <input type="text" th:field="*{startDate}" th:value="${project.startDate}" placeholder="Start date"><br>
-
-        <label>End date:</label>
-        <input type="text" th:field="*{endDate}" th:value="${project.endDate}" placeholder="End date"><br>
-
-        <label>PM name:</label>
-        <input type="text" th:field="*{pmName}" th:value="${project.pmName}" placeholder="PM name"><br>
-
-        <button type="submit">Upload</button>
-    </form>
+<div layout:fragment="content">
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+            <div class="row">
+                <div class="col-xl-12 col-sm-12 col-12 mb-4">
+                    <div class="breadcrumb-path">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><img th:src="@{/assets/img/dash.png}"
+                                                                                  class="mr-2" alt="breadcrumb">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                Projects
+                            </li>
+                        </ul>
+                        <h3>Edit Project</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-12 col-sm-12 col-12 ">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-titles">Edit Project</h2>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/project/edit}" method="post" th:object="${project}">
+                            <div class="row">
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <input th:value="*{id}" th:field="*{id}" type="hidden"><br>
+                                        <label>Name Project: </label>
+                                        <input type="text" th:field="*{name}" th:value="${project.name}"
+                                               placeholder="name"><br>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>Operating system: </label>
+                                        <input type="text" th:field="*{os}" placeholder="name"><br>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>Language: </label>
+                                        <input type="text" th:field="*{language}" placeholder="name"><br>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>Frame work: </label>
+                                        <input type="text" th:field="*{framework}" placeholder="name"><br>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>Start date: </label>
+                                        <input type="date" th:field="*{startDate}" th:value="${project.startDate}"
+                                               placeholder="startDate">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>End date: </label>
+                                        <input type="date" th:field="*{endDate}" th:value="${project.endDate}"
+                                               placeholder="endDate">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <label>PM name: </label>
+                                        <select th:field="*{pmId}">
+                                            <th:block th:each="employee :${employees}">
+                                                <option th:value="${employee.id}"
+                                                        th:text="${employee.lastName+' '+employee.firstName}"></option>
+                                            </th:block>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-sm-12 col-12 ">
+                                    <div class="form-group">
+                                        <li><a th:href="@{/project/add}">Add staff to the project</a></li>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12 col-sm-12 col-12 ">
+                                        <div class="form-btn">
+                                            <button type="submit" class="btn btn-apply">Upload</button>
+                                            <a style="width: 100px;padding: 9px 15px" th:href="@{/project/index}"
+                                               class="btn btn-secondary">Cancel</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
 </body>
 </html>

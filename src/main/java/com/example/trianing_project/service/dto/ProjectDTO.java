@@ -5,23 +5,20 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-public class ProjectDto implements Serializable {
+public class ProjectDTO implements Serializable {
     private Long id;
     @NotEmpty(message = "Name is required")
-    @Size(min = 5, message = "Project name must have at least 1 character")
     private String name;
-    @NotEmpty(message = "Operating system is required")
-    @Size(min = 1, message = "Operating system must have at least 1 character")
+
     private String os;
-    @NotEmpty(message = "Framework is required")
-    @Size(min = 1, message = "Framework must have at least 1 character")
+
     private String framework;
-    @Size(min = 2, max = 8, message = "Language must have 2 to 8 characters")
+
     private String language;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Start date is required")
@@ -31,23 +28,18 @@ public class ProjectDto implements Serializable {
     private LocalDate endDate;
     private Long pmId;
     private String pmName;
+    Set<Employee> employeeIds =new HashSet<>();
 
-
-    public ProjectDto() {
+    public ProjectDTO() {
     }
 
-    public ProjectDto(Long id, String name, String os, String framework, String language, LocalDate startDate, LocalDate endDate, Long pmId, String pmName) {
-        this.id = id;
-        this.name = name;
-        this.os = os;
-        this.framework = framework;
-        this.language = language;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.pmId = pmId;
-        this.pmName = pmName;
+    public Set<Employee> getEmployeeIds() {
+        return employeeIds;
     }
 
+    public void setEmployeeIds(Set<Employee> employeeIds) {
+        this.employeeIds = employeeIds;
+    }
 
     public Long getId() {
         return id;
