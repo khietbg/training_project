@@ -159,9 +159,6 @@ public class EmployeeController {
         }else {
             employeeDTO.setAvatarUrl(employeeUpdate.getAvatarUrl());
         }
-        employeeDTO.setPassword(employeeUpdate.getPassword());
-        employeeDTO.setStartDate(employeeUpdate.getStartDate());
-        employeeDTO.setRoles(employeeUpdate.getRoles());
         employeeService.update(employeeDTO);
         return "redirect:/profile/index";
     }
@@ -169,7 +166,7 @@ public class EmployeeController {
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable Long id, Model model) {
         model.addAttribute("skills", skillService.findAllByEmployeeId(id));
-//        model.addAttribute("projects", projectService.findAllByEmployeeId(id));
+        model.addAttribute("projects", projectService.findAllByEmployeeId(id));
         model.addAttribute("experiences", experienceService.findAllByEmployeeId(id));
         model.addAttribute("certificates", certificateService.findAllByEmployeeId(id));
         model.addAttribute("employee", employeeService.findOne(id).get());

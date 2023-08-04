@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,6 +38,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public Optional<ProjectDTO> findOne(Long id) {
         return projectRepository.findById(id).map(projectMapper::toDto);
+    }
+
+    @Override
+    public List<ProjectDTO> findAllByEmployeeId(Long id) {
+        return projectMapper.toDto(projectRepository.findAllByEmployeeId(id));
     }
 
     @Override

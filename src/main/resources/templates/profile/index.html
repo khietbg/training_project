@@ -157,28 +157,25 @@
                                 <a th:href="@{/project/add}" class="btn btn-success">Add Project</a>
                                 <div class="table-responsive">
                                     <table class="table table-borderless mb-0">
-                                        <!--                                                          <thead class="thead-light">-->
-                                        <!--                                                          <tr>-->
-                                        <!--                                                              <th>Name</th>-->
-                                        <!--                                                              <th>Language</th>-->
-                                        <!--                                                              <th>OS</th>-->
-                                        <!--                                                              <th>Framework</th>-->
-                                        <!--                                                              <th>Start Date</th>-->
-                                        <!--                                                              <th>End Date</th>-->
-                                        <!--                                                              <th>PM</th>-->
-                                        <!--                                                              <th>Detail</th>-->
-                                        <!--                                                          </tr>-->
-                                        <!--                                                          </thead>-->
-                                        <!--                                                          <tbody>-->
-                                        <!--                                                          <tr th:each="p : ${projects} ">-->
-                                        <!--                                                              <td th:text="${e.language}"></td>-->
-                                        <!--                                                              <td th:text="${e.os}"></td>-->
-                                        <!--                                                              <td th:text="${e.framework}"></td>-->
-                                        <!--                                                              <td th:text="${e.teamSize}"></td>-->
-                                        <!--                                                              <td th:text="${e.position}"></td>-->
-                                        <!--                                                              <td><a class="btn btn-secondary" th:href="@{'/experience/detail'+${e.id}}">Detail</a></td>-->
-                                        <!--                                                          </tr>-->
-                                        <!--                                                          </tbody>-->
+                                        <thead class="thead-light">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Language</th>
+                                            <th>OS</th>
+                                            <th>Framework</th>
+                                            <th>Detail</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="p : ${projects} ">
+                                            <td th:text="${p.name}"></td>
+                                            <td th:text="${p.language}"></td>
+                                            <td th:text="${p.os}"></td>
+                                            <td th:text="${p.framework}"></td>
+                                            <td><a class="btn btn-secondary" th:href="@{'/project/detail'+${p.id}}">Detail</a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
                                     </table>
                                 </div>
                                 <h5 class="mb-3 mt-4 text-uppercase"><i class="mdi mdi-cards-variant mr-1"></i>
