@@ -7,6 +7,7 @@ import com.example.trianing_project.service.dto.EmployeeDTO;
 import com.example.trianing_project.service.dto.ProjectDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +21,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/project")
+@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 public class ProjectController {
     private final ProjectService projectService;
     private final ProjectRepository projectRepository;

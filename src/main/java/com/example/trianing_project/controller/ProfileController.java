@@ -3,6 +3,7 @@ package com.example.trianing_project.controller;
 import com.example.trianing_project.service.*;
 import com.example.trianing_project.service.dto.EmployeeDTO;
 import com.example.trianing_project.service.email.SendEmailService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,6 +18,7 @@ import java.io.IOException;
 
 @Controller
 @RequestMapping("/profile")
+@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 public class ProfileController {
     private final EmployeeService employeeService;
     private final ProjectService projectService;
@@ -48,7 +50,10 @@ public class ProfileController {
         return "profile/index";
     }
     @GetMapping("/changePassword")
-    public String formChange() {
+    public String formChange(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        EmployeeDTO employeeLogin = employeeService.findEmployeeByEmail(authentication.getName());
+        model.addAttribute("employee",employeeLogin);
         return "profile/change-password";
     }
 

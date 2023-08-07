@@ -4,6 +4,7 @@ import com.example.trianing_project.service.CertificateService;
 import com.example.trianing_project.service.EmployeeService;
 import com.example.trianing_project.service.dto.CertificateDTO;
 import com.example.trianing_project.service.dto.EmployeeDTO;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/certificate")
+@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 public class CertificateController {
     private final EmployeeService employeeService;
     private final CertificateService certificateService;

@@ -10,7 +10,6 @@
 <body>
 
 <div layout:fragment="content">
-
     <form th:action="@{/employee/edit}" method="post" th:object="${employee}" enctype="multipart/form-data">
         <div class="page-wrapper">
             <div class="content container-fluid">
@@ -32,9 +31,6 @@
                                 <div class="row">
                                     <div class="col-xl-6 col-sm-12 col-12 ">
                                         <input type="hidden" th:field="*{id}"/>
-                                        <input type="hidden" th:field="*{employeeCode}"/>
-                                        <input type="hidden" th:field="*{startDate}"/>
-                                        <input type="hidden" th:field="*{password}"/>
                                         <input type="hidden" th:field="*{roles}"/>
                                         <div class="form-group">
                                             <label>First Name :</label>
