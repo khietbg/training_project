@@ -7,14 +7,16 @@
 </head>
 <body>
 <div layout:fragment="content">
+
     <div class="page-wrapper">
         <div class="content container-fluid">
             <div class="row">
                 <div class="col-xl-12 col-sm-12 col-12 mb-4">
                     <div class="breadcrumb-path">
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><img th:src="@{/assets/img/dash.png}"
-                                                                                  class="mr-2" alt="breadcrumb">Home</a>
+                            <li class="breadcrumb-item"><a th:href="@{/layout/index}"><img
+                                    th:src="@{/assets/img/dash.png}"
+                                    class="mr-2" alt="breadcrumb">Home</a>
                             </li>
                             <li class="breadcrumb-item active">
                                 Projects
@@ -24,7 +26,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-xl-12 col-sm-12 col-12 ">
                 <div class="card">
                     <div class="card-header">
@@ -38,7 +39,7 @@
                                         <label>Name Project: </label>
                                         <p th:if="${#fields.hasErrors('name')}" th:errorclass="error"
                                            th:errors="*{name}"></p>
-                                        <input type="text" th:field="*{name}" placeholder="name"><br>
+                                        <input type="text" th:field="*{name}" placeholder="Name project"><br>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-sm-12 col-12 ">
@@ -46,7 +47,13 @@
                                         <label>Operating system: </label>
                                         <p th:if="${#fields.hasErrors('os')}" th:errorclass="error"
                                            th:errors="*{os}"></p>
-                                        <input type="text" th:field="*{os}" placeholder="name"><br>
+                                        <select class="os-select" th:field="*{os}" multiple>
+                                            <option value="windows">Windows</option>
+                                            <option value="macos">macOS</option>
+                                            <option value="linux">Linux</option>
+                                            <option value="android">Android</option>
+                                            <option value="ios">IOS</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -56,7 +63,16 @@
                                         <label>Language: </label>
                                         <p th:if="${#fields.hasErrors('language')}" th:errorclass="error"
                                            th:errors="*{language}"></p>
-                                        <input type="text" th:field="*{language}" placeholder="name"><br>
+                                        <select class="language-select" th:field="*{language}" multiple>
+                                            <option value="python">Python</option>
+                                            <option value="javascript">JavaScript</option>
+                                            <option value="java">Java</option>
+                                            <option value="c#">C#</option>
+                                            <option value="c++">C++</option>
+                                            <option value="ruby">Ruby</option>
+                                            <option value="swift">Swift</option>
+                                            <option value="php">PHP</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-sm-12 col-12 ">
@@ -64,7 +80,16 @@
                                         <label>Frame work: </label>
                                         <p th:if="${#fields.hasErrors('framework')}" th:errorclass="error"
                                            th:errors="*{framework}"></p>
-                                        <input type="text" th:field="*{framework}" placeholder="name"><br>
+                                        <select class="framework-select" th:field="*{framework}" multiple>
+                                            <option value="django">Django</option>
+                                            <option value="rubyonrails">Ruby on Rails</option>
+                                            <option value="angular">Angular</option>
+                                            <option value="vuejs">Vue.js</option>
+                                            <option value="springbsoot">Spring Boot</option>
+                                            <option value="springsecurity">Spring Security</option>
+                                            <option value="expressjs">Express.js</option>
+                                            <option value="laravel">Laravel</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +99,8 @@
                                         <label>Start date: </label>
                                         <p th:if="${#fields.hasErrors('startDate')}" th:errorclass="error"
                                            th:errors="*{startDate}"></p>
-                                        <input type="date" th:field="*{startDate}" placeholder="startDate">
+                                        <input type="date" class="form-control" th:field="*{startDate}"
+                                               placeholder="startDate">
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-sm-12 col-12 ">
@@ -82,58 +108,34 @@
                                         <label>End date: </label>
                                         <p th:if="${#fields.hasErrors('endDate')}" th:errorclass="error"
                                            th:errors="*{endDate}"></p>
-                                        <input type="date" th:field="*{endDate}" placeholder="endDate">
+                                        <input type="date" class="form-control" th:field="*{endDate}"
+                                               placeholder="endDate">
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-xl-12 col-sm-12 col-12 mb-4">
-                                    <div class="head-link-set">
-                                      <a class="btn-add" th:href="@{/project/show/employee}">Add employee to project</a>
+                                    <div class="form-group">
+                                        <label>Employees : </label>
+                                        <p th:if="${#fields.hasErrors('framework')}" th:errorclass="error"
+                                           th:errors="*{framework}"></p>
+                                        <select class="framework-select" multiple name="employees">
+                                            <th:block th:each="e : ${employees}">
+                                                <option th:value="${e.id}"
+                                                        th:text="${e.firstName+' '+ e.lastName}"></option>
+                                            </th:block>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                            <div class="table-responsive">
-                                <table border="1" class="table custom-table no-footer">
-                                    <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th style="width: 200px">First and last name</th>
-                                        <th style="width: 100px">Address</th>
-                                        <th>Gender</th>
-                                        <th>Phone number</th>
-                                        <th>Position</th>
-                                        <th colspan="2">Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr th:each="employee : ${selectedEmployees}" th:field="*{employeeIds}">
-                                        <td th:text="${employee.id}"></td>
-                                        <td th:text="${employee.firstName + ' ' + employee.lastName}"></td>
-                                        <td th:text="${employee.address}"></td>
-                                        <td th:text="${employee.sex}"></td>
-                                        <td th:text="${employee.phone}"></td>
-                                        <td th:text="${employee.position}"></td>
-                                        <td>
-                                            <div class="actionset">
-                                                <label><a class="action_label4"
-                                                          th:href="@{'/project/employee/delete/'+${employee.id}}">Delete<i
-                                                        data-feather="trash-2"></i></a></label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <br>
-                                <br>
-                                <div class="row">
-                                    <div class="col-xl-12 col-sm-12 col-12 ">
-                                        <div class="form-btn">
-                                            <button type="submit" class="btn btn-apply">Save</button>
-                                            <a style="width: 100px;padding: 9px 15px" th:href="@{/project/index}"
-                                               class="btn btn-secondary">Cancel</a>
-                                        </div>
+                            <br>
+                            <br>
+                            <div class="row">
+                                <div class="col-xl-12 col-sm-12 col-12 ">
+                                    <div class="form-btn">
+                                        <button type="submit" class="btn btn-apply">Save</button>
+                                        <a style="width: 100px;padding: 9px 15px" th:href="@{/project/index}"
+                                           class="btn btn-secondary">Cancel</a>
                                     </div>
                                 </div>
                             </div>
