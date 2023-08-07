@@ -119,9 +119,4 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeDTO findEmployeeByEmployeeCode(String employeeCode) {
         return employeeMapper.toDto(employeeRepository.findEmployeeByEmployeeCode(employeeCode));
     }
-
-    @Override
-    public List<Employee> findByProjectId(Long projectId) {
-        return employeeRepository.findByProjectId(projectId);
-    }
 }

@@ -1,113 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" layout:decorate="~{layout/layout}" xmlns:layout="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="page-wrapper">
-        <div class="content container-fluid">
-            <div class="row">
-                <div class="col-xl-12 col-sm-12 col-12 mb-4">
-                    <div class="breadcrumb-path">
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a th:href="@{/layout/index}"><img
-                                    th:src="@{/assets/img/dash.png}"
-                                    class="mr-2" alt="breadcrumb">Home</a>
-                            </li>
-                            <li class="breadcrumb-item active">
-                                Projects
-                            </li>
-                        </ul>
-                        <h3>Project Detail</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-12 col-sm-12 col-12 ">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-titles" style="text-align: center">Project Detail</h2> <br>
-                    </div>
-                    <div class="card-body">
-                        <form th:if="${project}">
-                            <div class="row">
-                                <div class="col-xl-6 col-sm-12 col-12 ">
-                                    <div class="form-group">
-                                        <label>Name Project: </label>
-                                        <input type="text" th:placeholder="${project.name}" readonly><br>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-6 col-sm-12 col-12 ">
-                                    <div class="form-group">
-                                        <label>Operating system: </label>
-                                        <input type="text" th:placeholder="${project.os}" readonly><br>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-sm-12 col-12 ">
-                                    <div class="form-group">
-                                        <label>Frame work: </label>
-                                        <input type="text" th:placeholder="${project.framework}" readonly><br>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-6 col-sm-12 col-12 ">
-                                    <div class="form-group">
-                                        <label>Language: </label>
-                                        <input type="text" th:placeholder="${project.language}" readonly><br>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-sm-12 col-12 ">
-                                    <div class="form-group">
-                                        <label>Start date: </label>
-                                        <input type="text" th:placeholder="${project.startDate}" readonly><br>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-6 col-sm-12 col-12 ">
-                                    <div class="form-group">
-                                        <label>End date: </label>
-                                        <input type="text" th:placeholder="${project.endDate}" readonly><br>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-sm-12 col-12 ">
-                                    <div class="form-group">
-                                        <label>PM name: </label>
-                                        <input type="text" th:placeholder="${project.pmName}" readonly><br>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-sm-12 col-12 ">
-                                    <div class="form-group">
-                                        <label>Members participating in the project: </label>
-                                        <table border="1" class="table custom-table no-footer">
-                                            <tr>
-                                                <th>STT</th>
-                                                <th>Employee code</th>
-                                                <th>Name</th>
-                                                <th>Department</th>
-                                            </tr>
-                                            <tbody th:each="ep:${employeeProject}">
-                                            <tr>
-                                                <td th:text="${employeeProject.indexOf(ep)+1}"></td>
-                                                <td th:text="${ep.employeeCode}"></td>
-                                                <td th:text="${ep.firstName + ' ' + ep.lastName}"></td>
-                                                <td th:text="${ep.department.name}"></td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+    <h2>Project Detail</h2>
+    <div th:if="${project}">
+        <p>ID: <span th:text="${project.id}"></span></p>
+        <p>Name Project: <span th:text="${project.name}"></span></p>
+        <p>Operating system: <span th:text="${project.os}"></span></p>
+        <p>Frame work: <span th:text="${project.framework}"></span></p>
+        <p>Language: <span th:text="${project.language}"></span></p>
+        <p>Start date: <span th:text="${project.startDate}"></span></p>
+        <p>End date: <span th:text="${project.endDate}"></span></p>
+        <p>PM name: <span th:text="${project.pmName}"></span></p>
     </div>
 </div>
 </body>

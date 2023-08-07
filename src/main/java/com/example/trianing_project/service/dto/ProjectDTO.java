@@ -14,8 +14,11 @@ public class ProjectDTO implements Serializable {
     private Long id;
     @NotEmpty(message = "Name is required")
     private String name;
+
     private String os;
+
     private String framework;
+
     private String language;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Start date is required")
@@ -25,16 +28,16 @@ public class ProjectDTO implements Serializable {
     private LocalDate endDate;
     private Long pmId;
     private String pmName;
-    Set<EmployeeDTO> employeeIds = new HashSet<>();
+    Set<Employee> employeeIds =new HashSet<>();
 
     public ProjectDTO() {
     }
 
-    public Set<EmployeeDTO> getEmployeeIds() {
+    public Set<Employee> getEmployeeIds() {
         return employeeIds;
     }
 
-    public void setEmployeeIds(Set<EmployeeDTO> employeeIds) {
+    public void setEmployeeIds(Set<Employee> employeeIds) {
         this.employeeIds = employeeIds;
     }
 

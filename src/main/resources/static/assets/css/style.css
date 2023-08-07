@@ -661,7 +661,11 @@ button.bg-danger:hover {
 .text-muted {
 	color: #757575 !important;
 }
-
+.btn-primary {
+	background-color: #00882E;
+    border: 1px solid #00882E;
+	padding: 15px 0;
+}
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary.active,
