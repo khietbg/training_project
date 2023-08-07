@@ -79,7 +79,7 @@ public class ProjectController {
         }
         projectDto.setPmId(getUserId());
         projectService.save(projectDto);
-        return "redirect:/project/index";//+ getUserId()
+        return "redirect:/project/index"+ getUserId();
     }
 
     @GetMapping("/edit/{id}")
@@ -103,10 +103,10 @@ public class ProjectController {
     @GetMapping("/delete/{id}")
     public String doDelete(@PathVariable("id") Long id) {
         if (!projectRepository.existsById(id)) {
-            return "redirect:/project/index"; //+ getUserId()
+            return "redirect:/project/index" +getUserId();
         }
         projectService.delete(id);
-        return "redirect:/project/index";//+ getUserId()
+        return "redirect:/project/index"+ getUserId();
     }
 
     @GetMapping("/detail/{id}")
@@ -118,8 +118,7 @@ public class ProjectController {
     }
 
     public Long getUserId() {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        return employeeService.findEmployeeByEmail(authentication.getName()).getId();
-        return 1L;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return employeeService.findEmployeeByEmail(authentication.getName()).getId();
     }
 }
