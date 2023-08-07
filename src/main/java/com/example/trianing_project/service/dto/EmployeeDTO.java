@@ -1,5 +1,6 @@
 package com.example.trianing_project.service.dto;
 
+import com.example.trianing_project.domain.Employee;
 import com.example.trianing_project.domain.Project;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -10,7 +11,7 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Set;
 
-public class EmployeeDTO {
+public class EmployeeDTO  {
     private Long id;
     private String avatarUrl;
     @NotEmpty(message = "not empty!")

@@ -28,16 +28,16 @@ public class ProjectDTO implements Serializable {
     private LocalDate endDate;
     private Long pmId;
     private String pmName;
-    Set<Employee> employeeIds =new HashSet<>();
+    Set<EmployeeDTO> employeeIds =new HashSet<>();
 
     public ProjectDTO() {
     }
 
-    public Set<Employee> getEmployeeIds() {
+    public Set<EmployeeDTO> getEmployeeIds() {
         return employeeIds;
     }
 
-    public void setEmployeeIds(Set<Employee> employeeIds) {
+    public void setEmployeeIds(Set<EmployeeDTO> employeeIds) {
         this.employeeIds = employeeIds;
     }
 

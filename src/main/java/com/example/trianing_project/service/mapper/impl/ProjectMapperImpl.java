@@ -2,7 +2,9 @@ package com.example.trianing_project.service.mapper.impl;
 
 import com.example.trianing_project.domain.Employee;
 import com.example.trianing_project.domain.Project;
+import com.example.trianing_project.service.dto.EmployeeDTO;
 import com.example.trianing_project.service.dto.ProjectDTO;
+import com.example.trianing_project.service.mapper.EmployeeMapper;
 import com.example.trianing_project.service.mapper.ProjectMapper;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +15,12 @@ import java.util.stream.Collectors;
 
 @Component
 public class ProjectMapperImpl implements ProjectMapper {
+    private final EmployeeMapper employeeMapper;
+
+    public ProjectMapperImpl(EmployeeMapper employeeMapper) {
+        this.employeeMapper = employeeMapper;
+    }
+
     @Override
     public Project toEntity(ProjectDTO dto) {
         if (dto == null) {
@@ -27,6 +35,11 @@ public class ProjectMapperImpl implements ProjectMapper {
         project.setStartDate(dto.getStartDate());
         project.setEndDate(dto.getEndDate());
         project.setPmId(dto.getPmId());
+
+        for (EmployeeDTO e: dto.getEmployeeIds()
+        ) {
+            project.getEmployees().add(employeeMapper.toEntity(e));
+        }
         return project;
     }
 
@@ -44,15 +57,13 @@ public class ProjectMapperImpl implements ProjectMapper {
         projectDto.setStartDate(entity.getStartDate());
         projectDto.setEndDate(entity.getEndDate());
         projectDto.setPmId(entity.getPmId());
-
         Employee employee = entity.getPm();
         if (employee != null) {
             projectDto.setPmName(employee.getFirstName() + " " + employee.getLastName());
+        }else {
+            projectDto.setPmName("No management staff!!!");
         }
-        Set<Employee> employees = entity.getEmployees();
-        if (employee != null) {
-            projectDto.setEmployeeIds(employees);
-        }
+
         return projectDto;
     }
 
@@ -79,4 +90,5 @@ public class ProjectMapperImpl implements ProjectMapper {
         }
         return list;
     }
+
 }
