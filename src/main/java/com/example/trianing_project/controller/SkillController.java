@@ -3,12 +3,14 @@ package com.example.trianing_project.controller;
 import com.example.trianing_project.repository.SkillRepository;
 import com.example.trianing_project.service.SkillService;
 import com.example.trianing_project.service.dto.SkillDTO;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/skill")
+@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 public class SkillController {
     private final SkillService skillService;
     private final SkillRepository skillRepository;

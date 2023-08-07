@@ -4,6 +4,7 @@ import com.example.trianing_project.service.EmployeeService;
 import com.example.trianing_project.service.ExperienceService;
 import com.example.trianing_project.service.dto.EmployeeDTO;
 import com.example.trianing_project.service.dto.ExperienceDTO;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/experience")
+@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 public class ExperienceController {
     private final ExperienceService experienceService;
     private final EmployeeService employeeService;

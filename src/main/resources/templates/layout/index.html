@@ -11,7 +11,7 @@
         <div class="content container-fluid">
             <div class="page-name 	mb-4">
                 <h4 class="m-0"><img src="assets/img/profile.jpg" class="mr-1" alt="profile"/> Welcome to company</h4>
-                <label>Sun, 29 Nov 2019</label>
+                <label>Tue, 8 Aug 2023</label>
             </div>
             <div class="row mb-4">
                 <div class="col-xl-3 col-sm-6 col-12">
@@ -19,7 +19,7 @@
                         <div class="card-body">
                             <div class="card_widget_header">
                                 <label>Employees</label>
-                                <h4>700</h4>
+                                <h4 th:text="${sumE}"></h4>
                             </div>
                             <div class="card_widget_img">
                                 <img src="assets/img/dash1.png" alt="card-img"/>
@@ -31,8 +31,8 @@
                     <div class="card board1 fill2 ">
                         <div class="card-body">
                             <div class="card_widget_header">
-                                <label>Companies</label>
-                                <h4>30</h4>
+                                <label>Departments</label>
+                                <h4 th:text="${sumd}"></h4>
                             </div>
                             <div class="card_widget_img">
                                 <img src="assets/img/dash2.png" alt="card-img"/>
@@ -44,7 +44,7 @@
                     <div class="card board1 fill3 ">
                         <div class="card-body">
                             <div class="card_widget_header">
-                                <label>Leaves</label>
+                                <label>project</label>
                                 <h4>9</h4>
                             </div>
                             <div class="card_widget_img">
