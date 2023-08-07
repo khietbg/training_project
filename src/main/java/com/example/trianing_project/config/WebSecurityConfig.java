@@ -34,6 +34,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+                .antMatchers("/departments/**").hasAuthority("ADMIN")
+//                .antMatchers("/layout/**").permitAll()
+//                .antMatchers("/login").permitAll()
                 .anyRequest().permitAll()
                 .and()
                 .formLogin((form) -> form
@@ -43,8 +46,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                                 .defaultSuccessUrl("/home")
                                 .permitAll()
                 )
-                .logout((logout) -> logout.permitAll())
-                .exceptionHandling()
-                .accessDeniedPage("/403");
+                .logout((logout) -> logout.permitAll());
+//                .exceptionHandling()
+//                .accessDeniedPage("/403");
     }
 }

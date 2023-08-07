@@ -5,6 +5,7 @@ import com.example.trianing_project.service.dto.EmployeeDTO;
 import com.example.trianing_project.service.email.SendEmailService;
 import com.lowagie.text.pdf.BaseFont;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -60,6 +61,8 @@ public class EmployeeController {
 
     @GetMapping("/index")
     public String findAll(@RequestParam(name = "textSearch", required = false, defaultValue = "") String textSearch, Pageable pageable, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("employee",employeeService.findEmployeeByEmail(authentication.getName()));
         model.addAttribute("page", employeeService.findAll(textSearch, pageable));
         return "employee/index";
     }
@@ -205,6 +208,14 @@ public class EmployeeController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+    @GetMapping("/search")
+    public String search(@RequestParam(name = "textSearch", required = false, defaultValue = "") String textSearch, Pageable pageable, Model model) {
+        model.addAttribute("page", employeeService.findAll(textSearch, pageable));
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        EmployeeDTO employeeLogin = employeeService.findEmployeeByEmail(authentication.getName());
+        model.addAttribute("employee", employeeLogin);
+        return "employee/search";
     }
 }
 

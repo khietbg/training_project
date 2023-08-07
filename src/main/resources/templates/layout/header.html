@@ -131,28 +131,31 @@
         <li class="nav-item dropdown has-arrow main-drop">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
 <span class="user-img">
-<img th:src="@{/assets/img/profile.jpg}" alt="">
+<img th:src="@{'~/assets/img/' + ${employee.avatarUrl}}" alt="">
 <span class="status online"></span>
 </span>
-                <span>Kavin Hansen</span>
+                <span th:text="${employee.lastName}"></span>
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" th:href="@{/profile/index}"><i data-feather="user" class="mr-1"></i> Profile</a>
-                <a class="dropdown-item" href="settings.html"><i data-feather="settings" class="mr-1"></i> Settings</a>
-                <form th:action="@{/logout}" method="post"><button type="submit" class="dropdown-item"><i data-feather="log-out" class="mr-1"></i> Logout</button></form>
+                <a class="dropdown-item" th:href="@{/profile/index}"><i data-feather="user" class="mr-1"></i>
+                    Profile</a>
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit" class="dropdown-item"><i data-feather="log-out" class="mr-1"></i> Logout
+                    </button>
+                </form>
             </div>
         </li>
 
     </ul>
-    <div class="dropdown mobile-user-menu show">
-        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
-                class="fa fa-ellipsis-v"></i></a>
-        <div class="dropdown-menu dropdown-menu-right ">
-            <a class="dropdown-item" href="profile.html">My Profile</a>
-            <a class="dropdown-item" href="settings.html">Settings</a>
-            <a class="dropdown-item" href="login.html">Logout</a>
-        </div>
-    </div>
+    <!--    <div class="dropdown mobile-user-menu show">-->
+    <!--        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i-->
+    <!--                class="fa fa-ellipsis-v"></i></a>-->
+    <!--        <div class="dropdown-menu dropdown-menu-right ">-->
+    <!--            <a class="dropdown-item" href="profile.html">My Profile</a>-->
+    <!--            <a class="dropdown-item" href="settings.html">Settings</a>-->
+    <!--            <a class="dropdown-item" href="login.html">Logout</a>-->
+    <!--        </div>-->
+    <!--    </div>-->
 
 </div>
 </body>
