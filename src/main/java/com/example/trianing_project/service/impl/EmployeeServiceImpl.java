@@ -62,10 +62,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         } else {
             employeeDTO.getRoles().forEach(role -> {
                 switch (role) {
-                    case "admin":
+                    case "ADMIN":
                         Role adminRole = roleService.findByRoleName("ADMIN");
                         roles.add(adminRole);
-                    case "user":
+                    case "USER":
                         Role userRole = roleService.findByRoleName("USER");
                         roles.add(userRole);
                 }

@@ -90,10 +90,10 @@
                                     <td th:text="${s.name}"></td>
                                     <td th:text="${s.level*20+' %'}"></td>
                                     <td th:text="${s.year+' year '+s.month+' month'}"></td>
-                                    <td><a class="btn btn-secondary" th:href="@{'/skill/detail'+${s.id}}"></a>Detail
+                                    <td><a class="btn btn-secondary" th:href="@{'/skill/detail/'+${s.id}}"></a>Detail
                                     </td>
-                                    <td><a class="btn btn-warning" th:href="@{'/skill/edit'+${s.id}}"></a>Edit</td>
-                                    <td><a class="btn btn-danger" th:href="@{'/skill/delete'+${s.id}}"></a>Delete</td>
+                                    <td><a class="btn btn-warning" th:href="@{'/skill/edit/'+${s.id}}"></a>Edit</td>
+                                    <td><a class="btn btn-danger" th:href="@{'/skill/delete/'+${s.id}}"></a>Delete</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -141,11 +141,11 @@
                                             <td th:text="${e.framework}"></td>
                                             <td th:text="${e.teamSize}"></td>
                                             <td th:text="${e.position}"></td>
-                                            <td><a class="btn btn-secondary" th:href="@{'/experience/detail'+${e.id}}">Detail</a>
+                                            <td><a class="btn btn-secondary" th:href="@{'/experience/detail/'+${e.id}}">Detail</a>
                                             </td>
-                                            <td><a class="btn btn-warning" th:href="@{'/experience/update'+${e.id}}">Edit</a>
+                                            <td><a class="btn btn-warning" th:href="@{'/experience/edit/'+${e.id}}">Edit</a>
                                             </td>
-                                            <td><a class="btn btn-danger" th:href="@{'/experience/delete'+${e.id}}">Delete</a>
+                                            <td><a class="btn btn-danger" th:href="@{'/experience/delete/'+${e.id}}">Delete</a>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -172,7 +172,7 @@
                                             <td th:text="${p.language}"></td>
                                             <td th:text="${p.os}"></td>
                                             <td th:text="${p.framework}"></td>
-                                            <td><a class="btn btn-secondary" th:href="@{'/project/detail'+${p.id}}">Detail</a>
+                                            <td><a class="btn btn-secondary" th:href="@{'/project/detail/'+${p.id}}">Detail</a>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -198,11 +198,11 @@
                                             <td th:text="${c.issueDate}"></td>
                                             <td th:text="${c.expirationDate}"></td>
                                             <td th:text="${c.certificateOfficer}"></td>
-                                            <td><a class="btn btn-secondary" th:href="@{'/certificate/detail'+${c.id}}">Detail</a>
+                                            <td><a class="btn btn-secondary" th:href="@{'/certificate/detail/'+${c.id}}">Detail</a>
                                             </td>
                                             <td><a class="btn btn-warning"
-                                                   th:href="@{'/certificate/edit'+${c.id}}">Edit</a></td>
-                                            <td><a class="btn btn-danger" th:href="@{'/certificate/Delete'+${c.id}}">Delete</a>
+                                                   th:href="@{'/certificate/edit/'+${c.id}}">Edit</a></td>
+                                            <td><a class="btn btn-danger" th:href="@{'/certificate/Delete/'+${c.id}}">Delete</a>
                                             </td>
                                         </tr>
                                         </tbody>

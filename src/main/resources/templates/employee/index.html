@@ -14,20 +14,17 @@
                 <div class="col-xl-12 col-sm-12 col-12">
                     <div class="breadcrumb-path mb-4">
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><img th:src="@{/assets/img/dash.png}" class="mr-2" alt="breadcrumb" />Home</a>
-                            </li>
-                            <li class="breadcrumb-item active"> Employees</li>
+                            <form class="d-flex ms-5">
+                                <input type="text" name="textSearch" class="form-control w-150"
+                                       placeholder="search">
+                                <button class="btn btn-secondary" type="submit"><i class="fas fa-search">Search</i></button>
+                            </form>
                         </ul>
                         <h3>Employees</h3>
                     </div>
                 </div>
                 <div class="col-xl-12 col-sm-12 col-12 mb-4">
                     <div class="head-link-set">
-                        <ul>
-                            <li><a class="active" href="#">All</a></li>
-                            <li><a href="employee-team.html">Teams</a></li>
-                            <li><a href="employee-office.html">Offices</a></li>
-                        </ul>
                         <a class="btn-add" th:href="@{/employee/add}"><i data-feather="plus"></i> Add Employee</a>
                     </div>
                 </div>

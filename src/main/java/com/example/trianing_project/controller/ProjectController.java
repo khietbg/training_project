@@ -7,21 +7,21 @@ import com.example.trianing_project.service.dto.EmployeeDTO;
 import com.example.trianing_project.service.dto.ProjectDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/project")
+@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 public class ProjectController {
     private final ProjectService projectService;
     private final ProjectRepository projectRepository;
@@ -44,77 +44,100 @@ public class ProjectController {
     public String showAdd(Model model, HttpSession session) {
         model.addAttribute("employees", employeeService.findAll());
         model.addAttribute("project", new ProjectDTO());
+        List<EmployeeDTO> selectedEmployees = (List<EmployeeDTO>) session.getAttribute("selectedEmployees");
+        if (selectedEmployees != null && !selectedEmployees.isEmpty()) {
+            model.addAttribute("selectedEmployees", selectedEmployees);
+        }
         return "project/add";
     }
 
     @PostMapping("/add")
-    public String doAdd(@ModelAttribute("project") @Valid ProjectDTO projectDTO, @RequestParam("employees") List<Long> employees, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
-            return "project/add";
-        }
-        // chuyển từ id thành đối tượng
-        for (Long id : employees) {
-            Optional<EmployeeDTO> employeeDTO = employeeService.findOne(id);
-            if (employeeDTO.isPresent()) {
-                projectDTO.getEmployeeIds().add(employeeDTO.get());
-            }
-        }
-        projectDTO.setPmId(1L);
-        projectService.save(projectDTO);
-        redirectAttributes.addFlashAttribute("projectDTO", projectDTO);
-        return "redirect:/project/index";
-    }
-
-    @PostMapping("/edit")
-    public String doEdit(@Valid @ModelAttribute("project") ProjectDTO projectDto, @RequestParam("employees") List<Long> employees, BindingResult bindingResult, Model model) {
+    public String doAdd(@Valid @ModelAttribute("project") ProjectDTO projectDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("employees", employeeService.findAll());
-            return "project/edit";
-        }
-        for (Long id : employees) {
-            Optional<EmployeeDTO> employeeDTO = employeeService.findOne(id);
-            if (employeeDTO.isPresent()) {
-                projectDto.getEmployeeIds().add(employeeDTO.get());
-            }
+            return "project/add";
         }
         projectDto.setPmId(getUserId());
         projectService.save(projectDto);
-        return "redirect:/project/index";//+ getUserId()
+        return "redirect:/project/index";
     }
 
     @GetMapping("/edit/{id}")
-    public String showEdit(@PathVariable("id") Long id, Model model, HttpSession session) {
+    public String showEdit(@PathVariable("id") Long id, Model model) {
         Optional<ProjectDTO> projectDto = projectService.findOne(id);
         model.addAttribute("employees", employeeService.findAll());
         if (!projectDto.isPresent()) {
             return "redirect:/project/index";
         }
-        List<EmployeeDTO> selectedEmployees = (List<EmployeeDTO>) session.getAttribute("selectedEmployees");
-        if (selectedEmployees != null && !selectedEmployees.isEmpty()) {
-            model.addAttribute("selectedEmployees", selectedEmployees);
-        }
-        if (projectDto.get().getPmId() != getUserId()) {
-            return "redirect:/project/index";
-        }
+
         model.addAttribute("project", projectDto.get());
         return "project/edit";
+    }
+
+    @PostMapping("/edit")
+    public String doEdit(@Valid @ModelAttribute("project") ProjectDTO projectDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "project/edit";
+        }
+        projectService.save(projectDto);
+        return "redirect:/project/index";
     }
 
     @GetMapping("/delete/{id}")
     public String doDelete(@PathVariable("id") Long id) {
         if (!projectRepository.existsById(id)) {
-            return "redirect:/project/index"; //+ getUserId()
+            return "redirect:/project/index";
         }
         projectService.delete(id);
-        return "redirect:/project/index";//+ getUserId()
+        return "redirect:/project/index";
     }
 
     @GetMapping("/detail/{id}")
     public String showDetail(@PathVariable("id") Long id, Model model) {
         Optional<ProjectDTO> projectDto = projectService.findOne(id);
-        model.addAttribute("employeeProject", employeeService.findByProjectId(id));
-        model.addAttribute("project", projectDto.get());
-        return "project/detail";
+        if (projectDto.isPresent()) {
+            model.addAttribute("project", projectDto.get());
+            return "project/detail";
+        }
+        return "redirect:/project/index";
+    }
+
+    @GetMapping("/show/employee")
+    public String indexE(@RequestParam(required = false, defaultValue = "") String textSearch,
+                         Pageable pageable, Model model) {
+        Page<EmployeeDTO> listOfEmployees = employeeService.findAll(textSearch, pageable);
+        model.addAttribute("listOfEmployees", listOfEmployees);
+        return "project/employee_create";
+    }
+
+    @PostMapping("/add/employee")
+    public String doAdd(@RequestParam(value = "selectedEmployeeCodes", required = false) List<String> selectedEmployees,
+                        HttpSession session, Model model) {
+        if (selectedEmployees == null || selectedEmployees.isEmpty()) {
+            return "project/employee_create";
+        }
+        List<EmployeeDTO> selectedEmployee = new ArrayList<>();
+        for (String employeeCode : selectedEmployees) {
+            Long employeeId = Long.parseLong(employeeCode);
+            Optional<EmployeeDTO> employee = employeeService.findOne(employeeId);
+            if (employee.isPresent()) {
+                selectedEmployee.add(employee.get());
+            }
+        }
+        session.setAttribute("selectedEmployees", selectedEmployee);
+
+        return "redirect:/project/add";
+    }
+
+    @GetMapping("/employee/delete/{id}")
+    public String doDelete(@PathVariable Long id, HttpSession session, Model model) {
+        List<EmployeeDTO> selectedEmployees = (List<EmployeeDTO>) session.getAttribute("selectedEmployees");
+        if (selectedEmployees != null) {
+            selectedEmployees.removeIf(employee -> employee.getId().equals(id));
+            session.setAttribute("selectedEmployees", selectedEmployees);
+        }
+        model.addAttribute("selectedEmployees", selectedEmployees);
+        return "redirect:/project/add";
     }
 
     public Long getUserId() {

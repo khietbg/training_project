@@ -5,6 +5,7 @@ import com.example.trianing_project.service.dto.EmployeeDTO;
 import com.example.trianing_project.service.email.SendEmailService;
 import com.lowagie.text.pdf.BaseFont;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,7 +31,6 @@ import java.io.File;
 import java.io.IOException;
 
 import java.io.ByteArrayOutputStream;
-import java.util.Optional;
 
 
 @Controller
@@ -59,12 +59,16 @@ public class EmployeeController {
     }
 
     @GetMapping("/index")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String findAll(@RequestParam(name = "textSearch", required = false, defaultValue = "") String textSearch, Pageable pageable, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("employee",employeeService.findEmployeeByEmail(authentication.getName()));
         model.addAttribute("page", employeeService.findAll(textSearch, pageable));
         return "employee/index";
     }
 
     @GetMapping("/add")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String showAdd(Model model) {
         model.addAttribute("employee", new EmployeeDTO());
         model.addAttribute("employees", employeeService.findAll());
@@ -73,6 +77,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String doAdd(@Valid @ModelAttribute("employee") EmployeeDTO employeeDTO, BindingResult bindingResult, Model model, @RequestParam("rePassword") String rePassword) throws MessagingException {
         if (employeeService.existsByEmail(employeeDTO.getEmail())) {
             FieldError error = new FieldError("employee", "email", "email existed!");
@@ -102,12 +107,14 @@ public class EmployeeController {
     }
 
     @GetMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String delete(@PathVariable Long id) {
         employeeService.delete(id);
         return "redirect:/employee/index";
     }
 
     @GetMapping("/edit")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public String edit(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("employee", employeeService.findEmployeeByEmail(authentication.getName()));
@@ -117,6 +124,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/edit")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public String doEdit(@RequestParam("img") MultipartFile file, @ModelAttribute("employee") EmployeeDTO employeeDTO, BindingResult bindingResult, Model model) throws IOException {
         EmployeeDTO employeeByEmail = employeeService.findEmployeeByEmail(employeeDTO.getEmail());
         EmployeeDTO employeeByPhone = employeeService.findEmployeeByEmail(employeeDTO.getPhone());
@@ -164,6 +172,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/detail/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public String detail(@PathVariable Long id, Model model) {
         EmployeeDTO employeeDTO = employeeService.findOne(id).get();
         model.addAttribute("skills", skillService.findAllByEmployeeId(id));
@@ -174,13 +183,9 @@ public class EmployeeController {
         return "employee/detail";
     }
 
-    @GetMapping("/back")
-    public String back() {
-        return "redirect:/employee/index";
-    }
-
     @GetMapping("/export-pdf/{id}")
     @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<byte[]> exportProfileToPdf(@PathVariable Long id) {
         EmployeeDTO employeeDTO = employeeService.findOne(id).orElse(null);
         if (employeeDTO == null) {
@@ -205,6 +210,15 @@ public class EmployeeController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+    @GetMapping("/search")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    public String search(@RequestParam(name = "textSearch", required = false, defaultValue = "") String textSearch, Pageable pageable, Model model) {
+        model.addAttribute("page", employeeService.findAll(textSearch, pageable));
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        EmployeeDTO employeeLogin = employeeService.findEmployeeByEmail(authentication.getName());
+        model.addAttribute("employee", employeeLogin);
+        return "employee/search";
     }
 }
 
