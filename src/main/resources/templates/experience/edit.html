@@ -9,57 +9,53 @@
 <div layout:fragment="content">
     <div class="page-wrapper">
         <div class="content container-fluid">
-            <h3>Edit experience</h3>
-            <form th:action="@{/experience/edit}" method="post" th:object="${experience}">
-                <table>
-                    <input type="hidden" th:field="*{id}">
-                    <tr>
-                        <td>os:</td>
-                        <td><input type="text" th:field="*{os}"/></td>
-                    </tr>
-                    <tr>
-                        <td>language:</td>
-                        <td><input type="text" th:field="*{language}"/></td>
-                    </tr>
-                    <tr>
-                        <td>framework:</td>
-                        <td><input type="text" th:field="*{framework}"/></td>
-                    </tr>
-                    <tr>
-                        <td>link:</td>
-                        <td><input type="text" th:field="*{link}"/></td>
-                    </tr>
-                    <tr>
-                        <td>timeStart:</td>
-                        <td><input type="text" th:field="*{timeStart}"/></td>
-                    </tr>
-                    <tr>
-                        <td>timeEnd:</td>
-                        <td><input type="text" th:field="*{timeEnd}"/></td>
-                    </tr>
-                    <tr>
-                        <td>teamSize:</td>
-                        <td><input type="text" th:field="*{teamSize}"/></td>
-                    </tr>
-                    <tr>
-                        <td>position:</td>
-                        <td><input type="text" th:field="*{position}"/></td>
-                    </tr>
-                    <tr>
-                        <td>workPlace:</td>
-                        <td><input type="text" th:field="*{workPlace}"/></td>
-                    </tr>
-                    <tr>
-                        <td>description:</td>
-                        <td><input type="text" th:field="*{description}"/></td>
-                    </tr>
-                    <tr>
-                        <td>employeeId:</td>
-                        <td><input type="text" th:field="*{employeeId}"/></td>
-                    </tr>
-                </table>
-                <button type="submit">Update</button>
-            </form>
+                <h3 style="text-align: center; color: #028ee1">Edit experience</h3>
+            <div>
+                <form th:action="@{/experience/add}" method="post" th:object="${experience}">
+                    <div class="mb-3">
+                        <input type="hidden" th:field="*{id}"/>
+                        <label for="formGroupExampleInput1" class="form-label">OS : </label>
+                        <input type="text" class="form-control" id="formGroupExampleInput1" th:field="*{os}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label">Language : </label>
+                        <input type="text" class="form-control" id="formGroupExampleInput2" th:field="*{language}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput3" class="form-label">Framework :</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput3" th:field="*{framework}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput4" class="form-label">Link : </label>
+                        <input type="text" class="form-control" id="formGroupExampleInput4" th:field="*{link}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput5" class="form-label">Time Start</label>
+                        <input type="date" class="form-control" id="formGroupExampleInput5" th:field="*{timeStart}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput6" class="form-label">Time End :</label>
+                        <input type="date" class="form-control" id="formGroupExampleInput6" th:field="*{timeEnd}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput7" class="form-label">Team Size :</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput7" th:field="*{teamSize}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput8" class="form-label">Position :</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput8" th:field="*{position}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput9" class="form-label">Word Place :</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput9" th:field="*{workPlace}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput10" class="form-label">Description :</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput10" th:field="*{description}">
+                    </div>
+                    <button class="btn btn-warning" type="submit">Edit</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

@@ -18,7 +18,6 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/certificate")
-@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
 public class CertificateController {
     private final EmployeeService employeeService;
     private final CertificateService certificateService;
@@ -53,7 +52,7 @@ public class CertificateController {
         }
         certificateDTO.setEmployeeId(getUserId());
         certificateService.save(certificateDTO);
-        return "redirect:/employee/index";
+        return "redirect:/profile/index";
     }
 
     @GetMapping("/edit/{id}")
@@ -79,7 +78,7 @@ public class CertificateController {
             return "redirect:/employee/certificate/edit/" + certificateDTO.getId();
         }
         certificateService.save(certificateDTO);
-        return "redirect:/employee/edit/" + getUserId();
+        return "redirect:/profile/index";
     }
 
     @GetMapping("/delete/{id}")
@@ -90,7 +89,7 @@ public class CertificateController {
             return "redirect:/employee/edit/" + getUserId();
         }
         certificateService.delete(id);
-        return "redirect:/employee/edit/" + getUserId();
+        return "redirect:/profile/index";
     }
 
     public Long getUserId() {

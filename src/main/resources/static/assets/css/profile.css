@@ -49,6 +49,10 @@ body{
     color: #6c757d;
     background-color: #f1f5f7;
     border-color: #dee2e6;
+    text-align: center;
+}
+ th,td{
+    vertical-align: center!important;
 }
 .social-list-item {
     height: 2rem;
