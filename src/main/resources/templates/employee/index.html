@@ -15,15 +15,29 @@
                     <div class="breadcrumb-path mb-4">
                         <ul class="breadcrumb">
                             <form class="d-flex ms-5">
-                                <input type="text" name="textSearch" class="form-control w-150"
+                                <input type="text" name="textSearch" class="form-control w-150" style="margin-right: 10px"
                                        placeholder="search">
-                                <button class="btn btn-secondary" type="submit"><i class="fas fa-search">Search</i></button>
+                                <button class="btn btn-info" type="submit"><i class="fas fa-search">Search</i></button>
                             </form>
                         </ul>
                         <h3>Employees</h3>
                     </div>
                 </div>
-                <div class="col-xl-12 col-sm-12 col-12 mb-4">
+                <div class="col-xl-12 col-sm-12 col-12 mb-4 d-flex justify-content-between">
+                    <div class="head-link-set">
+                        <ul>
+                            <li th:if="${page.hasPrevious()}">
+                                <a th:href="@{'/employee/index?page='+${page.number -1}+'&&size=5'}">Previous</a>
+                            </li>
+                            <li style="text-align: center">
+                                <p><span th:text="${page.number + 1}"></span>/<span
+                                        th:text="${page.getTotalPages()}"></span></p>
+                            </li>
+                            <li th:if="${page.hasNext()}">
+                                <a th:href="@{'/departments/index?page='+${page.number +1}+'&&size=5'}">Next</a>
+                            </li>
+                        </ul>
+                    </div>
                     <div class="head-link-set">
                         <a class="btn-add" th:href="@{/employee/add}"><i data-feather="plus"></i> Add Employee</a>
                     </div>
@@ -65,7 +79,7 @@
                                     <td>
                                         <div class="table-img">
                                             <a href="../profile/index.html">
-                                                <img th:src="@{'~/assets/img/' + ${e.avatarUrl}}" alt="profile" class="img-table" />
+                                                <img style="object-fit: cover"  th:src="@{'~/assets/img/' + ${e.avatarUrl}}" alt="profile" class="img-table" />
                                             </a>
                                             <label th:text="${e.firstName+' '+e.lastName}"></label>
                                         </div>
