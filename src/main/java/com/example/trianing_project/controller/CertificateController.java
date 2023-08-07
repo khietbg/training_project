@@ -3,6 +3,7 @@ package com.example.trianing_project.controller;
 import com.example.trianing_project.service.CertificateService;
 import com.example.trianing_project.service.EmployeeService;
 import com.example.trianing_project.service.dto.CertificateDTO;
+import com.example.trianing_project.service.dto.EmployeeDTO;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -26,12 +27,18 @@ public class CertificateController {
     }
     @GetMapping("/detail/{id}")
     public String showDetail(@PathVariable("id")Long id,Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        EmployeeDTO employeeLogin = employeeService.findEmployeeByEmail(authentication.getName());
+        model.addAttribute("employee",employeeLogin);
         Optional<CertificateDTO> certificateDTO = certificateService.findOne(id);
         model.addAttribute("certificate",certificateDTO.get());
         return "certificate/detail";
     }
     @GetMapping("/add")
     public String showAdd(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        EmployeeDTO employeeLogin = employeeService.findEmployeeByEmail(authentication.getName());
+        model.addAttribute("employee",employeeLogin);
         model.addAttribute("certificate", new CertificateDTO());
         return "certificate/add";
     }
@@ -49,6 +56,9 @@ public class CertificateController {
 
     @GetMapping("/edit/{id}")
     public String showEdit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        EmployeeDTO employeeLogin = employeeService.findEmployeeByEmail(authentication.getName());
+        model.addAttribute("employee",employeeLogin);
         Optional<CertificateDTO> certificateDTO = certificateService.findOne(id);
         if (!certificateDTO.isPresent()) {
             redirectAttributes.addFlashAttribute("message", "No content!!!");

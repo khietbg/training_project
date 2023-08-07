@@ -177,7 +177,10 @@
                                     <div class="col-xl-6 col-sm-12 col-12 ">
                                         <div class="form-group">
                                             <label>Role :</label>
-                                            <input type="text" th:field="*{roles}"/>
+                                            <select class="select" th:field="*{roles}">
+                                                <option th:value="'ADMIN'">ADMIN</option>
+                                                <option th:value="'USER'">USER</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

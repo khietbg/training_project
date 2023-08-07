@@ -29,6 +29,9 @@ public class ExperienceController {
 
     @GetMapping("/add")
     public String showAdd(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        EmployeeDTO employeeLogin = employeeService.findEmployeeByEmail(authentication.getName());
+        model.addAttribute("employee",employeeLogin);
         model.addAttribute("experience", new ExperienceDTO());
         return "/experience/add";
     }
@@ -44,6 +47,9 @@ public class ExperienceController {
 
     @GetMapping("/edit/{id}")
     public String showEdit(@PathVariable Long id, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        EmployeeDTO employeeLogin = employeeService.findEmployeeByEmail(authentication.getName());
+        model.addAttribute("employee",employeeLogin);
         model.addAttribute("experience", experienceService.findOne(id).get());
         return "/experience/edit";
     }
@@ -65,7 +71,11 @@ public class ExperienceController {
 
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable Long id, Model model) {
-        model.addAttribute("experience", experienceService.findOne(id).get());
+        ExperienceDTO experienceDTO = experienceService.findOne(id).get();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        EmployeeDTO employeeLogin = employeeService.findEmployeeByEmail(authentication.getName());
+        model.addAttribute("employee",employeeLogin);
+        model.addAttribute("experience", experienceDTO);
         return "/experience/detail";
     }
 }

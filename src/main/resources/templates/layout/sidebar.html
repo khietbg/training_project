@@ -31,43 +31,25 @@
                     </div>
                 </div>
                 <ul>
-                    <li class="active">
-                        <a href="index.html"><img th:src="@{/assets/img/home.svg}" alt="sidebar_img">
-                            <span>Dashboard</span></a>
+                    <li>
+                        <a th:href="@{/employee/search}"><img th:src="@{/assets/img/leave.svg}" alt="sidebar_img"><span>Search Employee</span></a>
                     </li>
                     <li>
                         <a th:href="@{/employee/index}"><img th:src="@{/assets/img/employee.svg}"
                                                              alt="sidebar_img"><span> Employees</span></a>
                     </li>
+                    <li class="active">
+                        <a th:href="@{/home}"><img th:src="@{/assets/img/home.svg}" alt="sidebar_img">
+                            <span>Dashboard</span></a>
+                    </li>
+
                     <li>
                         <a th:href="@{/departments/index}"><img th:src="@{/assets/img/company.svg}" alt="sidebar_img"><span>Department</span></a>
                     </li>
                     <li>
                         <a th:href="@{/project/index}"><img th:src="@{/assets/img/calendar.svg}" alt="sidebar_img"><span>Project</span></a>
                     </li>
-                    <li>
-                        <a href="leave.html"><img th:src="@{/assets/img/leave.svg}" alt="sidebar_img"><span>Leave</span></a>
-                    </li>
-                    <li>
-                        <a href="review.html"><img th:src="@{/assets/img/review.svg}" alt="sidebar_img"><span>Review</span></a>
-                    </li>
-                    <li>
-                        <a href="report.html"><img th:src="@{/assets/img/report.svg}" alt="sidebar_img"><span>Report</span></a>
-                    </li>
-                    <li>
-                        <a href="manage.html"><img th:src="@{/assets/img/manage.svg}" alt="sidebar_img"><span>Manage</span></a>
-                    </li>
-                    <li>
-                        <a href="settings.html"><img th:src="@{/assets/img/settings.svg}" alt="sidebar_img"><span>Settings</span></a>
-                    </li>
-                    <li>
-                        <a href="profile.html"><img th:src="@{/assets/img/profile.svg}" alt="sidebar_img"><span>Profile</span></a>
-                    </li>
-                </ul>
-                <ul class="logout">
-                    <li>
-                        <a href="profile.html"><img th:src="@{/assets/img/logout.svg}" alt="sidebar_img"><span>Log out</span></a>
-                    </li>
+
                 </ul>
             </div>
         </div>

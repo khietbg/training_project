@@ -1,8 +1,12 @@
 package com.example.trianing_project.controller;
 
 import com.example.trianing_project.service.DepartmentService;
+import com.example.trianing_project.service.EmployeeService;
 import com.example.trianing_project.service.dto.DepartmentDTO;
+import com.example.trianing_project.service.dto.EmployeeDTO;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,14 +20,18 @@ import java.util.Optional;
 @RequestMapping("/departments")
 public class DepartmentController {
     private final DepartmentService departmentService;
+    private final EmployeeService employeeService;
 
-    public DepartmentController(DepartmentService departmentService) {
+    public DepartmentController(DepartmentService departmentService, EmployeeService employeeService) {
         this.departmentService = departmentService;
 
+        this.employeeService = employeeService;
     }
 
     @GetMapping("/index")
     public String index(@RequestParam(name = "search", required = false, defaultValue = "") String search, Pageable pageable, @ModelAttribute("message") String message, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("employee",employeeService.findEmployeeByEmail(authentication.getName()));
         model.addAttribute("message", message);
         model.addAttribute("departments", departmentService.findAllByName(search, pageable));
         model.addAttribute("page", pageable);
@@ -32,6 +40,9 @@ public class DepartmentController {
 
     @GetMapping("/add")
     public String showAdd(Model model, @ModelAttribute("message") String message) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        EmployeeDTO employeeLogin = employeeService.findEmployeeByEmail(authentication.getName());
+        model.addAttribute("employee",employeeLogin);
         model.addAttribute("message", message);
         model.addAttribute("department", new DepartmentDTO());
         model.addAttribute("parents", departmentService.findAll());
@@ -41,12 +52,18 @@ public class DepartmentController {
     @PostMapping("/add")
     public String doAdd(@Valid @ModelAttribute("department") DepartmentDTO departmentDTO, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            EmployeeDTO employeeLogin = employeeService.findEmployeeByEmail(authentication.getName());
+            model.addAttribute("employee",employeeLogin);
             model.addAttribute("department", departmentDTO);
             model.addAttribute("parents", departmentService.findAll());
             return "department/add";
         }
         Optional<DepartmentDTO> department = departmentService.findByDepartmentCode(departmentDTO.getDepartmentCode());
         if (department.isPresent()) {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            EmployeeDTO employeeLogin = employeeService.findEmployeeByEmail(authentication.getName());
+            model.addAttribute("employee",employeeLogin);
             redirectAttributes.addFlashAttribute("message", "Department ton tai");
             return "redirect:/departments/add";
         }
@@ -61,6 +78,9 @@ public class DepartmentController {
             redirectAttributes.addFlashAttribute("message", "No Content!!!");
             return "redirect:/departments/index";
         }
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        EmployeeDTO employeeLogin = employeeService.findEmployeeByEmail(authentication.getName());
+        model.addAttribute("employee",employeeLogin);
         model.addAttribute("message", message);
         model.addAttribute("parents", departmentService.findAll());
         model.addAttribute("department", departmentDTO.get());
@@ -71,11 +91,17 @@ public class DepartmentController {
     public String doEdit(@ModelAttribute("department") DepartmentDTO departmentDTO, @Valid BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         Optional<DepartmentDTO> department = departmentService.findByDepartmentCode(departmentDTO.getDepartmentCode());
         if (bindingResult.hasErrors()) {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            EmployeeDTO employeeLogin = employeeService.findEmployeeByEmail(authentication.getName());
+            model.addAttribute("employee",employeeLogin);
             model.addAttribute("department", departmentDTO);
             model.addAttribute("parents", departmentService.findAll());
             return "department/edit";
         }
         if (department.isPresent() && !department.get().getId().equals(departmentDTO.getId())) {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            EmployeeDTO employeeLogin = employeeService.findEmployeeByEmail(authentication.getName());
+            model.addAttribute("employee",employeeLogin);
             redirectAttributes.addFlashAttribute("message", "Department Code is already in use!!!");
             return "redirect:/departments/edit/" + departmentDTO.getId();
         }
