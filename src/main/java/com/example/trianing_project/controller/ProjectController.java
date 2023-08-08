@@ -35,13 +35,17 @@ public class ProjectController {
 
     @GetMapping("/index")
     public String index(@RequestParam(name = "name", required = false, defaultValue = "") String name, Pageable pageable, Model model) {
-        Page<ProjectDTO> projectDtos = projectService.findAll(name, pageable);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("employee", employeeService.findEmployeeByEmail(authentication.getName()));
+        List<ProjectDTO> projectDtos = projectService.findAll();
         model.addAttribute("projectDto", projectDtos);
         return "/project/index";
     }
 
     @GetMapping("/add")
     public String showAdd(Model model, HttpSession session) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("employee", employeeService.findEmployeeByEmail(authentication.getName()));
         model.addAttribute("employees", employeeService.findAll());
         model.addAttribute("project", new ProjectDTO());
         return "project/add";
@@ -59,10 +63,10 @@ public class ProjectController {
                 projectDTO.getEmployeeIds().add(employeeDTO.get());
             }
         }
-        projectDTO.setPmId(1L);
+        projectDTO.setPmId(getUserId());
         projectService.save(projectDTO);
         redirectAttributes.addFlashAttribute("projectDTO", projectDTO);
-        return "redirect:/project/index";
+        return "redirect:/profile/index";
     }
 
     @PostMapping("/edit")
@@ -84,6 +88,8 @@ public class ProjectController {
 
     @GetMapping("/edit/{id}")
     public String showEdit(@PathVariable("id") Long id, Model model, HttpSession session) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("employee", employeeService.findEmployeeByEmail(authentication.getName()));
         Optional<ProjectDTO> projectDto = projectService.findOne(id);
         model.addAttribute("employees", employeeService.findAll());
         if (!projectDto.isPresent()) {
@@ -106,12 +112,14 @@ public class ProjectController {
             return "redirect:/project/index" +getUserId();
         }
         projectService.delete(id);
-        return "redirect:/project/index"+ getUserId();
+        return "redirect:/profile/index";
     }
 
     @GetMapping("/detail/{id}")
     public String showDetail(@PathVariable("id") Long id, Model model) {
         Optional<ProjectDTO> projectDto = projectService.findOne(id);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("employee", employeeService.findEmployeeByEmail(authentication.getName()));
         model.addAttribute("employeeProject", employeeService.findByProjectId(id));
         model.addAttribute("project", projectDto.get());
         return "project/detail";

@@ -10,6 +10,7 @@ import java.util.Optional;
 
 public interface ProjectService {
     ProjectDTO save(ProjectDTO projectDto);
+    List<ProjectDTO> findAll();
 
     Page<ProjectDTO> findAll(String textSearch, Pageable pageable);
 

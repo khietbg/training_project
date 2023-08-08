@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,6 +29,11 @@ public class ProjectServiceImpl implements ProjectService {
         project = projectRepository.save(project);
 
         return projectMapper.toDto(project);
+    }
+
+    @Override
+    public List<ProjectDTO> findAll() {
+        return projectMapper.toDto(projectRepository.findAll());
     }
 
     @Override
