@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">layout</title>
+    <link rel="shortcut icon" th:href="@{/assets/img/favicon.png}"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/assets/plugins/fontawesome/css/fontawesome.min.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/plugins/fontawesome/css/all.min.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.min.css">
+</head>
+<body>
+<div th:replace="~{layout/header::header}"></div>
+<div th:insert="~{layout/sidebar::sidebar}"></div>
+<div layout:fragment="content">
+</div>
+</body>
+<script th:src="@{../../static/assets/js/pace.min.js}"></script>
+<script th:src="@{/assets/js/jquery-3.6.0.min.js}"></script>
+<script th:src="@{assets/js/popper.min.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script th:src="@{/assets/js/popper.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/feather.min.js}"></script>
+<script th:src="@{/assets/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+<script th:src="@{/assets/plugins/apexchart/apexcharts.min.js}"></script>
+<script th:src="@{/assets/plugins/apexchart/chart-data.js}"></script>
+<script th:src="@{/assets/js/script.js}"></script>
+<script>
+    $(document).ready(function () {
+        // Khởi tạo Selectize cho trường kết hợp có class 'framework-select'
+        $('.framework-select').selectize({
+            plugins: ['remove_button'],
+            create: function (input) {
+                return {
+                    value: input,
+                    text: input
+                };
+            }
+        });
+        $('.language-select').selectize({
+            plugins: ['remove_button'],
+            create: function (input) {
+                return {
+                    value: input,
+                    text: input
+                };
+            }
+        });
+        $('.os-select').selectize({
+            plugins: ['remove_button'],
+            create: function (input) {
+                return {
+                    value: input,
+                    text: input
+                };
+            }
+        });
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js"></script>
+</html>

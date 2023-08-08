@@ -1,6 +1,7 @@
 package com.example.trianing_project.domain;
 
 import org.hibernate.persister.entity.Loadable;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -19,8 +20,10 @@ public class Experience {
     @Column(name = "framework")
     private String framework;
     @Column(name = "time_start")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate timeStart;
     @Column(name = "time_end")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate timeEnd;
     @Column(name = "team_size")
     private int teamSize;

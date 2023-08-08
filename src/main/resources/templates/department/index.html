@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout/layout}" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+            <div class="row">
+                <div class="col-xl-12 col-sm-12 col-12 mb-4">
+                    <div class="breadcrumb-path ">
+                        <ul class="breadcrumb">
+                            <form class="d-flex ms-5">
+                                <input type="text" name="textSearch" class="form-control w-150" style="margin-right: 10px"
+                                       placeholder="search">
+                                <button class="btn btn-info" type="submit"><i class="fas fa-search">Search</i></button>
+                            </form>
+                        </ul>
+                        <h3>Department</h3>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-sm-12 col-12 mb-4">
+                    <div class="head-link-set">
+                        <ul>
+                            <li th:if="${departments.hasPrevious()}">
+                                <a th:href="@{'/departments/index?page='+${departments.number -1}+'&&size=5'}">Previous</a>
+                            </li>
+                            <li style="text-align: center">
+                                <p><span th:text="${departments.number + 1}"></span>/<span
+                                        th:text="${departments.getTotalPages()}"></span></p>
+                            </li>
+                            <li th:if="${departments.hasNext()}">
+                                <a th:href="@{'/departments/index?page='+${departments.number +1}+'&&size=5'}">Next</a>
+                            </li>
+                        </ul>
+                        <a class="btn-add" th:href="@{/departments/add}">Create Department</a>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-sm-12 col-12 ">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 th:unless="${message != null}" class="card-titles" th:text="Departments"></h2>
+                            <h4 th:if="${message != null}" th:text="${message}" style="color: red"></h4>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table  custom-table  no-footer">
+                                <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Name</th>
+                                    <th>Department code</th>
+                                    <th>Belonging</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody th:each="department,count : ${departments}">
+                                <tr>
+                                    <td>
+                                        <label th:text="${count.count +(page.getPageSize()*page.getPageNumber())}"></label>
+                                    </td>
+                                    <td>
+                                        <label th:text="${department.name}"></label>
+                                    </td>
+                                    <td>
+                                        <label th:text="${department.departmentCode}"></label>
+                                    </td>
+                                    <td>
+                                        <label th:if="${department.parentId == null}"
+                                               th:text="${department.parentName}"></label>
+                                        <label th:unless="${department.parentId == null}" th:text=""></label>
+                                    </td>
+                                    <td>
+                                        <div class="actionset">
+                                            <label><a class="action_label5"
+                                                      th:href="@{'/departments/edit/' +${department.id}}">Edit <i
+                                                    data-feather="edit"></i></a></label>
+                                            <label><a class="action_label4"
+                                                      th:href="@{'/departments/delete/'+${department.id}}"
+                                                      data-target="#delete">Delete
+                                                <i data-feather="trash-2"></i></a></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

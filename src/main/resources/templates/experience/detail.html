@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout/layout}" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Dleohr - Bootstrap Admin HTML Template</title>
+
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+            <div class="row">
+                <div class="col-xl-12 col-sm-12 col-12 ">
+                    <div class="breadcrumb-path mb-4">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><img src="assets/img/dash.png" class="mr-2"
+                                                                                  alt="breadcrumb">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active">Experience Detail</li>
+                        </ul>
+                        <h3>Experience Detail</h3>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-sm-12 col-12 ">
+                    <div class="row">
+                        <div class="col-xl-8 col-sm-12 col-12 d-flex ">
+                            <div class="card card-lists flex-fill">
+                                <div class="card-header">
+                                    <h2 class="card-titles">Experience</h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-xl-6 col-sm-12 col-12 d-flex ">
+                                            <div class="member-registor flex-fill">
+                                                <ul>
+                                                    <li>
+                                                        <label>Language :</label>
+                                                        <span th:text="${experience.language}"></span>
+                                                    </li>
+                                                    <li>
+                                                        <label>OS :</label>
+                                                        <span th:text="${experience.os}"></span>
+                                                    </li>
+                                                    <li>
+                                                        <label>Framework :</label>
+                                                        <span th:text="${experience.framework}"></span>
+                                                    </li>
+                                                    <li>
+                                                        <label>Link :</label>
+                                                        <span th:text="${experience.link}"></span>
+                                                    </li>
+                                                    <li>
+                                                        <label>Position :</label>
+                                                        <span th:text="${experience.position}"></span>
+                                                    </li>
+                                                    <li>
+                                                        <label>Team size:</label>
+                                                        <span th:text="${experience.teamSize}"></span>
+                                                    </li>
+                                                    <li>
+                                                        <label>Time Start:</label>
+                                                        <span th:text="${experience.timeStart}"></span>
+                                                    </li>
+                                                    <li>
+                                                        <label>time End:</label>
+                                                        <span th:text="${experience.timeEnd}"></span>
+                                                    </li>
+                                                    <li>
+                                                        <label>Work Place:</label>
+                                                        <span th:text="${experience.workPlace}"></span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-sm-12 col-12 d-flex">
+                                            <div class="member-address flex-fill">
+                                                <label>Description:</label>
+                                                <span th:text="${experience.description}"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-12 col-sm-12 col-12 ">
+                                            <div class="btn-link my-3">
+                                                <a th:href="@{'/employee/detail/'+ ${experience.employeeId}}"
+                                                   class="btn btn-secondary">Cancel</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

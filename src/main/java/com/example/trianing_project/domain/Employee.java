@@ -1,6 +1,10 @@
 package com.example.trianing_project.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,32 +19,37 @@ public class Employee {
 
     @Column(name = "avatar_url")
     private String avatarUrl;
+
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-
     @Column(name = "email")
+    @Email(message = "email in valid!")
     private String email;
     @Column(name = "address")
     private String address;
     @Column(name = "phone")
     private String phone;
+    @Size(min = 6)
     @Column(name = "password")
     private String password;
     @Column(name = "sex")
     private boolean sex;
     @Column(name = "date_of_birth")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
     @Column(name = "citizen_code")
     private String citizenCode;
     @Column(name = "license_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate licenseDate;
     @Column(name = "licensePlace")
-    private LocalDate licensePlace;
+    private String licensePlace;
     @Column(name = "employee_code")
-    private LocalDate employeeCode;
+    private String employeeCode;
     @Column(name = "start_date")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate startDate;
     @Column(name = "coefficients_salary")
     private float coefficientsSalary;
@@ -53,25 +62,18 @@ public class Employee {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Employee manager;
-
     @Column(name = "department_id")
     private Long departmentId;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Department department;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "employee_role",
             joinColumns = {@JoinColumn(name = "employee_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_name")})
     private Set<Role> roles = new HashSet<>();
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "employee_project",
-            joinColumns = {@JoinColumn(name = "employee_id")},
-            inverseJoinColumns = {@JoinColumn(name = "project_id")})
+    @ManyToMany(mappedBy = "employees")
     private Set<Project> projects = new HashSet<>();
     @Column(name = "status")
     private boolean status;
@@ -172,19 +174,19 @@ public class Employee {
         this.licenseDate = licenseDate;
     }
 
-    public LocalDate getLicensePlace() {
+    public String getLicensePlace() {
         return licensePlace;
     }
 
-    public void setLicensePlace(LocalDate licensePlace) {
+    public void setLicensePlace(String licensePlace) {
         this.licensePlace = licensePlace;
     }
 
-    public LocalDate getEmployeeCode() {
+    public String getEmployeeCode() {
         return employeeCode;
     }
 
-    public void setEmployeeCode(LocalDate employeeCode) {
+    public void setEmployeeCode(String employeeCode) {
         this.employeeCode = employeeCode;
     }
 

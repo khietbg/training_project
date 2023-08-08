@@ -28,6 +28,17 @@ public class Skill {
     public Skill() {
     }
 
+    public Skill(Long id, String name, int level, String description, int month, int year, Long employeeId, Employee employee) {
+        this.id = id;
+        this.name = name;
+        this.level = level;
+        this.description = description;
+        this.month = month;
+        this.year = year;
+        this.employeeId = employeeId;
+        this.employee = employee;
+    }
+
     public Long getId() {
         return id;
     }
@@ -89,17 +100,6 @@ public class Skill {
     }
 
     public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public Skill(Long id, String name, int level, String description, int month, int year, Long employeeId, Employee employee) {
-        this.id = id;
-        this.name = name;
-        this.level = level;
-        this.description = description;
-        this.month = month;
-        this.year = year;
-        this.employeeId = employeeId;
         this.employee = employee;
     }
 }

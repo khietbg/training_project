@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout/layout}" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+            <div class="row">
+                <div class="col-xl-12 col-sm-12 col-12 mb-4">
+                    <div class="breadcrumb-path ">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><img src="assets/img/dash.png" class="mr-2"
+                                                                                  alt="breadcrumb">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active"> Edit Department</li>
+                        </ul>
+                        <h3>Edit Department</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-xl-12 col-sm-12 col-12 ">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-titles">Edit Department</h2>
+                        </div>
+                        <form th:action="@{/departments/edit}" method="post" th:object="${department}">
+                            <input type="hidden" th:value="*{id}" th:field="*{id}">
+                            <div class="form-creation">
+                                <div class="row">
+                                    <div class="col-xl-6 col-sm-6 col-12 ">
+                                        <div class="form-group">
+                                            <label>Name <span class="mandatory">*</span> </label>
+                                            <p style="color: red" th:if="${#fields.hasErrors()}" th:errorclass="error"
+                                               th:errors="*{name}"></p>
+                                            <input type="text" th:field="*{name}" th:value="*{name}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-6 col-sm-12 col-12 ">
+                                        <div class="form-group">
+                                            <label>Department Code </label>
+                                            <p style="color: red" th:if="${message != null}" th:text="${message}"></p>
+                                            <p style="color: red" th:if="${#fields.hasErrors()}" th:errorclass="error"
+                                               th:errors="*{departmentCode  }"></p>
+                                            <input type="text" th:field="*{departmentCode}" th:value="*{name}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-6 col-sm-12 col-12 ">
+                                        <div class="form-group">
+                                            <label>Belonging<span class="mandatory">*</span> </label>
+                                            <select class="select" th:field="*{parentId}" th:value="*{parentId}">
+                                                <option th:value="null">Select</option>
+                                                <th:block th:each="parent : ${parents}">
+                                                    <option th:value="${parent.id}" th:text="${parent.name}"></option>
+                                                </th:block>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-sm-12 col-12 ">
+                                        <div class="form-group">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12 col-sm-12 col-12 ">
+                                        <div class="form-group">
+                                            <label>Description </label>
+                                            <textarea rows="4" cols="50" th:field="*{description}"
+                                                      th:value="*{description}">  </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12 col-sm-12 col-12 ">
+                                        <div class="form-btn">
+                                            <button type="submit" class="btn btn-apply">Save</button>
+                                            <a style="padding: 9px 15px;width: 120px"
+                                               th:href="@{/departments/index}"
+                                               class="btn btn-secondary">Cancel</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
