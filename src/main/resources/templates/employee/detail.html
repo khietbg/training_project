@@ -99,8 +99,8 @@
                     <div class="card-box">
                         <ul class="nav nav-pills navtab-bg">
                             <li class="nav-item">
-                                <a href="#about-me" data-toggle="tab" aria-expanded="true" class="nav-link ml-0 active">
-                                    <i class="mdi mdi-face-profile mr-1"></i>About Me
+                                <a th:href="@{'/employee/export-pdf/'+${employee.id}}" class="nav-link ml-0 active">
+                                    <i class="mdi mdi-face-profile mr-1"></i>Download
                                 </a>
                             </li>
                         </ul>
@@ -193,8 +193,6 @@
         </div>
     </div>
 </div>
-
-
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

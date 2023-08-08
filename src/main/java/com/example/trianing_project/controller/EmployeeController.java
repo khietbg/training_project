@@ -15,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -191,9 +192,16 @@ public class EmployeeController {
         if (employeeDTO == null) {
             return ResponseEntity.notFound().build();
         }
+
         Context context = new Context();
         context.setVariable("employee", employeeDTO);
-        String htmlContent = templateEngine.process("employee/detail", context);
+        ModelMap modelMap =new ModelMap();
+        modelMap.addAttribute("skills", skillService.findAllByEmployeeId(id));
+        modelMap.addAttribute("projects", employeeDTO.getProjects());
+        modelMap.addAttribute("experiences", experienceService.findAllByEmployeeId(id));
+        modelMap.addAttribute("certificates", certificateService.findAllByEmployeeId(id));
+        context.setVariables(modelMap);
+        String htmlContent = templateEngine.process("employee/exportPDF", context);
         try {
             ByteArrayOutputStream pdfOutputStream = new ByteArrayOutputStream();
             ITextRenderer renderer = new ITextRenderer();
